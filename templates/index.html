@@ -1,0 +1,15 @@
+<!doctype html>{% load render_bundle from webpack_loader %}
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+    <title>VCAT</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/json" id="site_info">{{ site_info }}</script>
+    {% block content %}{% endblock %}
+    {% render_bundle 'main' %}
+  </body>
+</html>

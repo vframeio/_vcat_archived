@@ -1,0 +1,139 @@
+h1 {
+
+}
+h2 {
+  font-weight: normal;
+  margin: 10px 0;
+  padding: 3px;
+  font-size: 24px;
+}
+h3 {
+  font-weight: normal;
+  margin: 10px 0 0 0;
+  padding: 3px;
+  font-size: 18px;
+}
+h4 {
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #888;
+  text-transform: uppercase;
+  margin: 5px 10px;
+  margin-top: 20px;
+}
+h4:first-child {
+  margin-top: 10px;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+  float: left;
+  width: 200px;
+  flex: 0 0 200px;
+  padding: 10px;
+  margin-right: 10px;
+}
+.sidebar a {
+  display: block;
+  padding: 10px 10px;
+  text-decoration: none;
+  color: #444;
+}
+.sidebar a.active {
+  font-weight: bold;
+  color: #222;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.body > div {
+  padding-bottom: 40px;
+}
+video {
+  max-width: 640px;
+  margin: 10px 0;
+}
+table {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  border-spacing: 0;
+}
+.tableObject td,
+.tableObject th {
+  padding: 3px;
+  vertical-align: top;
+}
+.tableObject hr {
+  width: 100%;
+  color: transparent;
+  border: 0;
+  border-bottom: 1px solid #bbb;
+  align: left;
+  margin: 3px 0;
+  padding: 0;
+}
+.tableObject th,
+.tableTuples th {
+  min-width: 145px;
+  text-align: left;
+  text-transform: capitalize;
+  padding: 3px;
+  padding-right: 10px;
+  font-weight: 300;
+  color: #333;
+}
+.tableTuples td {
+  text-align: right;
+  padding: 3px;
+}
+.tableObject td {
+  font-weight: normal;
+  color: #000;
+}
+.tableObject .tableObject {
+  border: 1px solid #ddd;
+}
+.tableArray {
+  border: 1px solid #ddd;
+  border-spacing: 0;
+}
+.tableArray td {
+  border-bottom: 1px solid #ddd;
+}
+.sha256 {
+  font-size: 12px;
+  color: #888;
+  display: block;
+  padding-left: 3px;
+  margin: 20px 0 0px;
+}
+.loading, .error {
+  font-weight: normal;
+  margin: 10px 0;
+  padding: 3px;
+  font-size: 24px;
+}
+.title {
+  text-transform: capitalize;
+}
+.rect {
+  position: absolute;
+}
+.rect { border: 1px solid rgba(0,0,255); background-color: rgba(0,0,255,0.1); }

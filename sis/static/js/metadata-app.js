@@ -1,0 +1,1 @@
+../../../vcat_metadata/dist/index.js

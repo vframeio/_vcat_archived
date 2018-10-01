@@ -1,0 +1,23 @@
+.autocomplete div {
+  background: white;
+}
+.autocomplete .matches {
+  border: 1px solid #888;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.autocomplete .matches div {
+  padding: 3px;
+}
+.autocomplete .matches div:nth-child(even) {
+  background: #eee;
+}
+.autocomplete .matches div:nth-child(odd) {
+  background: #fff;
+}
+.autocomplete .matches div:nth-child(even).selected,
+.autocomplete .matches div:nth-child(odd).selected {
+  color: #fff;
+  background: #000;
+  cursor: pointer;
+}

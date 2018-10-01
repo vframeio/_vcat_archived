@@ -1,0 +1,83 @@
+header.navbar {
+  background: #11F;
+  color: white;
+  font-family: 'Helvetica', sans-serif;
+}
+/*
+header div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;  
+}
+.hamburger {
+  cursor: pointer;
+}
+header .hello {
+  font-size: 12px;
+  padding: 10px;
+}
+*/
+header.navbar .btn.btn-link,
+header.navbar a {
+  color: rgba(255,255,255,0.89);
+  text-decoration: none;
+  line-height: 18px;
+  font-size:14px;
+  font-weight: bold;
+}
+header.navbar .btn.btn-link:focus,
+header.navbar .btn.btn-link:hover,
+header.navbar .btn.btn-link:active,
+header.navbar a:focus,
+header.navbar a:hover,
+header.navbar a:active {
+  text-decoration: underline;
+  color: white;
+}
+.menubar a:focus,
+.menubar a:hover,
+.menubar a:active {
+  color: white;
+}
+.menuToggle {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  cursor: pointer;
+  margin: 0 12px 0 12px;
+  line-height: 1;
+}
+.navbar a.navbar-brand {
+  font-size: .8rem;
+}
+
+.navbar {
+  height:60px;
+  color:#aaa;
+}
+
+header.navbar .last-navbar-section {
+  padding-right: 8px;
+}
+
+.capitalize{
+    text-transform: capitalize;
+}
+header .logout{
+  padding:0 .5rem;
+  border-left:1px solid #99f;
+}
+header .logged-in {
+   padding-right: .5rem;
+}
+header .login-out{
+  font-size:12px;
+}
+header .login-out a{
+  font-size:12px;
+}
+
+header .menu-help{
+  margin-right: 10px
+}

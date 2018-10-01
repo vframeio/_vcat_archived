@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<base href='/search/' />
+<link rel="stylesheet" href="static/css/app.css">
+<link rel="shortcut icon" href="static/favicon.ico" /> 
+<title>VFrame Image Import</title>
+</head>
+<body class='prefetch'>
+
+<header>
+  <section class="navbar-section">
+    <a href="/"><img class="menuToggle" alt='logo' src="static/css/vframe-logo.png" /></a>
+    <a href="/categories/">Categories</a>
+    <a href="/groups/user/">Assignments</a>
+    <a href="/images/new/">Add Image</a>
+  </section>
+
+  <section class="navbar-section last-navbar-section">
+    <span class="menu-help"><a href="/explorer/">Explore Data</a></span>
+    <span class="menu-help"><a href="/guide/">Guide</a></span>
+    <span class="login-out logged-in"><span class="capitalize"></span></span>
+    <span class="logout login-out"><a href="/accounts/logout/">Logout</a></span>
+  </section>
+</header>
+
+<div class="container">
+
+<div id="form">
+  <div>
+    <input type="file" name="img" accept="image/*" required>
+    <button class='btn upload_again'>Upload Again</button>
+  </div>
+  <div class="general_ui">
+    <button class='btn panic'>Panic</button>
+    <button class='btn random'>Random</button>
+    <button class='btn view_saved'>View Saved</button>
+  </div>
+</div>
+
+<div class="saving_ui">
+  <div>
+    <label><span>Title</span> <input type="text" name="title" placeholder="Enter a title"></label>
+    <label><span></span><input type="checkbox" name="graphic"> Graphic content</label>
+    </label>
+    <label><span></span>
+      <button class='btn create_new_group'>Create New Group</button>
+      <button class='btn check'>Check Duplicates</button>
+      <button class='btn reset'>Clear Selection</button>
+    </label>
+  </div>
+</div>
+
+<div class="query">
+  <span class='msg'></span>
+  <div></div>
+</div>
+
+<div class="results">
+</div>
+
+
+</div>
+<script type="text/html" id="result-template">
+  <div class='{className}'>
+    <img src="{img}" crossorigin="anonymous">
+    <div>
+      <div class='score'>{score}</div>
+      <a href='{browse}'><button class='btn browse'>Expand</button></a>
+      <a href='{search}'><button class='btn search'>Search</button></a>
+    </div>
+  </div>
+</script>
+</body>
+<script src="static/js/store2.min.js"></script>
+<script src="static/js/dataUriToBlob.js"></script>
+<script src="static/js/app.js"></script>
+</html>
+
+

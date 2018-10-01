@@ -1,0 +1,42 @@
+.arrowUp {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 7px 12px 7px;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  display: inline-block;
+}
+.arrowDown {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 11px 6.5px 0 6.5px;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  display: inline-block;
+}
+.arrowLeft {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 11px 6px 0;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  margin-bottom: -1px;
+  display: inline-block;
+}
+.arrowRight {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 0 6px 11px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  margin-bottom: -1px;
+  display: inline-block;
+}

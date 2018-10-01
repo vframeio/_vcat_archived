@@ -1,0 +1,8 @@
+.imageGroupRow {
+  margin-top: 0.8rem;
+}
+.imageGroupRow .buttons {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}

@@ -1,0 +1,55 @@
+// Autocomplete
+.form-autocomplete {
+  position: relative;
+}
+
+.form-autocomplete
+  .form-autocomplete-input {
+    align-content: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: $unit-8;
+    padding: $unit-h;
+  }
+
+.form-autocomplete
+  .form-autocomplete-input.is-focused {
+      @include control-shadow();
+      border-color: $primary-color;
+    }
+
+.form-autocomplete
+  .form-autocomplete-input
+    .form-input {
+      border-color: transparent;
+      box-shadow: none;
+      display: inline-block;
+      flex: 1 0 auto;
+      height: $unit-6;
+      line-height: $unit-4;
+      margin: $unit-h;
+      width: auto;
+    }
+
+.form-autocomplete
+  .form-autocomplete-input
+  .menu {
+    left: 0;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+  }
+
+.form-autocomplete
+  .form-autocomplete-input.autocomplete-oneline
+    .form-autocomplete-input {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
+
+.form-autocomplete
+  .form-autocomplete-input
+    .chip {
+      flex: 1 0 auto;
+    }

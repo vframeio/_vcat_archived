@@ -1,0 +1,23 @@
+.accordion h5 {
+  margin-bottom: 0rem;
+}
+.accordion .nav .nav-item a {
+	padding: 0;
+}
+.accordion .nav ul {
+	margin-left: .5rem;
+}
+.accordion .nav ul li {
+	margin-top: 0;
+}
+.accordion > ul > li > a { font-weight: 500; font-size: 16px;}
+.accordion > ul > li > ul > li > a { color: #333; font-size: 14px;}
+.accordion > ul > li > ul > li > ul > li a { color: #333; font-size: 12px; }
+.accordion a {
+	color: #333;
+}
+.accordion ul {
+	list-style: none;
+	margin-left: 0;
+	padding-left: 0;
+}

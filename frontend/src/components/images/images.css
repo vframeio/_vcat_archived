@@ -1,0 +1,26 @@
+.radio-buttons label {
+  width: 7rem;
+}
+
+.gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.gallery > a div {
+  margin: 0.5rem;
+}
+.gallery > a:hover {
+  background: #ddd;
+  border-radius: 2px;
+}
+h4:first-child {
+  padding-top: 0.5rem;
+}
+
+.verifyThumbnails > div {
+  display: inline-block;
+  font-size: 12px;
+  margin-right: 0.4rem;
+  margin-bottom: 0.8rem;
+}

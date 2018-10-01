@@ -1,0 +1,28 @@
+
+<!doctype html>{% load render_bundle from webpack_loader %}
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VCAT</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div class="prefab">
+      {% if messages %}
+      <div>
+        <strong>Messages:</strong>
+        <ul>
+          {% for message in messages %}
+          <li>{{message}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      {% block messages %}{% endblock %}
+      {% block content %}{% endblock %}
+    </div>
+    {% render_bundle 'main' %}
+  </body>
+</html>

@@ -1,0 +1,51 @@
+[
+  {
+    "model": "vsearch.documenttag",
+    "fields": {
+      "id": 1,
+      "name": "mediarecord"
+    }
+  },
+  {
+    "model": "vsearch.documenttag",
+    "fields": {
+      "id": 2,
+      "name": "mediainfo"
+    }
+  },
+  {
+    "model": "vsearch.documenttag",
+    "fields": {
+      "id": 3,
+      "name": "keyframe"
+    }
+  },
+  {
+    "model": "vsearch.documenttag",
+    "fields": {
+      "id": 4,
+      "name": "keyframe_status"
+    }
+  },
+  {
+    "model": "vsearch.documenttag",
+    "fields": {
+      "id": 5,
+      "name": "coco"
+    }
+  },
+  {
+    "model": "vsearch.documenttag",
+    "fields": {
+      "id": 6,
+      "name": "places365"
+    }
+  },
+  {
+    "model": "vsearch.documenttag",
+    "fields": {
+      "id": 7,
+      "name": "sugarcube"
+    }
+  }
+]

@@ -1,0 +1,11 @@
+Pillow
+h5py
+tensorflow
+Keras
+Flask
+opencv-python
+imagehash
+scikit-image
+scikit-learn
+imutils
+

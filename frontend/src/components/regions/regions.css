@@ -1,0 +1,29 @@
+* {  }
+
+.stageParent.cursor-nw { cursor: nwse-resize; }
+.stageParent.cursor-n { cursor: ns-resize; }
+.stageParent.cursor-ne { cursor: nesw-resize; }
+.stageParent.cursor-w { cursor: ew-resize; }
+.stageParent.cursor-grab { cursor: grab; }
+.stageParent.cursor-grabbing { cursor: grabbing; }
+.stageParent.cursor-e { cursor: ew-resize; }
+.stageParent.cursor-sw { cursor: nesw-resize; }
+.stageParent.cursor-s { cursor: ns-resize; }
+.stageParent.cursor-se { cursor: nwse-resize; }
+
+.annotate {
+  position: absolute;
+}
+.annotate input {
+  width: 100%;
+}
+.region-gallery.column {
+  padding: 0;
+}
+.region-gallery a {
+  display: block;
+  margin: 0.4rem;
+}
+.region-gallery canvas {
+  display: block;
+}

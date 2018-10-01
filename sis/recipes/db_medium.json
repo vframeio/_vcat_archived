@@ -1,0 +1,23 @@
+{
+  "dataset": "sa_approved",
+  "gpu": false,
+  "features": {
+    "framework": "keras",
+    "net": "tf",
+    "weights": "",
+    "dimension": 512
+  },
+  "faiss": {
+    "factory_type": "PCA80,Flat",
+    "test_factory_types": [
+      "Flat",
+      "PCA80,Flat",
+      "IVF512,SQ8"
+    ],
+    "train": "dataset"
+  },
+  "storage": {
+    "mode": "s3",
+    "endpoint": "https://sa-vframe.ams3.digitaloceanspaces.com"
+  }
+}

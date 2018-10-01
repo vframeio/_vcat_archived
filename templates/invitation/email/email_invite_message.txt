@@ -1,0 +1,12 @@
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans %}
+
+Hello,
+
+You ({{ email }}) have been invited to use VCAT.
+
+Please go to {{ invite_url }} to register your account.
+
+{% endblocktrans %}
+{% endautoescape %}

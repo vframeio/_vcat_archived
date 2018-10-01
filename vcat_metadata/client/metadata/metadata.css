@@ -1,0 +1,75 @@
+.thumbnails {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 3px;
+}
+.keyframe {
+  padding: 3px 3px 3px 3px;
+  margin: 0 10px 20px 0;
+  transition: all 0.4ms;
+}
+.keyframe img {
+  background-color: #eee;
+}
+.thumbnails a {
+  text-decoration: none;
+}
+.desktop .thumbnails .keyframe:hover {
+  background: #eee;
+}
+.keyframe a {
+  position: relative;
+  display: block;
+}
+.detectionList label,
+.keyframe label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 3px;
+}
+.keyframe label {
+  color: #888;
+  font-size: 12px;
+}
+.keyframe.th, .keyframe.th img { width: 160px; }
+.keyframe.sm, .keyframe.sm img { width: 320px; }
+.keyframe.md, .keyframe.md img { width: 640px; }
+.keyframe.lg, .keyframe.lg img { width: 1280px; }
+.keyframe.th img {
+  min-height: 90px;
+}
+
+.keyframeSummary .tableTuples td {
+  text-align: left;
+}
+.keyframeSummary .detectionList {
+  width: 326px;
+  display: block;
+}
+.keyframeSummary .detectionList small {
+  padding: 3px;
+  font-size: inherit;
+}
+
+ul.meta {
+  list-style-type: none;
+  margin: 3px 0 10px 0;
+  padding: 0;
+  padding-left: 3px;
+  font-size: 12px;
+}
+ul.meta li {
+  list-style-type: none;
+  display: inline-block;
+  margin: 0; padding: 0;
+}
+ul.meta li:first-child:before {
+  content: '';
+  padding: 0;
+}
+ul.meta li:before {
+  content: '·';
+  padding: 0 5px;
+}

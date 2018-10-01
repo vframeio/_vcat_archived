@@ -1,0 +1,64 @@
+* { box-sizing: border-box; }
+html,body {
+  margin: 0; padding: 0;
+  width: 100%; height: 100%;
+}
+body {
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  padding-top: 60px;
+}
+
+/* header */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  width: 100%;
+  background: #11F;
+  color: white;
+  align-items: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+header > section {
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  flex: 1 0;
+  font-weight: bold;
+}
+header > section:last-of-type {
+  justify-content: flex-end;
+}
+header a {
+  color: hsla(0,0%,100%,.89);
+  text-decoration: none;
+  line-height: 18px;
+  font-size: 14px;
+  font-weight: 700;
+  padding: .35rem .4rem;
+  white-space: nowrap;
+}
+header .logged-in {
+  font-size: 12px;
+  font-weight: normal;
+  padding: 0 0.5rem;
+}
+header .logout {
+  padding: 0 6px;
+  border-left: 1px solid #99f;
+}
+header .logout a {
+  font-size: 12px;
+}
+.menuToggle {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  cursor: pointer;
+  line-height: 1;
+}

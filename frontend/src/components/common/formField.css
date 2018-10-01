@@ -1,0 +1,54 @@
+.instruction {
+  display: block;
+  color: #888;
+  font-size: .6rem;
+}
+
+/*
+.field {
+  margin: 5px 0;
+}
+label {
+  display: inline-block;
+  width: 80px;
+}
+input[type=text],
+input[type=email],
+input[type=password] {
+  width: 160px;
+  padding: 4px;
+  outline: 0;
+  border: 1px solid #ddd;
+}
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus {
+  outline: 0;
+  border: 1px solid #11f;
+}
+input[type=submit], button {
+  border: 1px solid #ddd;
+  background: white;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-family: sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+}
+input[type=submit]:focus, button:focus {
+  outline: 0;
+  border-color: #11f;
+}
+input[type=submit]:active, button:active {
+  outline: 0;
+  border-color: #11f;
+  background: #11f;
+  color: #fff;
+}
+.info span {
+  display: inline-block;
+  min-width: 160px;
+  padding: 4px;
+  outline: 0;
+}
+*/

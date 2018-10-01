@@ -1,0 +1,19 @@
+{
+  "name": "sa_complete",
+  "gpu": false,
+  "features": {
+    "framework": "pytorch",
+    "net": "alexnet",
+    "weights": "",
+    "dimension": 4096
+  },
+  "faiss": {
+    "factory_type": "IMI2x10,Flat",
+    "test_factory_types": [],
+    "train": "sample.pkl"
+  },
+  "storage": {
+    "mode": "proxy",
+    "endpoint": "https://sa-proxy.vframe.io"
+  }
+}
