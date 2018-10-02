@@ -56,7 +56,9 @@ npm install
 
 ### vsearch
 
-The FAISS-based image search engine lives in `~/vcat/sis/` directory.  This is a flask server which runs seperately from the main Django app.  Instructions for installing everything are there, including another requirements.txt.  This may be moved into its own repo at some point.  If using vsearch, please run its fixtures:
+The FAISS-based image search engine lives in `~/vcat/vsearch/` directory.  This is a flask server which runs seperately from the main Django app.  Instructions for installing everything are there, including another requirements.txt.  This may be moved into its own repo at some point. Instructions for setting up vsearch can be found in that folder's readme.
+
+If using vsearch with vcat, please run its fixtures:
 
 ```
 python manage.py loaddata document_tag
