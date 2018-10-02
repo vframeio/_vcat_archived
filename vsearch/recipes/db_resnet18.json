@@ -1,11 +1,12 @@
 {
-  "dataset": "sa_approved",
+  "dataset": "sa_resnet18",
   "gpu": false,
   "features": {
-    "framework": "keras",
-    "net": "tf",
+    "framework": "pytorch",
+    "net": "resnet-18",
     "weights": "",
-    "dimension": 512
+    "dimension": 512,
+    "field": "feature_pt_resnet18"
   },
   "faiss": {
     "factory_type": "PCA80,Flat",

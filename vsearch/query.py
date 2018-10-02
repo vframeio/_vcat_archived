@@ -30,3 +30,4 @@ query = fe.extract(img)
 results = db.search(query, opt.limit)
 
 print(json.dumps(results, indent=2))
+

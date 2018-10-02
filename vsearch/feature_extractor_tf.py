@@ -75,15 +75,21 @@ class FeatureExtractor:
 
     self.preprocess_input = preprocess_input
 
-  def extract(self,im):
-    im_np = ensure_np(im)
-    im = cv.resize(im_np, self.input_size) # force resize
-    im = cv.cvtColor(im, cv.COLOR_RGBA2BGR)
-    #im = keras_image.load_img(fp_im, target_size=(224, 224)) # convert np.ndarray
+  def extract(self, fp_im):
+    #im_np = ensure_np(im)
+    #im = cv.resize(im_np, self.input_size) # force resize
+    #im = cv.cvtColor(im, cv.COLOR_RGBA2BGR)
+    im = keras_image.load_img(fp_im, target_size=(224, 224)) # convert np.ndarray
     x = keras_image.img_to_array(im) # reshape to (3, 224, 224) 
+    x = x.copy(order="C")
+    #im_rgb = Image.open(fp_im)
+    #im_np_rgb = ensure_np(im_rgb)
+    #im_np_bgr = cv.cvtColor(im_np_rgb, cv.COLOR_RGB2BGR)
+    #x = keras_image.img_to_array(im_np_bgr) # reshape to (3, 224, 224) 
     x = np.expand_dims(x, axis=0) # expand to (1, 3, 224, 224)
     #from keras.applications.vgg16 import preprocess_input as keras_preprocess
     x = self.preprocess_input(x)
+    print(x.shape)
     feats = self.model.predict(x)[0] # extract features
     #feats_arr = np.char.mod('%f', features) # convert to list
     feats_norm = feats/np.linalg.norm(feats)

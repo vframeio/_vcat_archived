@@ -16,6 +16,7 @@ import config
 parser = argparse.ArgumentParser()
 parser.add_argument('--config', required=True)
 parser.add_argument('--factory_type')
+parser.add_argument('--reset_db', action='store_true')
 parser.add_argument('--store_db', action='store_true')
 parser.add_argument('--test_search', action='store_true')
 parser.add_argument('--store_timing', action='store_true')
@@ -94,8 +95,9 @@ def build_test_factories():
 # Training should be done on the whole dataset (medium-sized) or a subset (large-sized).
 def train(fn):
   data = config.load_pickle(data_dir, fn)
+  field = recipe.features.field
 
-  feats = np.array([ data[v]['metadata']['feature_vgg16'][frame] for v in data.keys() for frame in data[v]['metadata']['feature_vgg16'].keys() ]).astype('float32')
+  feats = np.array([ data[v]['metadata'][field][frame] for v in data.keys() for frame in data[v]['metadata'][field].keys() ]).astype('float32')
   n, d = feats.shape
 
   train_start = time.time()
@@ -138,14 +140,16 @@ def add_photos(file_index, data, verified):
   return add_time
 
 def add_videos(file_index, data, verified):
+  field = recipe.features.field
+
   if opt.store_db:
     cursor = db.cursor()
     for hash in data.keys():
-      for frame in sorted(data[hash].keys()):
+      for frame in sorted(data[hash]['metadata'][field].keys()):
         cursor.execute('''INSERT INTO frames(file, verified, hash, frame) VALUES(?,?,?,?)''', (file_index, verified, hash, frame))
     db.commit()
 
-  feats = np.array([ data[hash]['metadata']['feature_vgg16'][frame] for hash in data.keys() for frame in sorted(data[hash]['metadata']['feature_vgg16'].keys()) ]).astype('float32')
+  feats = np.array([ data[hash]['metadata'][field][frame] for hash in data.keys() for frame in sorted(data[hash]['metadata'][field].keys()) ]).astype('float32')
   n, d = feats.shape
 
   if d != recipe.features.dimension:

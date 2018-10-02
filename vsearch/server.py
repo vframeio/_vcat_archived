@@ -86,6 +86,8 @@ def upload():
   uploaded_img_path = "static/uploaded/" + datetime.now().isoformat() + "_" + fn
   img.save(uploaded_img_path)
   img = cv.imread(uploaded_img_path)
+  print('query: {}'.format(uploaded_img_path))
+  #vec = fe.extract(uploaded_img_path)
   vec = fe.extract(img)
   results = db.search(vec, limit=limit)
   return jsonify({

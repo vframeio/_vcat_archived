@@ -7,7 +7,8 @@ def FeatureExtractor(framework='keras', net='VGG16', layer='default', weights='i
 
   if framework == 'keras' or framework == 'tf':
     from feature_extractor_tf import FeatureExtractor as FeatureExtractorTF
-    fe = FeatureExtractorTF(net=net, weights=weights)
+    return FeatureExtractorTF(net=net, weights=weights)
   if framework == 'pytorch':
     from feature_extractor_pytorch import FeatureExtractor as FeatureExtractorPyTorch
     return FeatureExtractorPyTorch(net=net, cuda=cuda)
+

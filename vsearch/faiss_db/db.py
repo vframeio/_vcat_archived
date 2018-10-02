@@ -184,6 +184,7 @@ class FaissSearch:
 
   # Generate a URL for a given image
   def url_for(self, verified, hash, frame='-1', size='sm'):
+    #0print("{} {} {}".format(verified, hash, frame))
     if frame == '-1':
       if verified == 1:
         type = 'photos'
@@ -196,7 +197,7 @@ class FaissSearch:
         type = 'keyframes'
       else:
         type = 'unverified/keyframes'
-      url = "{}/v1/media/{}/{}/{}/{}/{}/{}/{}/index.jpg".format(self.recipe.storage.endpoint, type, hash[0:3], hash[3:6], hash[6:9], hash, frame, size)
+      url = "{}/v1/media/{}/{}/{}/{}/{}/{:06d}/{}/index.jpg".format(self.recipe.storage.endpoint, type, hash[0:3], hash[3:6], hash[6:9], hash, int(frame), size)
     return url
 
   # Load a feature vector directly from the Pickle file.

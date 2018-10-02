@@ -14,6 +14,7 @@ from db import FaissSearch
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--config', required=True)
+parser.add_argument('--mediarecord_dir', type=str, default="/data_store/apps/syrianarchive/metadata/media_record")
 parser.add_argument('--verified', type=int, default=1)
 opt = parser.parse_args()
 
@@ -22,9 +23,9 @@ faiss_db = FaissSearch(recipe)
 
 dataset = recipe.dataset
 
-base_dir = path.join(path.dirname(path.abspath(__file__)), "..")
-data_dir = path.join(base_dir, "datasets", dataset, "mediarecord")
-pkl_fn = "verified.pkl"
+# base_dir = path.join(path.dirname(path.abspath(__file__)), "..")
+data_dir = opt.mediarecord_dir
+pkl_fn = "verified/index.pkl"
 
 data = config.load_pickle(data_dir, pkl_fn)
 
