@@ -146,3 +146,5 @@ sis/static/uploaded/*
 .git-old/
 data_store/
 
+config/settings/production.py
+
