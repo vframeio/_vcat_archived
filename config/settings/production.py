@@ -22,8 +22,6 @@ CSRF_COOKIE_SECURE = True
 
 SECRET_KEY = env('DJANGO_SECRET_KEY', default='replace123with:456env789var')
 
-
-
 DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',

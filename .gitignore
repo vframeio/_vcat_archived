@@ -1,3 +1,25 @@
+# Project specific
+
+*package-lock.json
+package.json
+webpack-stats.dev.json
+#static
+3rdparty/
+_local/
+*db.sqlite3
+__pycache__
+deploy_settings.py
+#static
+s3cfg
+.DS_Store
+node_modules/
+
+client_secret.json
+sheets.googleapis.com-python.json
+
+# ------------------------------------------
+# GitHub Python .gitignore ruleset
+# ------------------------------------------
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -8,13 +30,14 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+env/
 build/
 develop-eggs/
-dist/
+#dist/
 downloads/
 eggs/
 .eggs/
-lib/
+#lib/
 lib64/
 parts/
 sdist/
@@ -81,8 +104,10 @@ celerybeat-schedule
 # SageMath parsed files
 *.sage.py
 
-# Environments
+# Environment
 .env
+
+# virtualenv
 .venv
 env/
 venv/
@@ -102,3 +127,22 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+backend/backend/
+backend/media
+backend/static/*
+
+webpack-stats.dev.json
+
+*.swp
+
+!sis/static/
+sis/static/img/*
+sis/static/feature/*
+sis/static/uploaded/*
+
+*.pkl
+
+.git-old/
+data_store/
+

@@ -4,7 +4,7 @@ VCAT is a system for creating machine learning image datasets for computer visio
 
 VCAT is designed to be used with  <https://vframe.io> / <https://github.com/adamhrv/vframe> and is intended primarily for human rights researchers.
 
-**This project is under active development and repo will be udpated often during Oct-Nov 2018**
+**This project is under active development and repo will be updated often during Oct-Nov 2018**
 
 
 -------------------------
