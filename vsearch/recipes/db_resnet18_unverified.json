@@ -1,5 +1,5 @@
 {
-  "dataset": "sa_resnet18",
+  "dataset": "sa_resnet18_full",
   "gpu": false,
   "features": {
     "framework": "pytorch",
@@ -9,13 +9,12 @@
     "field": "feature_resnet18"
   },
   "faiss": {
-    "factory_type": "Flat",
+    "factory_type": "IMI2x10,Flat",
     "test_factory_types": [
-      "Flat",
-      "PCA80,Flat",
+      "PCAR8,IMI2x10,SQ8",
       "IVF512,SQ8"
     ],
-    "train": "dataset"
+    "train": "./datasets/sa_resnet18_verified/data/verified.pkl"
   },
   "storage": {
     "mode": "s3",

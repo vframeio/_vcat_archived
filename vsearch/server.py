@@ -10,13 +10,16 @@ from datetime import datetime
 from flask import Flask, request, render_template, jsonify
 from PIL import Image  # todo: try to remove PIL dependency
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from faiss_db.db import FaissSearch
 import faiss_db.config as config
 
 from feature_extractor import FeatureExtractor
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--config', default='./recipes/db_resnet18.json')
+parser.add_argument('--config', default=os.getenv('FAISS_RECIPE')
 parser.add_argument('--factory_type')
 opt = parser.parse_args()
 
