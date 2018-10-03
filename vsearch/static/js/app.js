@@ -478,7 +478,11 @@ function loadApp() {
     window.history.pushState({}, txt, path)
   }
   function preventDefault(e) {
-    if (e) e.preventDefault()
+    console.log(e.target)
+    console.log(e.target.innerHTML)
+    if (e && !e.target.innerHTML.match(/\/metadata\//)) {
+      e.preventDefault()
+    }
   }
   function clamp(n, a, b) { return n < a ? a : n < b ? n : b }
 
