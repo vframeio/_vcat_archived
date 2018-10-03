@@ -46,7 +46,7 @@ class ImportView(ImportView):
     for url in data['saved']:
       print(url)
 
-      # https://fax-vframe.ams3.digitaloceanspaces.com/v1/media/frames/27ad...979b/[frame]/lg/index.jpg
+      # https://fax-vframe.ams3.digitaloceanspaces.com/v1/media/keyframes/unverified/27ad...979b/[frame]/lg/index.jpg
       path, index_jpg = os.path.split(url)
       path, size = os.path.split(path)
       path, sa_hash = os.path.split(path)
@@ -57,6 +57,11 @@ class ImportView(ImportView):
       else:
         frame = ''
         original_fn = "{}".format(sa_hash)
+      path, verified = os.path.split(path)
+      if verified == 'keyframes':
+        verified = True
+      else:
+        verified = False
 
       phash = self.phash_url(url)
 
@@ -67,6 +72,7 @@ class ImportView(ImportView):
       initial_data['name'] = request.user.username
       initial_data['base_href'] = path
       initial_data['sa_hash'] = sa_hash
+      initial_data['verified'] = verified
       initial_data['frame'] = frame
       initial_data['fn'] = 'index'
       initial_data['ext'] = '.jpg'
