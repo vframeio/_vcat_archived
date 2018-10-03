@@ -1,5 +1,5 @@
 {
-  "dataset": "sa_resnet18",
+  "dataset": "sa_resnet18_verified",
   "gpu": false,
   "features": {
     "framework": "pytorch",

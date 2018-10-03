@@ -1,5 +1,6 @@
 #!python
 
+import os
 import sys
 import json
 import argparse
@@ -18,7 +19,7 @@ import faiss_db.config as config
 from feature_extractor import FeatureExtractor
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--config', default=os.getenv('FAISS_RECIPE')
+parser.add_argument('--config', default=os.getenv('FAISS_RECIPE'))
 parser.add_argument('--factory_type')
 opt = parser.parse_args()
 
@@ -28,7 +29,7 @@ dataset = recipe.dataset
 factory_type = opt.factory_type or recipe.faiss.factory_type
 
 fe = FeatureExtractor(config=recipe)
-db = FaissSearch(recipe, factory_type, fe)
+db = FaissSearch(recipe, factory_type, feature_extractor=fe)
 
 DEFAULT_LIMIT = 50
 
@@ -87,11 +88,10 @@ def upload():
   img = Image.open(file.stream)
   uploaded_img_path = "static/uploaded/" + datetime.now().isoformat() + "_" + fn
   img.save(uploaded_img_path)
-  img = cv.imread(uploaded_img_path)
   print('query: {}'.format(uploaded_img_path))
-  #vec = fe.extract(uploaded_img_path)
-  vec = fe.extract(img)
-  results = db.search(vec, limit=limit)
+  query = db.load_feature_vector_from_file(uploaded_img_path)
+  # vec = fe.extract(uploaded_img_path)
+  results = db.search(query, limit=limit)
   return jsonify({
     'query': { 'url': uploaded_img_path },
     'results': results,

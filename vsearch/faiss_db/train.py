@@ -146,7 +146,7 @@ def add_videos(file_index, data, verified):
     cursor = db.cursor()
     for hash in data.keys():
       for frame in sorted(data[hash]['metadata'][field].keys()):
-        cursor.execute('''INSERT INTO frames(verified, hash, frame) VALUES(?,?,?,?)''', (verified, hash, frame))
+        cursor.execute('''INSERT INTO frames(verified, hash, frame) VALUES(?,?,?)''', (verified, hash, frame))
     db.commit()
 
   feats = np.array([ data[hash]['metadata'][field][frame] for hash in data.keys() for frame in sorted(data[hash]['metadata'][field].keys()) ]).astype('float32')
