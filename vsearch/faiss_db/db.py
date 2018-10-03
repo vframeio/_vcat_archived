@@ -1,5 +1,6 @@
 #!python
 
+import os
 from os import path
 from pathlib import Path
 from random import randint
@@ -9,6 +10,7 @@ import numpy as np
 import sys
 import cv2 as cv
 import urllib.request
+from PIL import Image  # todo: try to remove PIL dependency
 
 import os
 realpath = os.path.realpath(sys.argv[0])
@@ -140,7 +142,7 @@ class FaissSearch:
     row = rows[0]
 
     id, verified, hash, frame = row
-    print(row)
+    # print(row)
     media_format = "video" if frame != -1 else "photo"
     verified_str = "verified" if verified == 1 else "unverified"
 
@@ -152,7 +154,7 @@ class FaissSearch:
 
   # Format the query for JSON output
   def format_match(self, row, distance=-1, size='sm'):
-    if len(row) == 4:
+    if len(row) == 3:
       id = -1
       verified, hash, frame = row
     else:
@@ -212,20 +214,25 @@ class FaissSearch:
     return url
 
   def load_feature_vector(self, verified, hash, frame):
-    url = self.url_for(verified, hash, frame, size='md')
+    url = self.url_for(verified, hash, frame, size='sm')
     return self.load_feature_vector_from_url(url)
 
   def load_feature_vector_from_url(self, url):
+    print("fetching url: {}".format(url))
     response = urllib.request.urlopen(url)
     data = response.read()
     print("got response: {}".format(len(data)))
     np_img = np.fromstring(data, dtype=np.uint8); 
     img = cv.imdecode(np_img, 1)
+    print(img.shape)
     query = self.feature_extractor.extract(img)
     return query
 
   def load_feature_vector_from_file(self, fn):
+    print("reading file: {}".format(fn))
     img = cv.imread(fn)
+    # img = Image.open(fn)
+    print(img.shape)
     query = self.feature_extractor.extract(img)
     return query
 

@@ -9,6 +9,10 @@ import numpy as np
 from datetime import datetime
 from flask import Flask, request, render_template, jsonify
 from PIL import Image  # todo: try to remove PIL dependency
+import re
+
+sanitize_re = re.compile('[\W]+')
+valid_exts = ['.gif', '.jpg', '.jpeg', '.png']
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -83,14 +87,24 @@ def upload():
   file = request.files['query_img']
   fn = file.filename
   if fn.endswith('blob'):
-      fn = 'filename.jpg'
+    fn = 'filename.jpg'
   # how to refactor this to get it to
-  img = Image.open(file.stream)
-  uploaded_img_path = "static/uploaded/" + datetime.now().isoformat() + "_" + fn
-  img.save(uploaded_img_path)
+  basename, ext = os.path.splitext(fn)
+  print("got {}, type {}".format(basename, ext))
+  if ext.lower() not in valid_exts:
+    return jsonify({ 'error': 'not an image' })
+
+  uploaded_fn = datetime.now().isoformat() + "_" + basename
+  uploaded_fn = sanitize_re.sub('', uploaded_fn)
+  uploaded_img_path = "static/uploaded/" + uploaded_fn + ext
+  uploaded_img_path = uploaded_img_path.lower()
   print('query: {}'.format(uploaded_img_path))
-  query = db.load_feature_vector_from_file(uploaded_img_path)
-  # vec = fe.extract(uploaded_img_path)
+
+  img = Image.open(file.stream)
+  img.save(uploaded_img_path)
+
+  # query = db.load_feature_vector_from_file(uploaded_img_path)
+  query = fe.extract(img)
   results = db.search(query, limit=limit)
   return jsonify({
     'query': { 'url': uploaded_img_path },
@@ -108,7 +122,7 @@ def upload():
 #   })
 
 @app.route('/search/api/search/<hash>/<frame>', methods=['GET'])
-def search(file, hash, frame):
+def search(hash, frame):
   offset, limit = get_offset_and_limit()
   results, query = db.search_by_frame(hash, frame, offset=offset, limit=limit)
   return jsonify({
@@ -131,10 +145,12 @@ def random():
 def fetch():
   offset, limit = get_offset_and_limit()
   url = request.args.get('url')
-  print("fetching url: {}".format(url))
   if url.startswith('static'):
-    query = db.load_feature_vector_from_file(url)
+    print("loading file: {}".format(url))
+    query = db.load_feature_vector_from_file(os.path.abspath(url))
+    print(query.shape)
   else:
+    print("fetching url: {}".format(url))
     query = db.load_feature_vector_from_url(url)
   results = db.search(query, offset=offset, limit=limit)
   return jsonify({
@@ -149,7 +165,7 @@ def get_offset_and_limit():
   except:
     limit = DEFAULT_LIMIT
   try:
-    offset = int(request.args.get('offset'))
+    offset = int(request.args.get('offset')) or 0
   except:
     offset = 0
   return offset, limit

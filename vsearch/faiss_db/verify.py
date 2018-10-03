@@ -25,7 +25,7 @@ dataset = recipe.dataset
 
 # base_dir = path.join(path.dirname(path.abspath(__file__)), "..")
 data_dir = opt.mediarecord_dir
-pkl_fn = "verified/index.pkl"
+pkl_fn = "verified.pkl"
 
 data = config.load_pickle(data_dir, pkl_fn)
 

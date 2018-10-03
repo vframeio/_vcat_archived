@@ -93,7 +93,8 @@ class FeatureExtractor:
       return features
     else:
       features = features.numpy()
-      return features/np.linalg.norm(features)
+      # print(np.linalg.norm(features))
+      return features #/np.linalg.norm(features)
 
   def get_vec(self, img, tensor=False):
         """ Get vector embedding from PIL image

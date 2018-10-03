@@ -109,6 +109,7 @@ function loadApp() {
         .replace('{score}', Math.floor(clamp(1 - distance, 0, 1) * 100) + "%")
         .replace('{browse}', '/search/q/' + hash)
         .replace('{search}', '/search/view/' + [file, hash, frame].join('/'))
+        .replace('{metadata}', '/metadata/' + hash)
         .replace('{className}', className)
         .replace('{saved_msg}', isSaved ? 'Saved' : 'Save')
         .replace('{img}', url)
