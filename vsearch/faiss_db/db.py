@@ -7,6 +7,8 @@ import faiss
 import sqlite3
 import numpy as np
 import sys
+import cv2 as cv
+import urllib.request
 
 import os
 realpath = os.path.realpath(sys.argv[0])
@@ -18,7 +20,7 @@ else:
 class FaissSearch:
 
   # Initialize the FAISS index and the SQLite database.
-  def __init__(self, recipe, factory_type=None, index_fn=None):
+  def __init__(self, recipe, factory_type=None, index_fn=None, feature_extractor=None):
     dataset = recipe.dataset
     factory_type = factory_type or recipe.faiss.factory_type
 
@@ -40,6 +42,7 @@ class FaissSearch:
     self.data_dir = data_dir
     self.pickle_fn = None
     self.pickle_data = None
+    self.feature_extractor = feature_extractor
 
   # Perform a search using a feature vector
   def search(self, query, offset=0, limit=15, size='sm'):
@@ -74,12 +77,12 @@ class FaissSearch:
 
     if len(indexes) == 1:
       q = '''
-          SELECT id, file, verified, hash, frame FROM frames WHERE id=?
+          SELECT id, verified, hash, frame FROM frames WHERE id=?
       '''
       cursor.execute(q, (indexes[0]+1,))
     else:
       q = '''
-          SELECT id, file, verified, hash, frame FROM frames WHERE id IN {}
+          SELECT id, verified, hash, frame FROM frames WHERE id IN {}
       '''.format(tuple([_i+1 for _i in indexes]))
       cursor.execute(q)
 
@@ -94,23 +97,24 @@ class FaissSearch:
     return sorted(results, key=lambda x: x['distance'])
 
   # Search using a frame from the database
-  def search_by_frame(self, file, hash, frame, offset=0, limit=15):
-    vec = self.load_feature_vector(file, hash, frame)
-    return self.search(vec, offset=offset, limit=limit), self.format_match((file, hash, frame,))
+  def search_by_frame(self, hash, frame, offset=0, limit=15):
+    verified, hash, frame = self.find_by_frame(hash, frame)
+    vec = self.load_feature_vector(verified, hash, frame)
+    return self.search(vec, offset=offset, limit=limit), self.format_match((verified, hash, frame,))
 
   # Search using a random frame from the database
   def search_random(self, limit=15):
     id = randint(1, self.count)
-    row = self.find_by_id(id)
-    vec = self.load_feature_vector(row[0], row[1], row[2])
-    return self.search(vec, limit=limit), self.format_match(row)
+    verified, hash, frame = self.find_by_id(id)
+    vec = self.load_feature_vector(verified, hash, frame)
+    return self.search(vec, limit=limit), self.format_match((verified, hash, frame,))
 
   # List frames in a video
   def browse(self, hash):
     db = sqlite3.connect(self.db_fn)
     cursor = db.cursor()
     cursor.execute('''
-        SELECT id, file, verified, hash, frame FROM frames WHERE hash=?
+        SELECT id, verified, hash, frame FROM frames WHERE hash=?
     ''', (hash,))
 
     rows = cursor.fetchall()
@@ -126,7 +130,7 @@ class FaissSearch:
     db = sqlite3.connect(self.db_fn)
     cursor = db.cursor()
     cursor.execute('''
-        SELECT id, file, verified, hash, frame FROM frames WHERE hash=? LIMIT 1
+        SELECT id, verified, hash, frame FROM frames WHERE hash=? LIMIT 1
     ''', (hash,))
 
     rows = cursor.fetchall()
@@ -135,7 +139,7 @@ class FaissSearch:
 
     row = rows[0]
 
-    id, file, verified, hash, frame = row
+    id, verified, hash, frame = row
     print(row)
     media_format = "video" if frame != -1 else "photo"
     verified_str = "verified" if verified == 1 else "unverified"
@@ -150,11 +154,10 @@ class FaissSearch:
   def format_match(self, row, distance=-1, size='sm'):
     if len(row) == 4:
       id = -1
-      file, verified, hash, frame = row
+      verified, hash, frame = row
     else:
-      id, file, verified, hash, frame = row
+      id, verified, hash, frame = row
     res = {
-      'file': file,
       'verified': verified,
       'hash': hash,
       'frame': frame,
@@ -178,7 +181,15 @@ class FaissSearch:
   def find_by_id(self, id):
     db = sqlite3.connect(self.db_fn)
     cursor = db.cursor()
-    cursor.execute('SELECT file, verified, hash, frame FROM frames WHERE id=?', (id,))
+    cursor.execute('SELECT verified, hash, frame FROM frames WHERE id=?', (id,))
+    row = cursor.fetchone()
+    return row
+
+  # Look up an image by hash and frame
+  def find_by_frame(self, hash, frame):
+    db = sqlite3.connect(self.db_fn)
+    cursor = db.cursor()
+    cursor.execute('SELECT verified, hash, frame FROM frames WHERE hash=? AND frame=?', (hash, str(int(frame)),))
     row = cursor.fetchone()
     return row
 
@@ -200,17 +211,35 @@ class FaissSearch:
       url = "{}/v1/media/{}/{}/{}/{}/{}/{:06d}/{}/index.jpg".format(self.recipe.storage.endpoint, type, hash[0:3], hash[3:6], hash[6:9], hash, int(frame), size)
     return url
 
+  def load_feature_vector(self, verified, hash, frame):
+    url = self.url_for(verified, hash, frame, size='md')
+    return self.load_feature_vector_from_url(url)
+
+  def load_feature_vector_from_url(self, url):
+    response = urllib.request.urlopen(url)
+    data = response.read()
+    print("got response: {}".format(len(data)))
+    np_img = np.fromstring(data, dtype=np.uint8); 
+    img = cv.imdecode(np_img, 1)
+    query = self.feature_extractor.extract(img)
+    return query
+
+  def load_feature_vector_from_file(self, fn):
+    img = cv.imread(fn)
+    query = self.feature_extractor.extract(img)
+    return query
+
   # Load a feature vector directly from the Pickle file.
   # Requires loading the entire pickle file...
-  def load_feature_vector(self, file, hash, frame):
-    if 0 > file or file > len(self.pickle_files):
-      return None
-    fn = self.pickle_files[file]
-    if fn != self.pickle_fn:
-      self.pickle_fn = fn
-      self.pickle_data = config.load_pickle(self.data_dir, fn)
-    if len(frame) != 6 and frame[0] != '0':
-      vec = self.pickle_data['photos'][hash]
-    else:
-      vec = self.pickle_data['videos'][hash][frame]
-    return vec
+  # def load_feature_vector(self, file, hash, frame):
+  #   if 0 > file or file > len(self.pickle_files):
+  #     return None
+  #   fn = self.pickle_files[file]
+  #   if fn != self.pickle_fn:
+  #     self.pickle_fn = fn
+  #     self.pickle_data = config.load_pickle(self.data_dir, fn)
+  #   if len(frame) != 6 and frame[0] != '0':
+  #     vec = self.pickle_data['photos'][hash]
+  #   else:
+  #     vec = self.pickle_data['videos'][hash][frame]
+  #   return vec

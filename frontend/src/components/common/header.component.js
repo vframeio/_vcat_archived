@@ -34,14 +34,14 @@ function LoggedInHeader(props){
         <Link to="/groups/user/" className="btn btn-link">Assignments</Link>
         <Link to="/images/new/" className="btn btn-link">Add Image</Link>
         {props.auth && props.auth.groups && props.auth.groups.staff
-        ? <a href="/search/" className="btn btn-link">Import Images</a>
+        ? <a href="/search/" className="btn btn-link">Search</a>
         : null
         }
       </section>
 
       <section className="navbar-section last-navbar-section">
         <span className="menu-help"><Link to="/static/explore/treemap.html" className="btn btn-link">Explore Data</Link></span>
-        <span className="menu-help"><Link to="/guide/" className="btn btn-link">Guide</Link></span>
+        <span className="menu-help"><Link to="/help/" className="btn btn-link">Help</Link></span>
         <span className="login-out logged-in"><span className="capitalize">{props.auth.user.username}</span></span>
         <span className="logout login-out"><Link to="/accounts/logout/">Logout</Link></span>
       </section>

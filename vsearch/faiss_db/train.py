@@ -44,7 +44,7 @@ def build(factory_type):
     print("Creating database...")
     cursor = db.cursor()
     cursor.execute("""DROP TABLE IF EXISTS frames""")
-    cursor.execute("""CREATE TABLE frames(id INTEGER PRIMARY KEY, file INTEGER, verified INTEGER, hash TEXT, frame TEXT)""")
+    cursor.execute("""CREATE TABLE frames(id INTEGER PRIMARY KEY, verified INTEGER, hash TEXT, frame TEXT)""")
     db.commit()
 
   train_time = 0
@@ -120,7 +120,7 @@ def add_photos(file_index, data, verified):
   if opt.store_db:
     cursor = db.cursor()
     for hash in data['photos'].keys():
-      cursor.execute('''INSERT INTO frames(file, verified, hash, frame) VALUES(?,?,?,?)''', (file_index, verified, hash, '-1'))
+      cursor.execute('''INSERT INTO frames(verified, hash, frame) VALUES(?,?,?)''', (verified, hash, '-1'))
     db.commit()
 
   feats = np.array([ data['photos'][hash] for hash in data['photos'].keys() ])
@@ -146,7 +146,7 @@ def add_videos(file_index, data, verified):
     cursor = db.cursor()
     for hash in data.keys():
       for frame in sorted(data[hash]['metadata'][field].keys()):
-        cursor.execute('''INSERT INTO frames(file, verified, hash, frame) VALUES(?,?,?,?)''', (file_index, verified, hash, frame))
+        cursor.execute('''INSERT INTO frames(verified, hash, frame) VALUES(?,?,?,?)''', (verified, hash, frame))
     db.commit()
 
   feats = np.array([ data[hash]['metadata'][field][frame] for hash in data.keys() for frame in sorted(data[hash]['metadata'][field].keys()) ]).astype('float32')

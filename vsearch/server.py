@@ -5,7 +5,6 @@ import json
 import argparse
 import cv2 as cv
 import numpy as np
-import urllib.request
 from datetime import datetime
 from flask import Flask, request, render_template, jsonify
 from PIL import Image  # todo: try to remove PIL dependency
@@ -29,7 +28,7 @@ dataset = recipe.dataset
 factory_type = opt.factory_type or recipe.faiss.factory_type
 
 fe = FeatureExtractor(config=recipe)
-db = FaissSearch(recipe, factory_type)
+db = FaissSearch(recipe, factory_type, fe)
 
 DEFAULT_LIMIT = 50
 
@@ -99,10 +98,19 @@ def upload():
   })
 
 # search using a specific file from the database
-@app.route('/search/api/search/<int:file>/<hash>/<frame>', methods=['GET'])
+# @app.route('/search/api/search/<int:file>/<hash>/<frame>', methods=['GET'])
+# def search(file, hash, frame):
+#   offset, limit = get_offset_and_limit()
+#   results, query = db.search_by_frame(file, hash, frame, offset=offset, limit=limit)
+#   return jsonify({
+#     'query': query,
+#     'results': results,
+#   })
+
+@app.route('/search/api/search/<hash>/<frame>', methods=['GET'])
 def search(file, hash, frame):
   offset, limit = get_offset_and_limit()
-  results, query = db.search_by_frame(file, hash, frame, offset=offset, limit=limit)
+  results, query = db.search_by_frame(hash, frame, offset=offset, limit=limit)
   return jsonify({
     'query': query,
     'results': results,
@@ -125,15 +133,10 @@ def fetch():
   url = request.args.get('url')
   print("fetching url: {}".format(url))
   if url.startswith('static'):
-    img = cv.imread(url)
+    query = db.load_feature_vector_from_file(url)
   else:
-    response = urllib.request.urlopen(url)
-    data = response.read()
-    print("got response: {}".format(len(data)))
-    np_img = np.fromstring(data, dtype=np.uint8); 
-    img = cv.imdecode(np_img, 1)
-  query = fe.extract(img)
-  results = db.search(query, limit=limit)
+    query = db.load_feature_vector_from_url(url)
+  results = db.search(query, offset=offset, limit=limit)
   return jsonify({
     'query': { 'url': url },
     'results': results,

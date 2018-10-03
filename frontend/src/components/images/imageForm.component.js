@@ -153,7 +153,7 @@ class ImageForm extends Component {
               <span className="instruction">
                 {'Required. Images should be JPG or PNG format. Ideally 1280x720 pixels. '+
                 'Minimum dimension 400 pixels. Avoid using pixellated or degraded images. '+
-                'See '} <Link to="/guide/">Image Tips</Link>
+                'See '} <Link to="/help/">Image Tips</Link>
               </span>
             </div>
           }
