@@ -62,7 +62,7 @@ ReactDOM.render(
           <Route path="/test/search/" component={Test.Search} />
           <Route path="/editor/image/:id/" component={Editor.View} />
 
-          <Route path="/guide" component={Pages.Guide} />
+          <Route path="/help/" component={Pages.Guide} />
           <ModalContainer />
         </div>
       </ConnectedRouter>

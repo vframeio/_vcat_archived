@@ -10,11 +10,12 @@ function Header(props) {
         <a href="/categories/">Categories</a>
         <a href="/groups/user/">Assignments</a>
         <a href="/images/new/">Add Image</a>
+        <a href="/search/">Search</a>
       </section>
 
       <section className="navbar-section last-navbar-section">
         <span className="menu-help"><a href="/explorer/">Explore Data</a></span>
-        <span className="menu-help"><a href="/guide/">Guide</a></span>
+        <span className="menu-help"><a href="/help/">Help</a></span>
         <span className="login-out logged-in"><span className="capitalize"></span></span>
         <span className="logout login-out"><a href="/accounts/logout/">Logout</a></span>
       </section>
