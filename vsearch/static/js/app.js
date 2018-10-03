@@ -138,6 +138,7 @@ function loadApp() {
         .replace('{img}', url)
         .replace('{browse}', '/search/q/' + hash)
         .replace('{search}', '/search/view/' + [file, hash, frame].join('/'))
+        .replace('{metadata}', '/metadata/' + hash)
         .replace('{className}', className)
         .replace('{saved_msg}', isSaved ? 'Saved' : 'Save')
       return t
@@ -159,6 +160,7 @@ function loadApp() {
         .replace('{img}', href)
         .replace('{browse}', '/search/q/' + dir)
         .replace('{search}', '/search/fetch/?url=' + url)
+        .replace('{metadata}', '/metadata/' + hash)
         .replace('{className}', className)
         .replace('{saved_msg}', 'Saved')
       return t
