@@ -28,7 +28,7 @@ recipe = config.load(opt.config)
 dataset = recipe.dataset
 factory_type = opt.factory_type or recipe.faiss.factory_type
 
-base_dir = path.join(path.dirname(path.abspath(__file__)), "..")
+base_dir = path.abspath(path.join(path.dirname(path.abspath(__file__)), ".."))
 data_dir = path.join(base_dir, "datasets", dataset)
 
 db_fn = path.join(base_dir, "datasets", dataset, "index", "sqlite3.db")
@@ -55,9 +55,10 @@ def build(factory_type):
   data_paths = list(Path(path.join(data_dir, 'data')).glob('*.pkl'))
   if recipe.faiss.train == '' or recipe.faiss.train == 'dataset':
     train_path = data_paths[0]
+    train_time = train(base_dir, train_path)
   else:
     train_path = recipe.faiss.train
-  train_time = train(train_path)
+    train_time = train(data_dir, train_path)
 
   for file_index, fn in enumerate(data_paths):
     add_time += add(file_index, fn)
@@ -93,8 +94,8 @@ def build_test_factories():
 
 # Pre-train the FAISS discriminator (some algorithms skip this step).
 # Training should be done on the whole dataset (medium-sized) or a subset (large-sized).
-def train(fn):
-  data = config.load_pickle(data_dir, fn)
+def train(which_dir, fn):
+  data = config.load_pickle(which_dir, fn)
   field = recipe.features.field
 
   feats = np.array([ data[v]['metadata'][field][frame] for v in data.keys() for frame in data[v]['metadata'][field].keys() ]).astype('float32')
