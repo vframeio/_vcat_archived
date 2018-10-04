@@ -47,7 +47,7 @@ class Command(BaseCommand):
 
 def load_pickle(data_dir, pkl_fn):
   load_start = time.time()
-  with open(path.join(str(data_dir), str(pkl_fn)), 'rb') as fh:
+  with open(os.path.join(str(data_dir), str(pkl_fn)), 'rb') as fh:
     raw = fh.read()
     data = pickle.loads(raw)
     load_end = time.time()
