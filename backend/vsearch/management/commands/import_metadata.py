@@ -21,9 +21,13 @@ class Command(BaseCommand):
 
   def handle(self, *args, **options):
     self.stdout.write(str(options))
-    verified = "unverified" if options['unverified'] else "verified"
 
     for tag in DocumentTag.objects.all():
+      self.load(tag, 'verified')
+      if options['unverified']:
+        self.load(tag, 'unverified')
+
+  def load(self, tag, verified):
       path = "/data_store/apps/syrianarchive/metadata/{}/{}".format(tag.name, verified)
       filename = os.path.join(path, 'index.pkl')
       if not os.path.exists(filename):

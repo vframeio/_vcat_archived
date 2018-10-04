@@ -17,4 +17,4 @@ cd ..
 python manage.py migrate vsearch zero
 python manage.py migrate
 python manage.py loaddata document_tag
-python manage.py import_metadata --dataset sa_approved
+python manage.py import_metadata
