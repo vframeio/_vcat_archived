@@ -9,7 +9,7 @@
     "field": "feature_resnet18"
   },
   "faiss": {
-    "factory_type": "Flat",
+    "factory_type": "PCA80,Flat",
     "test_factory_types": [
       "Flat",
       "PCA80,Flat",

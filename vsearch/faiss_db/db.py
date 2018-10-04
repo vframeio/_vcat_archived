@@ -202,14 +202,14 @@ class FaissSearch:
       if verified == 1:
         type = 'photos'
       else:
-        type = 'unverified/photos'
+        type = 'photos/unverified'
       # todo: confirm photos endpoint
       url = "{}/v1/media/{}/{}/{}/{}/{}/{}/index.jpg".format(self.recipe.storage.endpoint, type, hash[0:3], hash[3:6], hash[6:9], hash, size)
     else:
       if verified == 1:
         type = 'keyframes'
       else:
-        type = 'unverified/keyframes'
+        type = 'keyframes/unverified'
       url = "{}/v1/media/{}/{}/{}/{}/{}/{:06d}/{}/index.jpg".format(self.recipe.storage.endpoint, type, hash[0:3], hash[3:6], hash[6:9], hash, int(frame), size)
     return url
 
