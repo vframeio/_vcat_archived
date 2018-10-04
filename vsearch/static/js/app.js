@@ -161,7 +161,7 @@ function loadApp() {
         .replace('{img}', href)
         .replace('{browse}', '/search/q/' + dir)
         .replace('{search}', '/search/fetch/?url=' + url)
-        .replace('{metadata}', '/metadata/' + hash)
+        .replace('{metadata}', '/metadata/' + dir)
         .replace('{className}', className)
         .replace('{saved_msg}', 'Saved')
       return t
@@ -478,8 +478,6 @@ function loadApp() {
     window.history.pushState({}, txt, path)
   }
   function preventDefault(e) {
-    console.log(e.target)
-    console.log(e.target.innerHTML)
     if (e && !e.target.classList.contains('metadata')) {
       e.preventDefault()
     }
