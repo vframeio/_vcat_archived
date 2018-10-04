@@ -23,6 +23,7 @@ class Command(BaseCommand):
 
     for tag in DocumentTag.objects.all():
       path = "/data_store/apps/syrianarchive/metadata/{}/{}".format(tag.name, verified)
+      filename = os.path.join(path, 'index.pkl')
       if not os.path.exists(filename):
         self.stdout.write("Not found: {}".format(filename))
         continue
