@@ -32,7 +32,7 @@ class Command(BaseCommand):
       filename = os.path.join(path, 'index.pkl')
       if not os.path.exists(filename):
         self.stdout.write("Not found: {}".format(filename))
-        continue
+        return
       self.stdout.write("Importing {}".format(filename))
       data = load_pickle(path, 'index.pkl')
       index = 0

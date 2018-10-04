@@ -17,4 +17,4 @@ cd ..
 python manage.py migrate vsearch zero
 python manage.py migrate
 python manage.py loaddata document_tag
-python manage.py import_metadata
+python manage.py import_metadata --unverified
