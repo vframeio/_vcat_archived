@@ -480,7 +480,7 @@ function loadApp() {
   function preventDefault(e) {
     console.log(e.target)
     console.log(e.target.innerHTML)
-    if (e && !e.target.innerHTML.match(/\/metadata\//)) {
+    if (e && !e.target.classList.contains('metadata')) {
       e.preventDefault()
     }
   }
