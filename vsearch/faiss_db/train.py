@@ -40,7 +40,6 @@ index = faiss.index_factory(recipe.features.dimension, factory_type)
 # Build a new FAISS index from the dataset
 def build(factory_type):
   if opt.store_db:
-
     print("Creating database...")
     cursor = db.cursor()
     cursor.execute("""DROP TABLE IF EXISTS frames""")
@@ -53,17 +52,19 @@ def build(factory_type):
 
   print("Factory type: {}".format(factory_type))
   data_paths = list(Path(path.join(data_dir, 'data')).glob('*.pkl'))
-  if recipe.faiss.train == '' or recipe.faiss.train == 'dataset':
-    train_path = data_paths[0]
-    train_time = train(base_dir, train_path)
-  else:
-    train_path = recipe.faiss.train
-    train_time = train(data_dir, train_path)
+  if not opt.reset_db:
+    if recipe.faiss.train == '' or recipe.faiss.train == 'dataset':
+      train_path = data_paths[0]
+      train_time = train(base_dir, train_path)
+    else:
+      train_path = recipe.faiss.train
+      train_time = train(data_dir, train_path)
 
   for file_index, fn in enumerate(data_paths):
     add_time += add(file_index, fn)
 
-  faiss.write_index(index, index_fn)
+  if not opt.reset_db:
+    faiss.write_index(index, index_fn)
 
   if opt.test_search:
     test_time = test(train_path)
@@ -123,6 +124,8 @@ def add_photos(file_index, data, verified):
     for hash in data['photos'].keys():
       cursor.execute('''INSERT INTO frames(verified, hash, frame) VALUES(?,?,?)''', (verified, hash, '-1'))
     db.commit()
+  if opt.reset_db:
+    return 0
 
   feats = np.array([ data['photos'][hash] for hash in data['photos'].keys() ])
   n, d = feats.shape
@@ -149,6 +152,8 @@ def add_videos(file_index, data, verified):
       for frame in sorted(data[hash]['metadata'][field].keys()):
         cursor.execute('''INSERT INTO frames(verified, hash, frame) VALUES(?,?,?)''', (verified, hash, frame))
     db.commit()
+  if opt.reset_db:
+    return 0
 
   feats = np.array([ data[hash]['metadata'][field][frame] for hash in data.keys() for frame in sorted(data[hash]['metadata'][field].keys()) ]).astype('float32')
   n, d = feats.shape
