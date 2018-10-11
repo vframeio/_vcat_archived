@@ -61,7 +61,11 @@ The FAISS-based image search engine lives in `~/vcat/vsearch/` directory.  This 
 If using vsearch with vcat, please run its fixtures:
 
 ```
+python manage.py migrate vsearch zero
+python manage.py migrate
 python manage.py loaddata document_tag
+python manage.py import_metadata
+python manage.py import_metadata --unverified
 ```
 
 ## Running it
@@ -70,7 +74,7 @@ Run these commands in separate tabs:
 
 ```
 python manage.py runserver
-npm start
+npm run watch
 ```
 
 Note, if developing on Linux you may need to increase the number of filesystem watchers:
@@ -87,7 +91,7 @@ Put static images in `backend/api/static/`
 
 ### Building the frontend
 
-Production bundles should be built *locally* and then committed to git.  Locally, run the script `./deploy.sh` and then run `./restart.sh` on the remote server.
+Production bundles should be built *remotely*. Run `npm run reload` on the remote server.
 
 Services are set up in `/etc/init.d`. Find sample init.d files in `./bin/init.d/`. If there's a problem do `service vcat restart` or `service sis restart`.
 
@@ -96,6 +100,6 @@ Services are set up in `/etc/init.d`. Find sample init.d files in `./bin/init.d/
 For now you can curl using Basic Auth to hit endpoints like so -
 
 ```
-curl -u username:password https://annotate.vframe.io/api/hierarchy/1/full
+curl -u username:password https://syrianarchive.vframe.io/api/hierarchy/1/full
 ```
 
