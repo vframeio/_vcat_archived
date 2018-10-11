@@ -57,11 +57,10 @@ class ImportView(ImportView):
       else:
         frame = ''
         original_fn = "{}".format(sa_hash)
-      path, verified = os.path.split(path)
-      if verified == 'keyframes':
-        verified = True
-      else:
+      if 'unverified' in path:
         verified = False
+      else:
+        verified = True
 
       phash = self.phash_url(url)
 
@@ -71,8 +70,8 @@ class ImportView(ImportView):
       initial_data['user'] = request.user.pk
       initial_data['name'] = request.user.username
       initial_data['base_href'] = path
-      initial_data['sa_hash'] = sa_hash
       initial_data['verified'] = verified
+      initial_data['sa_hash'] = sa_hash
       initial_data['frame'] = frame
       initial_data['fn'] = 'index'
       initial_data['ext'] = '.jpg'
