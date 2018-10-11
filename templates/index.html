@@ -1,4 +1,4 @@
-<!doctype html>{% load render_bundle from webpack_loader %}
+<!doctype html>
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -10,6 +10,6 @@
     <div id="root"></div>
     <script type="text/json" id="site_info">{{ site_info }}</script>
     {% block content %}{% endblock %}
-    {% render_bundle 'main' %}
+    <script src="/static/app.js"></script>
   </body>
 </html>
