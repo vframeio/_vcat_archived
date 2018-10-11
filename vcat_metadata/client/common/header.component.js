@@ -14,7 +14,7 @@ function Header(props) {
       </section>
 
       <section className="navbar-section last-navbar-section">
-        <span className="menu-help"><a href="/explorer/">Explore Data</a></span>
+        <span className="menu-help"><a href="/static/explore/treemap.html">Explore Data</a></span>
         <span className="menu-help"><a href="/help/">Help</a></span>
         <span className="login-out logged-in"><span className="capitalize"></span></span>
         <span className="logout login-out"><a href="/accounts/logout/">Logout</a></span>
