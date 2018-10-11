@@ -24,7 +24,7 @@ class Image(models.Model):
   original_fn = models.CharField(max_length=80, blank=True)
   from_sa = models.BooleanField(default=False)
   sa_hash = models.CharField(max_length=80, blank=True)
-  base_href = models.CharField(max_length=80, blank=True)
+  base_href = models.CharField(max_length=90, blank=True)
   frame = models.CharField(max_length=6, blank=True)
   verified = models.BooleanField(max_length=6, blank=True)
   source_url = models.CharField(max_length=200, default="", blank=True)

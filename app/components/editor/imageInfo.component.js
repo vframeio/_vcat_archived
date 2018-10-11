@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import moment from 'moment'
+import { format } from 'date-fns'
 
 class ImageInfo extends Component {
   constructor(props){
@@ -21,7 +21,7 @@ class ImageInfo extends Component {
     const tag_count = (image.regions || []).length
 
     const username = image.user ? image.user.username : "unknown"
-    const date = moment(image.createdAt).format('DD-MMM-YYYY HH:mm')
+    const date = format(image.createdAt, 'DD-MMM-YYYY HH:mm')
 
     return (
       <div className='imageInfo'>
