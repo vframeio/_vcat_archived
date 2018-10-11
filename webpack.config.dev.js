@@ -59,8 +59,6 @@ module.exports = {
               require('babel-plugin-transform-object-rest-spread'),
               require('babel-plugin-transform-class-properties'),
               require('babel-plugin-transform-react-jsx'),
-              // require('react-hot-loader/babel'),
-              // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
             ]
           }
         }

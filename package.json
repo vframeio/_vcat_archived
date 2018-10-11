@@ -4,9 +4,8 @@
   "description": "vcat frontend",
   "main": "index.js",
   "scripts": {
-    "watch": "NODE_ENV=development webpack --watch --config ./webpack.config.dev.js",
+    "watch": "NODE_ENV=development webpack --watch --config ./webpack.config.dev.js --colors",
     "build": "NODE_ENV=production webpack --config ./webpack.config.prod.js",
-    "dev": "NODE_ENV=development webpack-dev-server --config ./webpack.config.dev.js --hot --inline",
     "buildDev": "NODE_ENV=development webpack --config ./webpack.config.dev.js --colors",
     "deploy": "NODE_ENV=production webpack --config ./webpack.config.prod.js && git commit -am 'deploy' && git push"
   },

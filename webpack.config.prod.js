@@ -10,8 +10,8 @@ module.exports = {
     main: './app/index.js',
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js',
+    path: path.resolve(__dirname, 'static'),
+    filename: 'app.js',
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -42,7 +42,6 @@ module.exports = {
             require('babel-plugin-transform-object-rest-spread'),
             require('babel-plugin-transform-class-properties'),
             require('babel-plugin-transform-react-jsx'),
-            // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
           ]
         }
       }
