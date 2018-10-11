@@ -44,13 +44,13 @@ app = Flask(__name__, static_url_path="/search/static", static_folder="static")
 # static api routes - this routing is actually handled in the JS
 @app.route('/', methods=['GET'])
 def index():
-  return app.send_static_file('index.html')
+  return app.send_static_file('metadata.html')
 @app.route('/search/', methods=['GET'])
 def search_index():
-  return app.send_static_file('index.html')
+  return app.send_static_file('metadata.html')
 @app.route('/search/<path:path>', methods=['GET'])
 def search_path(path):
-  return app.send_static_file('index.html')
+  return app.send_static_file('metadata.html')
 @app.route('/metadata/', methods=['GET'])
 def metadata_index():
   return app.send_static_file('metadata.html')

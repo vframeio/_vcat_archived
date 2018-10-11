@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router'
 
 import { Header, Sidebar, Footer } from './common'
 import * as Metadata from './metadata'
+import * as Search from './search'
 
 export default class App extends Component {
   render() {
@@ -12,7 +13,8 @@ export default class App extends Component {
         <div>
           <Header />
           <div className='app'>
-            <Sidebar />
+            <Route path="/metadata/" component={Sidebar} />
+            <Route path="/search/" component={Search.Menu} />
             <div className='body'>
               <Route path="/metadata/:hash/" component={Metadata.Heading} />
               <Switch>

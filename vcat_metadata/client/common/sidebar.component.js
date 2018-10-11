@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import * as actions from '../actions'
-
-import ActiveLink from './activeLink.component'
-
 class Sidebar extends Component {
   render() {
     const { hash } = this.props
