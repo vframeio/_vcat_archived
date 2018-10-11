@@ -148,3 +148,5 @@ data_store/
 
 config/settings/production.py
 
+old-package.json
+

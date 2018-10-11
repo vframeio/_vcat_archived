@@ -1,6 +1,5 @@
 require('dotenv').config()
 
-const BundleTracker = require('webpack-bundle-tracker');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
@@ -9,7 +8,7 @@ let path = require('path')
 
 module.exports = {
   entry: {
-    main: './frontend/src/index.js'
+    main: './app/index.js'
   },
   output: {
     path: path.resolve(__dirname, 'static'),
@@ -48,7 +47,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, 'frontend', 'src'),
+        include: path.resolve(__dirname, 'app'),
         exclude: /(node_modules|bower_components|build)/,
         use: {
           loader: 'babel-loader',
@@ -62,7 +61,6 @@ module.exports = {
               require('babel-plugin-transform-react-jsx'),
               // require('react-hot-loader/babel'),
               // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-              // new BundleTracker({path: '.', filename: 'webpack-stats.dev.json'})
             ]
           }
         }

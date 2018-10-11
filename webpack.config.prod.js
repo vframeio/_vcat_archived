@@ -2,13 +2,12 @@ require('dotenv').config()
 
 const webpack = require('webpack')
 const path = require('path')
-const BundleTracker = require('webpack-bundle-tracker');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
   entry: {
-    main: './client/index.js',
+    main: './app/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -32,7 +31,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, 'client'),
+        include: path.resolve(__dirname, 'app'),
         exclude: /(node_modules|bower_components|build)/,
         loader: 'babel-loader',
         options: {
@@ -43,8 +42,7 @@ module.exports = {
             require('babel-plugin-transform-object-rest-spread'),
             require('babel-plugin-transform-class-properties'),
             require('babel-plugin-transform-react-jsx'),
-            new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-            new BundleTracker({filename: 'webpack-stats.prod.json'})
+            // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
           ]
         }
       }
