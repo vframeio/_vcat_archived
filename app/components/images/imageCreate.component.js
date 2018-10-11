@@ -34,6 +34,7 @@ class ImageCreate extends Component {
         node={{
           from_sa: true,
           graphic: false,
+          verified: false,
         }}
         onSubmit={this.handleSubmit}
       />

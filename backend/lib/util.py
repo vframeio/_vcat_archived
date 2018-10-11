@@ -23,7 +23,7 @@ def make_thumbnails(full_fn, path, fn, s3_client=None):
             print("upload > {}".format(upload_path))
             s3_client.upload_file(
                 thumb_path,
-                settings.S3_BUCKET,
+                settings.S3['bucket'],
                 upload_path,
                 ExtraArgs={
                     'ContentType': 'image/jpg',
