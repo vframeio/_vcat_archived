@@ -1,7 +1,7 @@
 from .base import *
 
 STATICFILES_DIRS = [
-  str(ROOT_DIR.path('assets')),
+  str(ROOT_DIR.path('dist')),
 ]
 
 WEBPACK_LOADER = {

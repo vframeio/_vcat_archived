@@ -10,7 +10,7 @@ module.exports = {
     main: './app/index.js',
   },
   output: {
-    path: path.resolve(__dirname, 'static'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'app.js',
   },
   plugins: [
