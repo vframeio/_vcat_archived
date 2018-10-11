@@ -79,7 +79,7 @@ class Thumbnail extends Component {
       <div
         className={'thumbnail rounded ' + size + ' ' + classes}
       >
-        <img src={  thumb_url} ref="img" alt="thumbnail" />
+        <img src={thumb_url} ref="img" alt="thumbnail" />
         {regions}
       </div>
     )

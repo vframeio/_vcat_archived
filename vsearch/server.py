@@ -100,7 +100,7 @@ def upload():
   uploaded_img_path = uploaded_img_path.lower()
   print('query: {}'.format(uploaded_img_path))
 
-  img = Image.open(file.stream)
+  img = Image.open(file.stream).convert('RGB')
   img.save(uploaded_img_path)
 
   # query = db.load_feature_vector_from_file(uploaded_img_path)
