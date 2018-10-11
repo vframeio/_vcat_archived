@@ -22,7 +22,9 @@ export const videos = {
 
 // export const visualguide = "https://files.vframe.io/syrian_archive_visual_guide/"
 
-export const image_uploads = "https://" + site.s3.bucket + "." + site.s3.region + ".digitaloceanspaces.com/media"
+export const image_endpoint = "https://" + site.s3.bucket + "." + site.s3.region + ".digitaloceanspaces.com"
+export const keyframe_endpoint = [image_endpoint, 'v1', 'media', 'keyframes'].join('/')
+export const keyframe_endpoint_unverified = [keyframe_endpoint, 'unverified'].join('/')
 
 // size can be: th, sm, md, lg
 export const image_url = (img, type, size) => {
@@ -31,10 +33,28 @@ export const image_url = (img, type, size) => {
   }
   size = size || 'md'
   if (img.base_href) {
-    if (img.frame) {
-      return [img.base_href, img.sa_hash, img.frame, size, 'index.jpg'].join('/')
+    const endpoint = img.verified ? keyframe_endpoint : keyframe_endpoint_unverified
+    if (!img.frame) {
+      return [
+        endpoint,
+        img.sa_hash.substr(0, 3),
+        img.sa_hash.substr(3, 6),
+        img.sa_hash.substr(6, 9),
+        img.sa_hash,
+        size,
+        'index.jpg'
+      ].join('/')
     }
-    return [img.base_href, img.sa_hash, size, 'index.jpg'].join('/')
+    return [
+      endpoint,
+      img.sa_hash.substr(0, 3),
+      img.sa_hash.substr(3, 6),
+      img.sa_hash.substr(6, 9),
+      img.sa_hash,
+      img.frame,
+      size,
+      'index.jpg'
+    ].join('/')
   }
-  return [image_uploads, type, img.id, img.fn, size + ".jpg"].join('/')
+  return [image_endpoint, "media", type, img.id, img.fn, size + ".jpg"].join('/')
 }

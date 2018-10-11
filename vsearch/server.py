@@ -111,16 +111,6 @@ def upload():
     'results': results,
   })
 
-# search using a specific file from the database
-# @app.route('/search/api/search/<int:file>/<hash>/<frame>', methods=['GET'])
-# def search(file, hash, frame):
-#   offset, limit = get_offset_and_limit()
-#   results, query = db.search_by_frame(file, hash, frame, offset=offset, limit=limit)
-#   return jsonify({
-#     'query': query,
-#     'results': results,
-#   })
-
 @app.route('/search/api/search/<hash>/<frame>', methods=['GET'])
 def search(hash, frame):
   offset, limit = get_offset_and_limit()
