@@ -17,3 +17,4 @@ boto3==1.7.48
 psycopg2-binary==2.7.5
 simplejson
 django-cors-headers==2.4.0
+django-extensions==2.1.3
