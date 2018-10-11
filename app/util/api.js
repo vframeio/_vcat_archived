@@ -34,6 +34,15 @@ export const image_url = (img, type, size) => {
   size = size || 'md'
   if (img.base_href) {
     const endpoint = img.verified ? keyframe_endpoint : keyframe_endpoint_unverified
+    console.log([
+        endpoint,
+        img.sa_hash.substr(0, 3),
+        img.sa_hash.substr(3, 6),
+        img.sa_hash.substr(6, 9),
+        img.sa_hash,
+        size,
+        'index.jpg'
+      ])
     if (!img.frame) {
       return [
         endpoint,
