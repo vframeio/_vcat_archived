@@ -22,7 +22,6 @@ class ImageInfo extends Component {
 
     const username = image.user ? image.user.username : "unknown"
     const date = format(image.created_at, 'DD-MMM-YYYY HH:mm')
-    console.log(image)
 
     return (
       <div className='imageInfo'>
