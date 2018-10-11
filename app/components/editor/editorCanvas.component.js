@@ -52,7 +52,7 @@ class EditorCanvas extends Component {
     console.log('/!\\', error, info)
   }
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.image.image !== prevProps.image.image) {
+    if (this.props.image.image !== prevProps.image.image && (!prevProps.image.image || this.props.image.image.id !== prevProps.image.image.id)) {
       // prevent displaying image with old regions
       this.props.actions.editor.clearSelectedId()
       this.setState({
