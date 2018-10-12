@@ -1,61 +1,70 @@
-import fetchJsonp from 'fetch-jsonp'
+// import fetchJsonp from 'fetch-jsonp'
 import * as types from '../types'
 // import { hashPath } from '../util'
 
 const url = {
-  mediaRecord: hash => '/search/api/mediarecord/' + hash,
-//   mediaInfo: hash => 'https://sa-vframe.ams3.digitaloceanspaces.com/v1/metadata/mediainfo/' + hashPath(hash) + '/index.json',
+  upload: () => '/search/api/upload',
+  search: uri => '/search/api/fetch/?url=' + encodeURIComponent(uri),
+  browse: hash => '/search/api/list/' + hash,
+  random: () => '/search/api/random/',
+  check: () => '/api/images/import/search/',
 }
 
-const loading = (tag, hash) => ({
-  type: types.metadata.loading,
-  tag,
-  hash
+const loading = (tag) => ({
+  type: types.search.loading,
+  tag
 })
-const loaded = (tag, hash, data) => ({
-  type: types.metadata.loaded,
+const loaded = (tag, data) => ({
+  type: types.search.loaded,
   tag,
-  hash,
   data
 })
-const loadedMany = (tag, hash, data) => ({
-  type: types.metadata.loaded_many,
+const error = (tag, err) => ({
+  type: types.search.error,
   tag,
-  hash,
-  data
-})
-const error = (tag, hash, err) => ({
-  type: types.metadata.error,
-  tag,
-  hash,
   err
 })
 
-const get = uri => fetch(uri, {}).then(data => data.json())
-
-export const setHash = (hash) => (dispatch) => {
-  dispatch({
-    type: types.metadata.set_hash,
-    hash,
-  })
+export const panic = () => dispatch => {
+  dispatch({ type: types.search.panic })
 }
-
-export const dispatchFetch = (tag, hash) => dispatch => {
-  dispatch(loading(tag, hash))
-  get(url[tag](hash), {
+export const upload = file => dispatch => {
+  const tag = 'query'
+  const fd = new FormData()
+  fd.append('query_img', file)
+  document.body.className = 'loading'
+  dispatch(loading(tag))
+  fetch(url.upload(), {
+    method: 'POST',
+    mode: 'cors',
+    data: fd,
+  })
+    .then(data => data.json())
+    .then(data => dispatch(loaded(tag, data)))
+    .catch(err => dispatch(error(tag, err)))
+}
+export const search = url => dispatch => {
+  const tag = 'query'
+  document.body.className = 'loading'
+  dispatch(loading(tag))
+  fetch(url.search(url), {
     method: 'GET',
     mode: 'cors',
   })
-    .then(data => dispatch(loaded(tag, hash, data)))
-    .catch(err => dispatch(error(tag, hash, err)))
+    .then(data => data.json())
+    .then(data => dispatch(loaded(tag, data)))
+    .catch(err => dispatch(error(tag, err)))
+}
+export const browse = hash => dispatch => {
+  const tag = 'browse'
+  dispatch(loading(tag))
+  fetch(url[tag](hash), {
+    method: 'GET',
+    mode: 'cors',
+  })
+    .then(data => data.json())
+    .then(data => dispatch(loaded(tag, data)))
+    .catch(err => dispatch(error(tag, err)))
 }
 
-export const fetchMediaRecord = hash => dispatch => dispatchFetch('mediaRecord', hash)(dispatch)
-// export const fetchMediaInfo = hash => dispatch => dispatchFetch('mediaInfo', hash)(dispatch)
-export const fetchMetadata = hash => dispatch => {
-  dispatch(loading('metadata', hash))
-  fetchJsonp(url.metadata(hash))
-    .then(res => res.json())
-    .then(data => dispatch(loadedMany('metadata', hash, data)))
-    .catch(err => dispatch(error('metadata', hash, err)))
-}
+// export const fetch = hash => dispatch => dispatchFetch('mediaRecord', hash)(dispatch)

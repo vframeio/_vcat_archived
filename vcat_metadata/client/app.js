@@ -27,7 +27,9 @@ export default class App extends Component {
                 <Route exact path="/metadata/:hash/places365/" component={Metadata.Places365} />
                 <Route exact path="/metadata/:hash/sugarcube/" component={Metadata.Sugarcube} />
                 <Route exact path="/metadata/:hash/" component={Metadata.Summary} />
-                <Route exact path="/metadata/" render={() => <div class='notFound'><h4>NOT FOUND</h4></div>} />
+                <Route exact path="/metadata/" render={() => <div className='notFound'><h4>NOT FOUND</h4></div>} />
+                <Route exact path="/search/q/" component={Search.Results} />
+                <Route exact path="/search/saved/" component={Search.Saved} />
               </Switch>
             </div>
           </div>

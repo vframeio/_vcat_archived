@@ -5,22 +5,13 @@ const initialState = {
 
 export default function searchReducer(state = initialState, action) {
   switch (action.type) {
-    case types.search.set_hash:
-      state = {
-        ...state,
-        hash: action.hash,
-      }
-      return state
-
     case types.search.loading:
-      // if (action.hash !== state.hash) return state
       return {
         ...state,
         [action.tag]: 'loading',
       }
 
     case types.search.loaded:
-      // if (action.hash !== state.hash) return state
       return {
         ...state,
         [action.tag]: action.data,
@@ -30,6 +21,11 @@ export default function searchReducer(state = initialState, action) {
       return {
         ...state,
         [action.tag]: action.err,
+      }
+
+    case types.search.panic:
+      return {
+        ...initialState,
       }
 
     default:

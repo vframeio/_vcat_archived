@@ -16,7 +16,7 @@ class SearchImport extends Component {
 
   render() {
     return (
-      <div className="saving_ui">
+      <div className="searchImport">
         <div>
           <label>
             <span>Title</span>

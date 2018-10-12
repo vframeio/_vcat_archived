@@ -11,20 +11,35 @@ class SearchMenu extends Component {
   componentDidUpdate(prevProps) {
   }
 
-  fetch(hash) {
+  upload(e) {
+    const files = e.dataTransfer ? e.dataTransfer.files : e.target.files
+    let i
+    let file
+    for (i = 0; i < files.length; i++) {
+      file = files[i]
+      if (file && file.type.match('image.*')) break
+    }
+    if (!file) return
+    this.props.actions.upload(file)
   }
 
   render() {
     return (
-      <div className="form">
-        <div>
-          <input type="file" name="img" accept="image/*" required />
-          <button className='btn upload_again'>Upload Again</button>
-        </div>
-        <div className="general_ui">
-          <button className='btn panic'>Panic</button>
-          <button className='btn random'>Random</button>
-          <button className='btn view_saved'>View Saved</button>
+      <div className="searchForm row">
+        <div className='row'>
+          <div className='upload'>
+            <button className='btn'><span>⤴</span> Upload an Image</button>
+            <input
+              type="file"
+              name="img"
+              accept="image/*"
+              onChange={this.upload.bind(this)}
+              required
+            />
+          </div>
+          <button className='btn random'><span>♘</span> Random</button>
+          <button className='btn panic'><span>⚠</span> Panic</button>
+          <button className='btn view_saved'><span>⇪</span> View Saved</button>
         </div>
       </div>
     )
