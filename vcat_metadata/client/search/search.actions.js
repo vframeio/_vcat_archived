@@ -25,6 +25,30 @@ const error = (tag, err) => ({
   err
 })
 
+export const post = (uri, data) => {
+  let headers
+  if (data instanceof FormData) {
+    headers = {
+      Accept: 'application/json, application/xml, text/play, text/html, *.*',
+      // Authorization: 'Token ' + token,
+    }
+  } else {
+    headers = {
+      Accept: 'application/json, application/xml, text/play, text/html, *.*',
+      'Content-Type': 'application/json; charset=utf-8',
+      // Authorization: 'Token ' + token,
+    }
+    data = JSON.stringify(data)
+  }
+
+  // headers['X-CSRFToken'] = csrftoken
+  return fetch(uri, {
+    method: 'POST',
+    body: data,
+    credentials: 'include',
+    headers,
+  }).then(res => res.json())
+}
 export const panic = () => dispatch => {
   dispatch({ type: types.search.panic })
 }
@@ -32,22 +56,15 @@ export const upload = file => dispatch => {
   const tag = 'query'
   const fd = new FormData()
   fd.append('query_img', file)
-  document.body.className = 'loading'
   dispatch(loading(tag))
-  fetch(url.upload(), {
-    method: 'POST',
-    mode: 'cors',
-    data: fd,
-  })
-    .then(data => data.json())
+  post(url.upload(), fd)
     .then(data => dispatch(loaded(tag, data)))
     .catch(err => dispatch(error(tag, err)))
 }
-export const search = url => dispatch => {
+export const search = uri => dispatch => {
   const tag = 'query'
-  document.body.className = 'loading'
   dispatch(loading(tag))
-  fetch(url.search(url), {
+  fetch(url.search(uri), {
     method: 'GET',
     mode: 'cors',
   })

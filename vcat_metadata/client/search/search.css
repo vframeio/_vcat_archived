@@ -32,3 +32,14 @@
 .row .btn {
   margin: 0 5px;
 }
+.searchQuery {
+  margin: 20px;
+  padding: 10px;
+}
+.searchQuery img {
+  max-width: 320px;
+  max-height: 180px;
+}
+.searchResults {
+  margin: 20px;
+}

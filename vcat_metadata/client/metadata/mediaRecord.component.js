@@ -12,7 +12,7 @@ class MediaRecord extends Component {
 }
 
 const mapStateToProps = state => ({
-  mediaRecord: state.app.mediaRecord,
+  mediaRecord: state.metadata.mediaRecord,
 })
 
 export default connect(mapStateToProps)(MediaRecord)

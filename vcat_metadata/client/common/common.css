@@ -61,6 +61,7 @@ h4:first-child {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  flex-grow: 1;
 }
 .body > div {
   padding-bottom: 40px;

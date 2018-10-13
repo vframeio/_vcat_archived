@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import * as actions from './search.actions'
 
 class SearchMenu extends Component {
-  componentDidMount() {
-  }
-
-  componentDidUpdate(prevProps) {
-  }
-
   upload(e) {
     const files = e.dataTransfer ? e.dataTransfer.files : e.target.files
     let i
@@ -37,9 +32,13 @@ class SearchMenu extends Component {
               required
             />
           </div>
-          <button className='btn random'><span>♘</span> Random</button>
-          <button className='btn panic'><span>⚠</span> Panic</button>
-          <button className='btn view_saved'><span>⇪</span> View Saved</button>
+          <Link to='/search/random/'>
+            <button className='btn random'><span>♘</span> Random</button>
+          </Link>
+          <button className='btn panic' onClick={this.props.actions.panic}><span>⚠</span> Panic</button>
+          <Link to='/search/saved/'>
+            <button className='btn view_saved'><span>⇪</span> View Saved</button>
+          </Link>
         </div>
       </div>
     )
@@ -54,29 +53,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchMenu)
-
-/*
-<div class="query">
-  <span class='msg'></span>
-  <div></div>
-</div>
-
-<div class="results">
-</div>
-
-
-</div>
-<script type="text/html" id="result-template">
-  <div class='{className}'>
-    <img src="{img}" crossorigin="anonymous">
-    <div>
-      <div class='score'>{score}</div>
-      <a href='{metadata}'><button class='btn metadata'>Info</button></a>
-      <a href='{browse}'><button class='btn browse'>Expand</button></a>
-      <a href='{search}'><button class='btn search'>Search</button></a>
-    </div>
-  </div>
-</script>
-</body>
-
-*/

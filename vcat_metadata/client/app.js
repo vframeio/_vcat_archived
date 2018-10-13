@@ -14,8 +14,8 @@ export default class App extends Component {
           <Header />
           <div className='app'>
             <Route path="/metadata/" component={Sidebar} />
-            <Route path="/search/" component={Search.Menu} />
             <div className='body'>
+              <Route path="/search/" component={Search.Menu} />
               <Route path="/metadata/:hash/" component={Metadata.Heading} />
               <Switch>
                 <Route exact path="/metadata/:hash/summary/" component={Metadata.Summary} />
@@ -28,7 +28,8 @@ export default class App extends Component {
                 <Route exact path="/metadata/:hash/sugarcube/" component={Metadata.Sugarcube} />
                 <Route exact path="/metadata/:hash/" component={Metadata.Summary} />
                 <Route exact path="/metadata/" render={() => <div className='notFound'><h4>NOT FOUND</h4></div>} />
-                <Route exact path="/search/q/" component={Search.Results} />
+                <Route exact path="/search/" component={Search.Results} />
+                <Route exact path="/search/random/" component={Search.Random} />
                 <Route exact path="/search/saved/" component={Search.Saved} />
               </Switch>
             </div>

@@ -31,11 +31,7 @@ class Sidebar extends Component {
 }
 
 const mapStateToProps = state => ({
-  hash: state.app.hash,
-  router: state.router,
+  hash: state.metadata.hash,
 })
 
-const mapDispatchToProps = dispatch => ({
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar)
+export default connect(mapStateToProps)(Sidebar)

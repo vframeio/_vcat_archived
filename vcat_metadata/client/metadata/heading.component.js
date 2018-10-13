@@ -34,7 +34,7 @@ class Heading extends Component {
 }
 
 const mapStateToProps = state => ({
-  hash: state.app.hash
+  hash: state.metadata.hash
 })
 
 const mapDispatchToProps = dispatch => ({
