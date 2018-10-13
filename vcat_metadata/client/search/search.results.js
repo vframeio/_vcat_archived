@@ -10,12 +10,10 @@ import * as actions from './search.actions'
 function SearchQuery({ query }) {
   if (!query) return null
   if (query.loading) {
-    return <div>Loading...</div>
+    return <div className="searchQuery">Loading results...</div>
   }
-  console.log(query)
   return (
     <div className="searchQuery">
-      Results for:
       <img src={query.url} />
     </div>
   )
@@ -29,7 +27,13 @@ class SearchResults extends Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    const qsOld = querystring.parse(prevProps.location.search.substr(1))
+    const qsNew = querystring.parse(this.props.location.search.substr(1))
+    console.log(qsOld, qsNew)
+    if (qsOld && qsNew && qsNew.url && qsNew.url !== qsOld.url) {
+      this.props.actions.search(qsNew.url)
+    }
   }
 
   render() {
@@ -40,12 +44,16 @@ class SearchResults extends Component {
         key={result.hash + '_' + result.frame}
         sha256={result.hash}
         frame={result.frame}
-      />
+        size='th'
+        to={'/search/?url=' + encodeURIComponent(result.url)}
+      >
+
+      </Keyframe>
     ))
     return (
       <div>
         <SearchQuery query={query} />
-        <div className="searchResults">
+        <div className="searchResults row">
           {searchResults}
         </div>
       </div>
