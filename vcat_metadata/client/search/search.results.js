@@ -30,7 +30,7 @@ class SearchResults extends Component {
   componentDidUpdate(prevProps) {
     const qsOld = querystring.parse(prevProps.location.search.substr(1))
     const qsNew = querystring.parse(this.props.location.search.substr(1))
-    console.log(qsOld, qsNew)
+    // console.log(qsOld, qsNew)
     if (qsOld && qsNew && qsNew.url && qsNew.url !== qsOld.url) {
       this.props.actions.search(qsNew.url)
     }
@@ -38,7 +38,6 @@ class SearchResults extends Component {
 
   render() {
     const { query, results } = this.props.query
-    console.log(query, results)
     const searchResults = results && results.map(result => (
       <Keyframe
         key={result.hash + '_' + result.frame}

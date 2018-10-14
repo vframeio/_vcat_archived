@@ -31,6 +31,7 @@ export default function searchReducer(state = initialState, action) {
       }
 
     case types.search.panic:
+      window.history.pushState(null, 'VSearch', '/search/')
       return {
         ...initialState,
       }

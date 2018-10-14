@@ -6,8 +6,8 @@ const url = {
   upload: () => '/search/api/upload',
   search: uri => '/search/api/fetch/?url=' + encodeURIComponent(uri),
   browse: hash => '/search/api/list/' + hash,
-  random: () => '/search/api/random/',
-  check: () => '/api/images/import/search/',
+  random: () => '/search/api/random',
+  check: () => '/api/images/import/search',
 }
 
 const loading = (tag) => ({
@@ -83,5 +83,14 @@ export const browse = hash => dispatch => {
     .then(data => dispatch(loaded(tag, data)))
     .catch(err => dispatch(error(tag, err)))
 }
-
-// export const fetch = hash => dispatch => dispatchFetch('mediaRecord', hash)(dispatch)
+export const random = () => dispatch => {
+  const tag = 'query'
+  dispatch(loading(tag))
+  fetch(url.random(), {
+    method: 'GET',
+    mode: 'cors',
+  })
+    .then(data => data.json())
+    .then(data => dispatch(loaded(tag, data)))
+    .catch(err => dispatch(error(tag, err)))
+}

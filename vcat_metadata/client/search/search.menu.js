@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import * as actions from './search.actions'
+import PanicButton from './panicButton.component'
 
 class SearchMenu extends Component {
   upload(e) {
@@ -16,6 +17,10 @@ class SearchMenu extends Component {
     }
     if (!file) return
     this.props.actions.upload(file)
+  }
+
+  random() {
+    this.props.actions.random()
   }
 
   render() {
@@ -32,10 +37,8 @@ class SearchMenu extends Component {
               required
             />
           </div>
-          <Link to='/search/random/'>
-            <button className='btn random'><span>♘</span> Random</button>
-          </Link>
-          <button className='btn panic' onClick={this.props.actions.panic}><span>⚠</span> Panic</button>
+          <button className='btn random' onClick={this.random.bind(this)}><span>♘</span> Random</button>
+          <PanicButton />
           <Link to='/search/saved/'>
             <button className='btn view_saved'><span>⇪</span> View Saved</button>
           </Link>
