@@ -2,6 +2,10 @@ import * as types from '../types'
 
 const initialState = {
   query: {},
+  options: {
+    thumbnailSize: 'th',
+    perPage: 50,
+  }
 }
 
 export default function searchReducer(state = initialState, action) {
@@ -34,6 +38,14 @@ export default function searchReducer(state = initialState, action) {
       window.history.pushState(null, 'VSearch', '/search/')
       return {
         ...initialState,
+      }
+
+    case types.search.update_options:
+      return {
+        ...state,
+        options: {
+          ...action.opt,
+        }
       }
 
     default:

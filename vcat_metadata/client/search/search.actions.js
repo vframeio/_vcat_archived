@@ -52,6 +52,9 @@ export const post = (uri, data) => {
 export const panic = () => dispatch => {
   dispatch({ type: types.search.panic })
 }
+export const updateOptions = opt => dispatch => {
+  dispatch({ type: types.search.update_options, opt })
+}
 export const upload = file => dispatch => {
   const tag = 'query'
   const fd = new FormData()

@@ -16,6 +16,9 @@
   padding: 20px;
   background: #eee;
 }
+.body > div.searchForm {
+  padding-bottom: 20px;
+}
 .upload {
   position: relative;
 }
@@ -44,4 +47,20 @@
   margin: 20px;
   display: flex;
   flex-wrap: wrap;
+}
+.perPage {
+  margin-left: 10px;
+  font-size: 12px;
+}
+.perPage input {
+  font-size: 12px;
+  width: 30px;
+  background: rgba(255,255,255,0);
+  border-color: transparent;
+  transition: opacity 0.3s;
+  font-family: Helvetica, sans-serif;
+}
+.perPage input:focus {
+  background: rgba(255,255,255,1.0);
+  border-color: #000;
 }

@@ -30,7 +30,6 @@ class SearchResults extends Component {
   componentDidUpdate(prevProps) {
     const qsOld = querystring.parse(prevProps.location.search.substr(1))
     const qsNew = querystring.parse(this.props.location.search.substr(1))
-    // console.log(qsOld, qsNew)
     if (qsOld && qsNew && qsNew.url && qsNew.url !== qsOld.url) {
       this.props.actions.search(qsNew.url)
     }
@@ -43,7 +42,7 @@ class SearchResults extends Component {
         key={result.hash + '_' + result.frame}
         sha256={result.hash}
         frame={result.frame}
-        size='th'
+        size={this.props.options.thumbnailSize}
         to={'/search/?url=' + encodeURIComponent(result.url)}
       >
 
@@ -62,6 +61,7 @@ class SearchResults extends Component {
 
 const mapStateToProps = state => ({
   query: state.search.query,
+  options: state.search.options,
 })
 
 const mapDispatchToProps = dispatch => ({

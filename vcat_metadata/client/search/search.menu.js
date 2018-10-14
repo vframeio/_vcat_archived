@@ -43,12 +43,33 @@ class SearchMenu extends Component {
             <button className='btn view_saved'><span>⇪</span> View Saved</button>
           </Link>
         </div>
+
+        <div className='row'>
+          <select
+            onChange={e => this.props.actions.updateOptions({ thumbnailSize: e.target.value })}
+            value={this.props.options.thumbnailSize}
+          >
+            <option value='th'>Thumbnail</option>
+            <option value='sm'>Small</option>
+            <option value='md'>Medium</option>
+            <option value='lg'>Large</option>
+          </select>
+          <label className='perPage'>
+            <input type='text'
+              onChange={e => this.props.actions.updateOptions({ perPage: parseInt(e.target.value, 10) })}
+              value={this.props.options.perPage}
+            />
+            {' per page'}
+          </label>
+
+        </div>
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
+  options: state.search.options,
 })
 
 const mapDispatchToProps = dispatch => ({
