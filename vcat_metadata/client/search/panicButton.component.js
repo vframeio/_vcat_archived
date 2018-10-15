@@ -20,7 +20,6 @@ class PanicButton extends Component {
   }
 
   keydown(e) {
-    console.log(e.keyCode)
     if (e.keyCode === 27) {
       this.props.actions.panic()
     }

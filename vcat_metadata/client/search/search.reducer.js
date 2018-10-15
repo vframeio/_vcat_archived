@@ -20,9 +20,6 @@ export default function searchReducer(state = initialState, action) {
       }
 
     case types.search.loaded:
-      if (action.data.query.url) {
-        window.history.pushState(null, 'VSearch: Results', '/search/?url=' + action.data.query.url)
-      }
       return {
         ...state,
         [action.tag]: action.data,

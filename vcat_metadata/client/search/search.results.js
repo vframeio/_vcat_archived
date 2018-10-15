@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as querystring from 'querystring'
@@ -27,13 +27,13 @@ class SearchResults extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const qsOld = querystring.parse(prevProps.location.search.substr(1))
-    const qsNew = querystring.parse(this.props.location.search.substr(1))
-    if (qsOld && qsNew && qsNew.url && qsNew.url !== qsOld.url) {
-      this.props.actions.search(qsNew.url)
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   const qsOld = querystring.parse(prevProps.location.search.substr(1))
+  //   const qsNew = querystring.parse(this.props.location.search.substr(1))
+  //   if (qsOld && qsNew && qsNew.url && qsNew.url !== qsOld.url) {
+  //     this.props.actions.search(qsNew.url)
+  //   }
+  // }
 
   render() {
     const { query, results } = this.props.query
@@ -45,7 +45,6 @@ class SearchResults extends Component {
         size={this.props.options.thumbnailSize}
         to={'/search/?url=' + encodeURIComponent(result.url)}
       >
-
       </Keyframe>
     ))
     return (

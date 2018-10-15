@@ -1,10 +1,12 @@
 // import fetchJsonp from 'fetch-jsonp'
 import * as types from '../types'
 // import { hashPath } from '../util'
+import { store } from '../store'
+import querystring from 'query-string'
 
 const url = {
   upload: () => '/search/api/upload',
-  search: uri => '/search/api/fetch/?url=' + encodeURIComponent(uri),
+  search: () => '/search/api/fetch',
   browse: hash => '/search/api/list/' + hash,
   random: () => '/search/api/random',
   check: () => '/api/images/import/search',
@@ -56,18 +58,27 @@ export const updateOptions = opt => dispatch => {
   dispatch({ type: types.search.update_options, opt })
 }
 export const upload = file => dispatch => {
+  const { options } = store.getState().search
   const tag = 'query'
   const fd = new FormData()
   fd.append('query_img', file)
+  fd.append('limit', options.perPage)
   dispatch(loading(tag))
   post(url.upload(), fd)
-    .then(data => dispatch(loaded(tag, data)))
+    .then(data => {
+      dispatch(loaded(tag, data))
+      if (data.query.url && !window.location.search.match(data.query.url)) {
+        window.history.pushState(null, 'VSearch: Results', '/search/?url=' + data.query.url)
+      }
+    })
     .catch(err => dispatch(error(tag, err)))
 }
 export const search = uri => dispatch => {
+  const { options } = store.getState().search
   const tag = 'query'
   dispatch(loading(tag))
-  fetch(url.search(uri), {
+  const qs = querystring.stringify({ url: uri, limit: options.perPage })
+  fetch(url.search(uri) + '?' + qs, {
     method: 'GET',
     mode: 'cors',
   })
@@ -87,9 +98,11 @@ export const browse = hash => dispatch => {
     .catch(err => dispatch(error(tag, err)))
 }
 export const random = () => dispatch => {
+  const { options } = store.getState().search
+  const qs = querystring.stringify({ limit: options.perPage })
   const tag = 'query'
   dispatch(loading(tag))
-  fetch(url.random(), {
+  fetch(url.random() + '?' + qs, {
     method: 'GET',
     mode: 'cors',
   })

@@ -20,7 +20,7 @@ class HierarchyEdit extends Component {
     this.props.actions.update(data.id, data)
   }
   render() {
-    if (!this.props.auth.groups.hierarchy && !this.props.auth.groups.staff) {
+    if (!this.props.auth.groups.staff) {
       return window.location.href = '/'
     }
     if (this.props.hierarchy.loading) {
