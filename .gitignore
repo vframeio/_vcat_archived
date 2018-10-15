@@ -20,6 +20,7 @@ sheets.googleapis.com-python.json
 # ------------------------------------------
 # GitHub Python .gitignore ruleset
 # ------------------------------------------
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -30,6 +31,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+
 env/
 build/
 develop-eggs/
@@ -106,8 +108,6 @@ celerybeat-schedule
 
 # Environment
 .env
-
-# virtualenv
 .venv
 env/
 venv/
