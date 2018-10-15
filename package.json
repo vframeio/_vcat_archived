@@ -8,7 +8,7 @@
     "build": "NODE_ENV=production webpack --config ./webpack.config.prod.js",
     "buildDev": "NODE_ENV=development webpack --config ./webpack.config.dev.js --colors",
     "reload": "git pull ; npm run build ; python manage.py collectstatic --noinput",
-    "deploy": "NODE_ENV=production webpack --config ./webpack.config.prod.js && git commit -am 'deploy' && git push"
+    "deploy": "NODE_ENV=production webpack --config ./webpack.config.prod.js && git commit -am 'deploy' && git push && ssh vframe@vframe ./restart.sh"
   },
   "directories": {
     "doc": "docs"
