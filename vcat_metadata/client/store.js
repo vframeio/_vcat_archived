@@ -2,10 +2,13 @@ import { applyMiddleware, compose, combineReducers, createStore } from 'redux'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { createBrowserHistory, createHashHistory } from 'history'
 import thunk from 'redux-thunk'
-import appReducer from './reducer'
+
+import metadataReducer from './metadata/metadata.reducer'
+import searchReducer from './search/search.reducer'
 
 const rootReducer = combineReducers({
-  app: appReducer,
+  metadata: metadataReducer,
+  search: searchReducer,
 })
 
 function configureStore(initialState = {}, history) {

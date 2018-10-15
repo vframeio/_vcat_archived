@@ -15,8 +15,7 @@ function Gate(props) {
 }
 
 const mapStateToProps = state => ({
-  app: state.app
+  app: state.metadata
 })
-
 
 export default connect(mapStateToProps)(Gate)

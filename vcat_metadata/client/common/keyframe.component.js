@@ -15,6 +15,7 @@ export default function Keyframe({
   children,
   detectionList = [],
   aspectRatio = 1.777,
+  onClick,
 }) {
   if (!sha256) return null
   const width = widths[size]
@@ -27,6 +28,7 @@ export default function Keyframe({
           src={imageUrl(sha256, frame, size)}
           width={width}
           height={height}
+          onClick={onClick}
         />
         {detectionList.map(({ labels, detections }, i) => (
           <DetectionBoxes
@@ -48,6 +50,9 @@ export default function Keyframe({
 }
 
 const PossiblyExternalLink = props => {
+  if (props.onClick) {
+    return props.children
+  }
   if (props.to.match(/^http/)) {
     return <a href={props.to} target='_blank' rel='noopener noreferrer'>{props.children}</a>
   }

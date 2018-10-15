@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as actions from '../actions'
+import * as actions from './metadata.actions'
 
 class Heading extends Component {
   componentDidMount() {
@@ -34,7 +34,7 @@ class Heading extends Component {
 }
 
 const mapStateToProps = state => ({
-  hash: state.app.hash
+  hash: state.metadata.hash
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -49,7 +49,7 @@ class HierarchyView extends Component {
   }
   renderNewCategoryButtons(node){
     if (node.is_attribute) return
-    if (!this.props.auth.groups.hierarchy && !this.props.auth.groups.staff) return
+    if (!this.props.auth.groups.staff) return
     const label = node === rootNode ? 'New Top-Level' : 'New Sub-Category'
     return (
       <Link to={"/categories/" + node.id + "/new"}>
@@ -59,7 +59,7 @@ class HierarchyView extends Component {
   }
   renderMetadata(node){
     if (node === rootNode) return
-    if (!this.props.auth.groups.hierarchy) return
+    if (!this.props.auth.groups.staff) return
     return (
       <p className="text-gray">
         <small>
@@ -86,7 +86,7 @@ class HierarchyView extends Component {
   }
   renderActions(node){
     if (node === rootNode) return this.renderToplevelActions(node)
-    if (!this.props.auth.groups.hierarchy && !this.props.auth.groups.staff) return
+    if (!this.props.auth.groups.staff) return
     return (
       <div>
         <ul className='cat-edit-opts'>
