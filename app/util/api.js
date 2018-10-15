@@ -32,29 +32,32 @@ export const image_url = (img, type, size) => {
     return "/static/vframe-logo-blue.png"
   }
   size = size || 'md'
-  if (img.base_href) {
+  if (img.sa_hash) {
     const endpoint = img.verified ? keyframe_endpoint : keyframe_endpoint_unverified
-    if (!img.frame) {
+    if (img.frame) {
       return [
         endpoint,
-        img.sa_hash.substr(0, 3),
-        img.sa_hash.substr(3, 3),
-        img.sa_hash.substr(6, 3),
-        img.sa_hash,
+        hash_dir(img.sa_hash),
+        img.frame,
         size,
         'index.jpg'
       ].join('/')
     }
     return [
       endpoint,
-      img.sa_hash.substr(0, 3),
-      img.sa_hash.substr(3, 3),
-      img.sa_hash.substr(6, 3),
-      img.sa_hash,
-      img.frame,
+      hash_dir(img.sa_hash),
       size,
       'index.jpg'
     ].join('/')
   }
   return [image_endpoint, "media", type, img.id, img.fn, size + ".jpg"].join('/')
+}
+
+export function hash_dir = (hash) => {
+  return [
+    hash.substr(0, 3),
+    hash.substr(3, 3),
+    hash.substr(6, 3),
+    hash,
+  ].join('/')
 }
