@@ -26,6 +26,16 @@ export const image_endpoint = "https://" + site.s3.bucket + "." + site.s3.region
 export const keyframe_endpoint = [image_endpoint, 'v1', 'media', 'keyframes'].join('/')
 export const keyframe_endpoint_unverified = [keyframe_endpoint, 'unverified'].join('/')
 
+// generate the three-level hash used by vframe v1 keyframe datastore api
+export const hash_dir = (hash) => {
+  return [
+    hash.substr(0, 3),
+    hash.substr(3, 3),
+    hash.substr(6, 3),
+    hash,
+  ].join('/')
+}
+
 // size can be: th, sm, md, lg
 export const image_url = (img, type, size) => {
   if (! img.id) {
@@ -51,13 +61,4 @@ export const image_url = (img, type, size) => {
     ].join('/')
   }
   return [image_endpoint, "media", type, img.id, img.fn, size + ".jpg"].join('/')
-}
-
-export function hash_dir = (hash) => {
-  return [
-    hash.substr(0, 3),
-    hash.substr(3, 3),
-    hash.substr(6, 3),
-    hash,
-  ].join('/')
 }
