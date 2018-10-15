@@ -122,6 +122,8 @@ class QuickImageSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'fn', 'ext',
+            'sa_hash', 'verified', 'frame',
+            'from_sa', 'source_url',
             'graphic',
             'region_count',
         )
