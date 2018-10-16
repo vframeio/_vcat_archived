@@ -1,10 +1,13 @@
 import * as types from '../types'
+import session from '../session'
+
+console.log(session)
 
 const initialState = {
   query: { reset: true },
   options: {
-    thumbnailSize: 'th',
-    perPage: 50,
+    thumbnailSize: session('thumbnailSize') || 'th',
+    perPage: parseInt(session('perPage'), 10) || 50,
   }
 }
 
@@ -38,6 +41,7 @@ export default function searchReducer(state = initialState, action) {
       }
 
     case types.search.update_options:
+      session.setAll(action.opt)
       return {
         ...state,
         options: {

@@ -20,6 +20,9 @@
 .searchForm .row {
   align-items: center;
 }
+.keyframe label.searchButtons {
+  justify-content: flex-start;
+}
 .body > div.searchForm {
   padding-bottom: 20px;
 }

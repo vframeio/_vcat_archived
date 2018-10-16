@@ -1,7 +1,5 @@
 # Project specific
 
-*package-lock.json
-package.json
 webpack-stats.dev.json
 #static
 3rdparty/

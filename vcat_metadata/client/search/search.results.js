@@ -26,7 +26,7 @@ function SearchResults({ query, results, options }) {
   if (!query.loading && !results.length) {
     return <div>No results</div>
   }
-  const searchResults = results.map(({ hash, frame }) => (
+  const searchResults = results.map(({ hash, frame, distance }) => (
     <Keyframe
       key={hash + '_' + frame}
       sha256={hash}
@@ -34,12 +34,19 @@ function SearchResults({ query, results, options }) {
       size={options.thumbnailSize}
       to={searchActions.publicUrl.browse(hash)}
     >
-      <Link
-        to={searchActions.publicUrl.searchByFrame(hash, frame)}
-        className='btn'
-      >
+      <label className='searchButtons'>
+        <Link
+          to={searchActions.publicUrl.searchByFrame(hash, frame)}
+          className='btn'
+        >
           Search
-      </Link>
+        </Link>
+        <button
+          className='btn'
+        >
+          Save
+        </button>
+      </label>
     </Keyframe>
   ))
   return (
