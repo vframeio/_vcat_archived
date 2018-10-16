@@ -145,17 +145,25 @@ def add_photos(file_index, data, verified):
 
 def add_videos(file_index, data, verified):
   field = recipe.features.field
+  multiple = recipe.features.multiple
 
   if opt.store_db:
     cursor = db.cursor()
     for hash in data.keys():
       for frame in sorted(data[hash]['metadata'][field].keys()):
-        cursor.execute('''INSERT INTO frames(verified, hash, frame) VALUES(?,?,?)''', (verified, hash, frame))
+        if multiple:
+          for vec in data[hash]['metadata'][field][frame]:
+            cursor.execute('''INSERT INTO frames(verified, hash, frame) VALUES(?,?,?)''', (verified, hash, frame))
+        else:
+          cursor.execute('''INSERT INTO frames(verified, hash, frame) VALUES(?,?,?)''', (verified, hash, frame))
     db.commit()
   if opt.reset_db:
     return 0
 
-  feats = np.array([ data[hash]['metadata'][field][frame] for hash in data.keys() for frame in sorted(data[hash]['metadata'][field].keys()) ]).astype('float32')
+  if multiple:
+    feats = np.array([ vec for hash in data.keys() for frame in sorted(data[hash]['metadata'][field].keys()) for vec in data[hash]['metadata'][field][frame] ]).astype('float32')
+  else:
+    feats = np.array([ data[hash]['metadata'][field][frame] for hash in data.keys() for frame in sorted(data[hash]['metadata'][field].keys()) ]).astype('float32')
   n, d = feats.shape
 
   if d != recipe.features.dimension:

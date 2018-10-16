@@ -29,8 +29,12 @@ Organize your datasets of feature vectors:
 
 VSearch expects PKL files containing feature vectors with the following structure:
 
-- `data['photos'][:hash] = vec`
-- `data['videos'][:hash][:frame] = vec`
+- `data['photos'][:hash]['metadata'][field] = vec`
+- `data['videos'][:hash]['metadata'][field][:frame] = vec`
+
+Optionally, you can index multiple vectors per video. Set the flag "multiple" in the recipe, and use the following data structure:
+
+- `data['videos'][:hash]['metadata'][:field][:frame] = [vecs]`
 
 ### Recipes
 
