@@ -215,12 +215,12 @@ class FaissSearch:
 
   def load_feature_vector(self, verified, hash, frame):
     url = self.url_for(verified, hash, frame, size='sm')
-    if self.recipe.storage == 'local':
+    if self.recipe.storage.mode == 'local':
       return self.load_feature_vector_from_file(url)
-    elif self.recipe.storage == 's3':
+    elif self.recipe.storage.mode == 's3':
       return self.load_feature_vector_from_url(url)
     else:
-      raise ValueError('Unknown storage type specified in recipe')
+      raise ValueError('Unknown storage type specified in recipe: {}'.format(self.recipe.storage.mode))
 
   def load_feature_vector_from_url(self, url):
     print("fetching url: {}".format(url))

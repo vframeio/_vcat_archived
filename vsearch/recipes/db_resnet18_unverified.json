@@ -6,7 +6,8 @@
     "net": "resnet-18",
     "weights": "",
     "dimension": 512,
-    "field": "feature_resnet18"
+    "field": "feature_resnet18",
+    "multiple": false
   },
   "faiss": {
     "factory_type": "IMI2x10,Flat",

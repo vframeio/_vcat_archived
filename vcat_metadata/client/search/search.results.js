@@ -19,11 +19,40 @@ function SearchQuery({ query }) {
   )
 }
 
-class SearchResults extends Component {
+function SearchResults({ query, results, options }) {
+  if (!query || query.loading || !results) {
+    return <div></div>
+  }
+  if (!results.length) {
+    return <div>No results</div>
+  }
+  const searchResults = results.map(result => (
+    <Keyframe
+      key={result.hash + '_' + result.frame}
+      sha256={result.hash}
+      frame={result.frame}
+      size={options.thumbnailSize}
+      to={'/search/?url=' + encodeURIComponent(result.url)}
+    >
+    </Keyframe>
+  ))
+  return (
+    <div className="searchResults row">
+      {searchResults}
+    </div>
+  )
+}
+
+class SearchResultsContainer extends Component {
   componentDidMount() {
     const qs = querystring.parse(this.props.location.search.substr(1))
     if (qs && qs.url) {
       this.props.actions.search(qs.url)
+    }
+    const { hash, frame } = this.props.match.params
+    console.log(hash, frame)
+    if (hash && frame) {
+      this.props.actions.searchByFrame(hash, frame)
     }
   }
 
@@ -36,23 +65,13 @@ class SearchResults extends Component {
   // }
 
   render() {
-    const { query, results } = this.props.query
-    const searchResults = results && results.map(result => (
-      <Keyframe
-        key={result.hash + '_' + result.frame}
-        sha256={result.hash}
-        frame={result.frame}
-        size={this.props.options.thumbnailSize}
-        to={'/search/?url=' + encodeURIComponent(result.url)}
-      >
-      </Keyframe>
-    ))
+    const { query: q, options } = this.props
+    const { query, results } = q
+    // console.log(query, results)
     return (
       <div>
         <SearchQuery query={query} />
-        <div className="searchResults row">
-          {searchResults}
-        </div>
+        <SearchResults query={query} results={results} options={options} />
       </div>
     )
   }
@@ -67,4 +86,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ ...actions }, dispatch)
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchResults))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchResultsContainer))

@@ -5,7 +5,8 @@
     "framework": "pytorch",
     "net": "alexnet",
     "weights": "",
-    "dimension": 4096
+    "dimension": 4096,
+    "multiple": false
   },
   "faiss": {
     "factory_type": "IMI2x10,Flat",

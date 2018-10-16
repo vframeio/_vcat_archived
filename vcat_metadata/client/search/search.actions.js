@@ -2,11 +2,13 @@
 import * as types from '../types'
 // import { hashPath } from '../util'
 import { store } from '../store'
+import { pad } from '../util'
 import querystring from 'query-string'
 
 const url = {
   upload: () => '/search/api/upload',
   search: () => '/search/api/fetch',
+  searchByFrame: (hash, frame) => '/search/api/fetch/' + hash + '/' + pad(frame, 6),
   browse: hash => '/search/api/list/' + hash,
   random: () => '/search/api/random',
   check: () => '/api/images/import/search',
@@ -73,6 +75,19 @@ export const upload = file => dispatch => {
     })
     .catch(err => dispatch(error(tag, err)))
 }
+export const searchByFrame = (hash, frame) => dispatch => {
+  const { options } = store.getState().search
+  const tag = 'query'
+  dispatch(loading(tag))
+  const qs = querystring.stringify({ limit: options.perPage })
+  fetch(url.searchByFrame(hash, frame) + '?' + qs, {
+    method: 'GET',
+    mode: 'cors',
+  })
+    .then(data => data.json())
+    .then(data => dispatch(loaded(tag, data)))
+    .catch(err => dispatch(error(tag, err)))
+}
 export const search = uri => dispatch => {
   const { options } = store.getState().search
   const tag = 'query'
@@ -107,6 +122,9 @@ export const random = () => dispatch => {
     mode: 'cors',
   })
     .then(data => data.json())
-    .then(data => dispatch(loaded(tag, data)))
+    .then(data => {
+      dispatch(loaded(tag, data))
+      window.history.pushState(null, 'VSearch: Results', '/search/keyframe/' + data.query.hash + '/' + data.query.frame + '/')
+    })
     .catch(err => dispatch(error(tag, err)))
 }

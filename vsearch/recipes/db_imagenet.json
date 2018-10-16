@@ -5,7 +5,8 @@
     "framework": "keras",
     "net": "VGG16",
     "weights": "imagenet",
-    "dimension": 512
+    "dimension": 512,
+    "multiple": false
   },
   "faiss": {
     "factory_type": "PCA80,Flat",

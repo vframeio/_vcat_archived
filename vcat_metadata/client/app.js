@@ -29,6 +29,7 @@ export default class App extends Component {
                 <Route exact path="/metadata/:hash/" component={Metadata.Summary} />
                 <Route exact path="/metadata/" render={() => <div className='notFound'><h4>NOT FOUND</h4></div>} />
                 <Route exact path="/search/" component={Search.Results} />
+                <Route exact path="/search/keyframe/:hash/:frame/" component={Search.Results} />
                 <Route exact path="/search/random/" component={Search.Random} />
                 <Route exact path="/search/saved/" component={Search.Saved} />
               </Switch>
