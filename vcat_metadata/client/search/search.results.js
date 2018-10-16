@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as querystring from 'querystring'
 
 import { Keyframe } from '../common'
-import * as actions from './search.actions'
+import * as searchActions from './search.actions'
 
 function SearchQuery({ query }) {
   if (!query) return null
@@ -20,20 +20,26 @@ function SearchQuery({ query }) {
 }
 
 function SearchResults({ query, results, options }) {
-  if (!query || query.loading || !results) {
+  if (!query || query.reset || query.loading || !results) {
     return <div></div>
   }
-  if (!results.length) {
+  if (!query.loading && !results.length) {
     return <div>No results</div>
   }
-  const searchResults = results.map(result => (
+  const searchResults = results.map(({ hash, frame }) => (
     <Keyframe
-      key={result.hash + '_' + result.frame}
-      sha256={result.hash}
-      frame={result.frame}
+      key={hash + '_' + frame}
+      sha256={hash}
+      frame={frame}
       size={options.thumbnailSize}
-      to={'/search/?url=' + encodeURIComponent(result.url)}
+      to={searchActions.publicUrl.browse(hash)}
     >
+      <Link
+        to={searchActions.publicUrl.searchByFrame(hash, frame)}
+        className='btn'
+      >
+          Search
+      </Link>
     </Keyframe>
   ))
   return (
@@ -49,29 +55,37 @@ class SearchResultsContainer extends Component {
     if (qs && qs.url) {
       this.props.actions.search(qs.url)
     }
+    this.searchByHash()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params !== this.props.match.params) {
+      this.searchByHash()
+    }
+    // const qsOld = querystring.parse(prevProps.location.search.substr(1))
+    // const qsNew = querystring.parse(this.props.location.search.substr(1))
+    // if (qsOld && qsNew && qsNew.url && qsNew.url !== qsOld.url) {
+    //   this.props.actions.search(qsNew.url)
+    // }
+  }
+
+  searchByHash() {
     const { hash, frame } = this.props.match.params
-    console.log(hash, frame)
     if (hash && frame) {
       this.props.actions.searchByFrame(hash, frame)
     }
   }
 
-  // componentDidUpdate(prevProps) {
-  //   const qsOld = querystring.parse(prevProps.location.search.substr(1))
-  //   const qsNew = querystring.parse(this.props.location.search.substr(1))
-  //   if (qsOld && qsNew && qsNew.url && qsNew.url !== qsOld.url) {
-  //     this.props.actions.search(qsNew.url)
-  //   }
-  // }
-
   render() {
-    const { query: q, options } = this.props
-    const { query, results } = q
-    // console.log(query, results)
+    const { query, results } = this.props.query
     return (
       <div>
         <SearchQuery query={query} />
-        <SearchResults query={query} results={results} options={options} />
+        <SearchResults
+          {...this.props}
+          query={query}
+          results={results}
+        />
       </div>
     )
   }
@@ -83,7 +97,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ ...actions }, dispatch)
+  actions: bindActionCreators({ ...searchActions }, dispatch)
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchResultsContainer))

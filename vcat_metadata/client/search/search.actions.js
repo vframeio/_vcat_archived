@@ -8,10 +8,14 @@ import querystring from 'query-string'
 const url = {
   upload: () => '/search/api/upload',
   search: () => '/search/api/fetch',
-  searchByFrame: (hash, frame) => '/search/api/fetch/' + hash + '/' + pad(frame, 6),
+  searchByFrame: (hash, frame) => '/search/api/search/' + hash + '/' + pad(frame, 6),
   browse: hash => '/search/api/list/' + hash,
   random: () => '/search/api/random',
   check: () => '/api/images/import/search',
+}
+export const publicUrl = {
+  browse: hash => '/search/browse/' + hash,
+  searchByFrame: (hash, frame) => '/search/keyframe/' + hash + '/' + pad(frame, 6),
 }
 
 const loading = (tag) => ({

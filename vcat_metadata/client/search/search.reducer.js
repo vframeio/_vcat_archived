@@ -1,7 +1,7 @@
 import * as types from '../types'
 
 const initialState = {
-  query: {},
+  query: { reset: true },
   options: {
     thumbnailSize: 'th',
     perPage: 50,
