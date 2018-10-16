@@ -29,8 +29,8 @@ Organize your datasets of feature vectors:
 
 VSearch expects PKL files containing feature vectors with the following structure:
 
-- `data['photos'][:hash]['metadata'][field] = vec`
-- `data['videos'][:hash]['metadata'][field][:frame] = vec`
+- `data['photos'][:hash]['metadata'][:field] = vec`
+- `data['videos'][:hash]['metadata'][:field][:frame] = vec`
 
 Optionally, you can index multiple vectors per video. Set the flag "multiple" in the recipe, and use the following data structure:
 
@@ -38,7 +38,24 @@ Optionally, you can index multiple vectors per video. Set the flag "multiple" in
 
 ### Recipes
 
-The JSON files in `recipes` are suitable for both medium and large setups.
+The JSON files in `recipes` are suitable for both medium and large setups.  The JSON should contain these fields:
+
+- `dataset` - Directory in "datasets" which contains the dataset
+- `gpu` - Whether this recipe uses the GPU (for most indexes this is false)
+- `features` - Options for feature extractor
+  - `framework` - `"pytorch"` or `"keras"`
+  - `net` - Network to use (see feature_extractor.py)
+  - `weights` - Specify network weights for keras
+  - `dimension` - Dimension of vectors to be indexed
+  - `field` - Name of the metadata field which contains the frames/vectors
+  - `multiple` - Whether to index multiple vectors per image
+- `faiss` - Options for FAISS
+  - `factory_type` - Standard factory type to use (see below)
+  - `test_factory_types` - Array of factories to generate if testing
+  - `train` - Specify "dataset" to train on the whole dataset, or a file in the dataset e.g. `data/verified.pkl`
+- `storage` - Options for storage
+  - `mode` - `"s3"` or `"local"`
+  - `endpoint` - If S3, this is the base HREF of our files. If local, this is the base path. If using local storage, make sure your images are accessible from the same URL on your local endpoint.
 
 ## Indexing
 
