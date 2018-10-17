@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { Keyframes, Video } from '../common'
-import { Coco } from '../metadata'
+// import { Coco } from '../metadata'
 import * as searchActions from './search.actions'
 import * as metadataActions from '../metadata/metadata.actions'
 import SearchMeta from './search.meta'
@@ -54,8 +54,11 @@ class Browse extends Component {
         </div>
         <Keyframes
           frames={browse.frames}
+          showHash
+          showTimestamp
+          showSearchButton
+          showSaveButton
         />
-        <Coco showAll />
       </div>
     )
   }
