@@ -63,6 +63,7 @@ export const clear = () => dispatch => {
   dispatch({ type: types.review.clear })
 }
 
+// export a CSV of the stored sha256's
 export const exportCSV = () => dispatch => {
   console.log('export CSV')
   let saved = getSavedFromStore()
@@ -81,3 +82,23 @@ export const exportCSV = () => dispatch => {
     saveAs(blob, 'vsearch_investigation_' + format(new Date(), 'YYYYMMDD_HHmm') + '.csv')
   })
 }
+
+// // check duplicates
+// export const checkDuplicates = () => {
+//   post('/api/images/import/search/', {
+//     saved: window.store.get('saved') || [],
+//   }).then(res => {
+//     console.log(res)
+//     const { good, bad } = res
+//     // did_check = true
+//     window.store.set('saved', good)
+//     if (!bad.length) {
+//       return alert("No duplicates found.")
+//     }
+//     bad.forEach(path => {
+//       const el = document.querySelector('img[src="' + path + '"]')
+//       if (el) el.parentNode.classList.remove('saved')
+//     })
+//     return alert("Untagged " + bad.length + " duplicate" + (bad.length === 1 ? "" : "s") + ".")
+//   })
+// }
