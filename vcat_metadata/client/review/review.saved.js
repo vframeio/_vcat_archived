@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 
 import * as actions from './review.actions'
 import { Keyframes } from '../common'
-import InvestigatorMenu from './investigatorMenu.component'
 import AnnotatorMenu from './annotatorMenu.component'
 
 class ReviewSaved extends Component {

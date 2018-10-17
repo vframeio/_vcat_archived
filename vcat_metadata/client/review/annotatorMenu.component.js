@@ -9,20 +9,16 @@ class AnnotatorMenu extends Component {
     return (
       <div className="importMenu">
         <div>
-          <h3>Investigation</h3>
+          <h3>New VCAT Image Group</h3>
           <label>
-            <span>Title</span>
-            <input type="text" name="title" placeholder="Enter a title" />
+            <input type="text" name="title" placeholder="Title this group" />
           </label>
           <label>
-            <span />
-            <input type="checkbox" name="graphic" />Graphic content
+            <input type="checkbox" name="graphic" /> <small>Graphic content</small>
           </label>
           <label>
-            <span />
+            <button className='btn check'>Check Dupes</button>
             <button className='btn create_new_group'>Create New Group</button>
-            <button className='btn check'>Check Duplicates</button>
-            <button className='btn reset'>Clear Selection</button>
           </label>
         </div>
       </div>

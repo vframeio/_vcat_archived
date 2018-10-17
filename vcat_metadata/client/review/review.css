@@ -6,3 +6,11 @@
 .reviewButtons {
   margin-bottom: 10px;
 }
+.importMenu h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.importMenu input[type=text] {
+  font-size: 13px;
+  width: 250px;
+}

@@ -4,6 +4,7 @@ import saveAs from 'file-saver'
 
 import * as types from '../types'
 import { store } from '../store'
+import { verify } from '../util'
 
 const getSavedFromStore = () => store.getState().review.saved
 
@@ -68,7 +69,7 @@ export const exportCSV = () => dispatch => {
   const results = Object.keys(saved).sort().map(key => {
     const { verified, hash, frames } = saved[key]
     return [
-      verified,
+      verify(verified),
       hash,
       Object.keys(frames).join(', '),
     ]
