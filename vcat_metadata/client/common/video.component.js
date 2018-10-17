@@ -15,7 +15,7 @@ class Video extends Component {
     const { sugarcube } = data.metadata
     console.log(data.metadata)
     const url = sugarcube.fp.replace('/var/www/files/', 'https://cube.syrianarchive.org/')
-    const sha256 = app.mediainfo.sha256
+    const { sha256, verified } = app.mediainfo
     const { video } = app.mediainfo.metadata.mediainfo
     const keyframe = app.keyframe.metadata.keyframe.basic[0]
     console.log(keyframe)
@@ -28,7 +28,7 @@ class Video extends Component {
               style={{
                 width: widths[size || 'sm'],
                 height: widths[size || 'sm'] / video.aspect_ratio,
-                backgroundImage: 'url(' + imageUrl(sha256, keyframe, size) + ')',
+                backgroundImage: 'url(' + imageUrl(verified, sha256, keyframe, size) + ')',
               }}
               onClick={() => this.setState({ playing: true })}
             >

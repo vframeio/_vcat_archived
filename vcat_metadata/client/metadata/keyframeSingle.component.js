@@ -34,7 +34,7 @@ class KeyframeSingle extends Component {
     const sizes = ['th', 'sm', 'md', 'lg']
       .map(size => (
         <span key={size}>
-          <a href={imageUrl(sha256, frame, size)} target="_blank" rel="noopener noreferrer">
+          <a href={imageUrl(verified, sha256, frame, size)} target="_blank" rel="noopener noreferrer">
             {'['}{size}{']'}
           </a>
           {' '}
@@ -65,7 +65,7 @@ class KeyframeSingle extends Component {
           frame={frame}
           verified={verified}
           size='md'
-          to={imageUrl(sha256, frame, 'lg')}
+          to={imageUrl(verified, sha256, frame, 'lg')}
           aspectRatio={aspectRatio}
           detectionList={[
             { labels: labels.coco, detections: detections.coco }
