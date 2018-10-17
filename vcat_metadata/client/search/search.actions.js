@@ -29,14 +29,16 @@ function verify(verified) {
   return verified
 }
 
-const loading = (tag) => ({
+const loading = (tag, offset) => ({
   type: types.search.loading,
-  tag
+  tag,
+  offset
 })
-const loaded = (tag, data) => ({
+const loaded = (tag, data, offset = 0) => ({
   type: types.search.loaded,
   tag,
-  data
+  data,
+  offset
 })
 const error = (tag, err) => ({
   type: types.search.error,
@@ -90,43 +92,43 @@ export const upload = file => dispatch => {
     })
     .catch(err => dispatch(error(tag, err)))
 }
-export const searchByVerifiedFrame = (verified, hash, frame) => dispatch => {
+export const searchByVerifiedFrame = (verified, hash, frame, offset = 0) => dispatch => {
   const { options } = store.getState().search
   const tag = 'query'
-  dispatch(loading(tag))
-  const qs = querystring.stringify({ limit: options.perPage })
+  dispatch(loading(tag, offset))
+  const qs = querystring.stringify({ limit: options.perPage, offset })
   fetch(url.searchByVerifiedFrame(verified, hash, frame) + '?' + qs, {
     method: 'GET',
     mode: 'cors',
   })
     .then(data => data.json())
-    .then(data => dispatch(loaded(tag, data)))
+    .then(data => dispatch(loaded(tag, data, offset)))
     .catch(err => dispatch(error(tag, err)))
 }
-export const searchByFrame = (hash, frame) => dispatch => {
+export const searchByFrame = (hash, frame, offset = 0) => dispatch => {
   const { options } = store.getState().search
   const tag = 'query'
-  dispatch(loading(tag))
-  const qs = querystring.stringify({ limit: options.perPage })
+  dispatch(loading(tag, offset))
+  const qs = querystring.stringify({ limit: options.perPage, offset })
   fetch(url.searchByFrame(hash, frame) + '?' + qs, {
     method: 'GET',
     mode: 'cors',
   })
     .then(data => data.json())
-    .then(data => dispatch(loaded(tag, data)))
+    .then(data => dispatch(loaded(tag, data, offset)))
     .catch(err => dispatch(error(tag, err)))
 }
-export const search = uri => dispatch => {
+export const search = (uri, offset = 0) => dispatch => {
   const { options } = store.getState().search
   const tag = 'query'
-  dispatch(loading(tag))
-  const qs = querystring.stringify({ url: uri, limit: options.perPage })
+  dispatch(loading(tag, offset))
+  const qs = querystring.stringify({ url: uri, limit: options.perPage, offset })
   fetch(url.search(uri) + '?' + qs, {
     method: 'GET',
     mode: 'cors',
   })
     .then(data => data.json())
-    .then(data => dispatch(loaded(tag, data)))
+    .then(data => dispatch(loaded(tag, data, offset)))
     .catch(err => dispatch(error(tag, err)))
 }
 export const browse = hash => dispatch => {

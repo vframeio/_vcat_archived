@@ -73,3 +73,16 @@
   width: 30px;
   font-family: Helvetica, sans-serif;
 }
+.loadMore {
+  width: 400px;
+  margin: 20px;
+  height: 40px;
+}
+.loadMore.wide {
+  width: calc(100% - 40px);
+  margin: 20px;
+  height: 100px;
+}
+.loadingMore {
+  margin: 20px;
+}

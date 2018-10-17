@@ -26,7 +26,6 @@ function SearchResults({ query, results, options }) {
       size={options.thumbnailSize}
       to={searchActions.publicUrl.browse(hash)}
       showHash
-      showFrame
       showTimestamp
     >
       <label className='searchButtons'>
@@ -72,21 +71,26 @@ class SearchResultsContainer extends Component {
     // }
   }
 
-  searchByHash() {
+  searchByHash(offset = 0) {
     const { verified, hash, frame } = this.props.match.params
     if (verified && hash && frame) {
-      this.props.searchActions.searchByVerifiedFrame(verified, hash, frame)
+      this.props.searchActions.searchByVerifiedFrame(verified, hash, frame, offset)
     } else if (hash && frame) {
-      this.props.searchActions.searchByFrame(hash, frame)
+      this.props.searchActions.searchByFrame(hash, frame, offset)
     }
-    if (hash) {
+    if (hash && !offset) {
       this.props.metadataActions.fetchMetadata(hash)
     }
   }
 
+  searchByOffset() {
+    const offset = this.props.query.results.length
+    this.searchByHash(offset)
+  }
+
   render() {
-    const { query, results } = this.props.query
-    console.log(query, results)
+    const { query, results, loadingMore } = this.props.query
+    console.log(query, results, loadingMore)
     return (
       <div>
         <SearchQuery />
@@ -95,6 +99,15 @@ class SearchResultsContainer extends Component {
           query={query}
           results={results}
         />
+        {!loadingMore
+          ? <button
+              onClick={() => this.searchByOffset()}
+              className={(results && results.length > 50) ? 'btn loadMore wide' : 'btn loadMore'}
+            >
+              Load more
+            </button>
+          : <div className='loadingMore'>{'Loading more...'}</div>
+        }
       </div>
     )
   }

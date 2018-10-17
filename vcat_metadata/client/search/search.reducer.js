@@ -23,12 +23,34 @@ export default function searchReducer(state = initialState, action) {
   console.log(action.type, action)
   switch (action.type) {
     case types.search.loading:
+      if (action.tag === 'query' && action.offset) {
+        return {
+          ...state,
+          query: {
+            ...state.query,
+            loadingMore: true,
+          }
+        }
+      }
       return {
         ...state,
         [action.tag]: loadingState[action.tag] || loadingState.loading,
       }
 
     case types.search.loaded:
+      if (action.tag === 'query' && action.offset) {
+        return {
+          ...state,
+          query: {
+            query: action.data.query,
+            results: [
+              ...state.query.results,
+              ...action.data.results,
+            ],
+            loadingMore: false,
+          }
+        }
+      }
       return {
         ...state,
         [action.tag]: action.data,
