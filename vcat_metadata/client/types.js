@@ -11,5 +11,9 @@ export const metadata = tagAsType('metadata', [
 ])
 
 export const search = tagAsType('search', [
-  'loading', 'loaded', 'error', 'panic', 'update_options'
+  'loading', 'loaded', 'error', 'panic', 'update_options',
+])
+
+export const review = tagAsType('review', [
+  'save', 'unsave', 'refresh', 'clear', 'dedupe',
 ])

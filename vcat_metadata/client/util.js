@@ -28,6 +28,7 @@ export const formatName = s => {
   return s.replace(/_/g, ' ')
 }
 
+// Use to pad frame numbers with zeroes
 export const pad = (n, m) => {
   let s = String(n || 0)
   while (s.length < m) {
@@ -35,6 +36,15 @@ export const pad = (n, m) => {
   }
   return s
 }
+
+// Verified is 0/1 when retrieved from SQL, but 'verified' or 'unverified' when retrieved elsewhere
+export const verify = verified => (
+  (verified === 1 || verified === '1')
+    ? 'verified'
+    : !verified
+      ? 'unverified'
+      : verified
+)
 
 export const courtesyS = (n, s) => n + ' ' + (n === 1 ? s : s + 's')
 
@@ -78,3 +88,31 @@ export const imageUrl = (sha256, frame, size = 'th') => [
 
 export const metadataUri = (sha256, tag) => '/metadata/' + sha256 + '/' + tag + '/'
 export const keyframeUri = (sha256, frame) => '/metadata/' + sha256 + '/keyframe/' + pad(frame, 6) + '/'
+
+/* AJAX */
+
+export const post = (uri, data) => {
+  let headers
+  if (data instanceof FormData) {
+    headers = {
+      Accept: 'application/json, application/xml, text/play, text/html, *.*',
+      // Authorization: 'Token ' + token,
+    }
+  } else {
+    headers = {
+      Accept: 'application/json, application/xml, text/play, text/html, *.*',
+      'Content-Type': 'application/json; charset=utf-8',
+      // Authorization: 'Token ' + token,
+    }
+    data = JSON.stringify(data)
+  }
+
+  // headers['X-CSRFToken'] = csrftoken
+  return fetch(uri, {
+    method: 'POST',
+    body: data,
+    credentials: 'include',
+    headers,
+  }).then(res => res.json())
+}
+

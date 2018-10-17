@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router'
 import { Header, Sidebar, Footer } from './common'
 import * as Metadata from './metadata'
 import * as Search from './search'
+import * as Review from './review'
 
 export default class App extends Component {
   render() {
@@ -28,12 +29,12 @@ export default class App extends Component {
                 <Route exact path="/metadata/:hash/sugarcube/" component={Metadata.Sugarcube} />
                 <Route exact path="/metadata/:hash/" component={Metadata.Summary} />
                 <Route exact path="/metadata/" render={() => <div className='notFound'><h4>NOT FOUND</h4></div>} />
-                <Route exact path="/search/" component={Search.Results} />
-                <Route exact path="/search/keyframe/:verified/:hash/:frame/" component={Search.Results} />
-                <Route exact path="/search/keyframe/:hash/:frame/" component={Search.Results} />
+                <Route exact path="/search/" component={Search.Container} />
+                <Route exact path="/search/keyframe/:verified/:hash/:frame/" component={Search.Container} />
+                <Route exact path="/search/keyframe/:hash/:frame/" component={Search.Container} />
                 <Route exact path="/search/browse/:hash/" component={Search.Browse} />
                 <Route exact path="/search/random/" component={Search.Random} />
-                <Route exact path="/search/saved/" component={Search.Saved} />
+                <Route exact path="/search/review/" component={Review.Saved} />
               </Switch>
             </div>
           </div>

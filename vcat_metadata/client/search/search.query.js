@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { timestamp } from '../util'
 import * as searchActions from './search.actions'
 import SearchMeta from './search.meta'
 
@@ -28,7 +27,6 @@ class SearchQuery extends Component {
 const mapStateToProps = state => ({
   query: state.search.query,
   options: state.search.options,
-  metadata: state.metadata,
 })
 
 const mapDispatchToProps = dispatch => ({

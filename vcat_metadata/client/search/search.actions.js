@@ -2,8 +2,10 @@
 import * as types from '../types'
 // import { hashPath } from '../util'
 import { store } from '../store'
-import { pad } from '../util'
+import { post, pad, verify } from '../util'
 import querystring from 'query-string'
+
+// urls
 
 const url = {
   upload: () => '/search/api/upload',
@@ -19,15 +21,8 @@ export const publicUrl = {
   searchByVerifiedFrame: (verified, hash, frame) => '/search/keyframe/' + verify(verified) + '/' + hash + '/' + pad(frame, 6),
   searchByFrame: (hash, frame) => '/search/keyframe/' + hash + '/' + pad(frame, 6),
 }
-function verify(verified) {
-  if (verified === 1 || verified === '1') {
-    return 'verified'
-  }
-  if (!verified) {
-    return 'unverified'
-  }
-  return verified
-}
+
+// standard loading events
 
 const loading = (tag, offset) => ({
   type: types.search.loading,
@@ -46,36 +41,17 @@ const error = (tag, err) => ({
   err
 })
 
-export const post = (uri, data) => {
-  let headers
-  if (data instanceof FormData) {
-    headers = {
-      Accept: 'application/json, application/xml, text/play, text/html, *.*',
-      // Authorization: 'Token ' + token,
-    }
-  } else {
-    headers = {
-      Accept: 'application/json, application/xml, text/play, text/html, *.*',
-      'Content-Type': 'application/json; charset=utf-8',
-      // Authorization: 'Token ' + token,
-    }
-    data = JSON.stringify(data)
-  }
+// search UI functions
 
-  // headers['X-CSRFToken'] = csrftoken
-  return fetch(uri, {
-    method: 'POST',
-    body: data,
-    credentials: 'include',
-    headers,
-  }).then(res => res.json())
-}
 export const panic = () => dispatch => {
   dispatch({ type: types.search.panic })
 }
 export const updateOptions = opt => dispatch => {
   dispatch({ type: types.search.update_options, opt })
 }
+
+// API functions
+
 export const upload = file => dispatch => {
   const { options } = store.getState().search
   const tag = 'query'

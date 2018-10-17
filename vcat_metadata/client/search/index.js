@@ -1,13 +1,17 @@
-import Results from './search.results'
 import Menu from './search.menu'
-import Import from './search.import'
+import Container from './search.container'
+import Meta from './search.meta'
+import Query from './search.query'
+import Results from './search.results'
 import Browse from './browse.component'
 
 import './search.css'
 
 export {
+  Menu,
+  Container,
+  Meta,
+  Query,
   Results,
   Browse,
-  Menu,
-  Import
 }

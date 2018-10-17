@@ -2,21 +2,18 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as actions from './search.actions'
+import * as actions from './review.actions'
 
-class SearchImport extends Component {
+class ReviewMenu extends Component {
   componentDidMount() {
   }
 
   componentDidUpdate(prevProps) {
   }
 
-  fetch(hash) {
-  }
-
   render() {
     return (
-      <div className="searchImport">
+      <div className="importMenu">
         <div>
           <label>
             <span>Title</span>
@@ -45,4 +42,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ ...actions }, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchImport)
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewMenu)

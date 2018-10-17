@@ -20,11 +20,16 @@ class SearchMeta extends Component {
         </span>
         <span>
           {'sha256: '}
-          <Link to={'/search/browse/' + query.hash}>{query.hash}</Link>
+          <Link to={searchActions.publicUrl.browse(query.hash)}>{query.hash}</Link>
         </span>
         {query.frame &&
           <span>
-            {'frame: '}{timestamp(query.frame, video.frame_rate)}{' / '}{timestamp(video.duration / 1000, 1)}
+            {'frame: '}
+            <Link to={searchActions.publicUrl.searchByVerifiedFrame(query.verified, query.hash, query.frame)}>
+              {timestamp(query.frame, video.frame_rate)}
+              {' / '}
+              {timestamp(video.duration / 1000, 1)}
+            </Link>
           </span>
         }
         <span>
