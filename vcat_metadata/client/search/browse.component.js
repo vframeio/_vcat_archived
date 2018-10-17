@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { Keyframe, Video } from '../common'
+import { Keyframes, Video } from '../common'
 import { Coco } from '../metadata'
 import * as searchActions from './search.actions'
 import * as metadataActions from '../metadata/metadata.actions'
@@ -40,29 +40,6 @@ class Browse extends Component {
     if (!browse.loading && !browse.frames.length) {
       return <div>No frames</div>
     }
-    const frames = browse.frames.map(({ hash, frame }) => (
-      <Keyframe
-        key={hash + '_' + frame}
-        hash={hash}
-        frame={frame}
-        size={options.thumbnailSize}
-        to={searchActions.publicUrl.browse(hash)}
-      >
-        <label className='searchButtons'>
-          <Link
-            to={searchActions.publicUrl.searchByFrame(hash, frame)}
-            className='btn'
-          >
-            Search
-          </Link>
-          <button
-            className='btn'
-          >
-            Save
-          </button>
-        </label>
-      </Keyframe>
-    ))
     return (
       <div className="searchQuery column">
         <SearchMeta query={browse} sugarcube />
@@ -75,7 +52,9 @@ class Browse extends Component {
             View Full Metadata
           </Link>
         </div>
-        {frames}
+        <Keyframes
+          frames={browse.frames}
+        />
         <Coco showAll />
       </div>
     )

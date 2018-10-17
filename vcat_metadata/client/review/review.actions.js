@@ -5,27 +5,29 @@ const getSavedFromStore = () => store.getState().review.saved
 
 // add a hash/frame to the reviewer
 export const save = opt => dispatch => {
+  console.log('save', opt)
   let saved = getSavedFromStore()
-  let hash = [opt.hash] || {
+  let hash = saved[opt.hash] || {
     frames: {},
     hash: opt.hash,
     verified: opt.verified,
   }
   if (opt.frame) {
-    hash.frames[opt.frame] = true
+    hash.frames[parseInt(opt.frame)] = true
   }
   hash.verified = opt.verified
-  saved[opt.hash] = {}
+  saved[opt.hash] = hash
   dispatch({ type: types.review.save, saved })
 }
 
 // mark a frame as being not for export
 export const unsave = (opt) => dispatch => {
+  console.log('unsave', opt)
   let saved = getSavedFromStore()
   let hash = saved[opt.hash]
   if (hash) {
-    if (opt.frame && hash.frames[opt.frame]) {
-      hash.frames[opt.frame] = false
+    if (opt.frame && hash.frames[parseInt(opt.frame)]) {
+      hash.frames[parseInt(opt.frame)] = false
     }
   }
   dispatch({ type: types.review.unsave, saved })

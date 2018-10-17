@@ -3,18 +3,21 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import * as actions from './review.actions'
+import { SearchResults } from '../search'
 
-class SearchSaved extends Component {
-  componentDidMount() {
-  }
-
-  componentDidUpdate(prevProps) {
-  }
-
-  fetch(hash) {
-  }
-
+class ReviewSaved extends Component {
   render() {
+    const { saved } = this.props
+    const savedResults = Object.keys(saved).forEach(key => {
+      const { verified, hash, frames } = saved[key]
+      return Object.keys(frames).map(frame => ({
+        verified,
+        hash,
+        frame,
+      }))
+    }).reduce((a, b) => {
+      return (b && b.length) ? a.concat(b) : a
+    }, [])
     return (
       <div className="searchImport">
         <div>
@@ -33,17 +36,21 @@ class SearchSaved extends Component {
             <button className='btn reset'>Clear Selection</button>
           </label>
         </div>
+        <SearchResults
+          query
+          results={savedResults}
+        />
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  saved: state.saved,
+  saved: state.review.saved,
 })
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ ...actions }, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchSaved)
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewSaved)

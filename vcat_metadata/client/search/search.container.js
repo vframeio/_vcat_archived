@@ -58,11 +58,7 @@ class SearchContainer extends Component {
     return (
       <div>
         <SearchQuery />
-        <SearchResults
-          {...this.props}
-          query={query}
-          results={results}
-        />
+        <SearchResults />
         {showLoadMore
           ? !loadingMore
             ? <button
@@ -71,7 +67,7 @@ class SearchContainer extends Component {
               >
                 Load more
               </button>
-            : <div className='loadingMore'>{'Loading more...'}</div>
+            : <div className='loadingMore'>{'Loading more results...'}</div>
           : <div></div>
         }
       </div>

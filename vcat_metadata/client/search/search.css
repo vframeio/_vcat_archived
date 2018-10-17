@@ -61,8 +61,6 @@
 }
 .searchResults {
   margin: 20px;
-  display: flex;
-  flex-wrap: wrap;
 }
 .perPage {
   margin-left: 10px;

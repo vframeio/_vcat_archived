@@ -51,7 +51,11 @@
   display: flex;
   align-items: flex-start;
 }
-
+.keyframes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
 .keyframeSummary .tableTuples td {
   text-align: left;

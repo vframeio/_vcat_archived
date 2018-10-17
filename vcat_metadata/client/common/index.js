@@ -7,6 +7,7 @@ import Footer from './footer.component'
 import Sidebar from './sidebar.component'
 import Gate from './gate.component'
 import Keyframe from './keyframe.component'
+import Keyframes from './keyframes.component'
 import Video from './video.component'
 import { TableObject, TableArray, TableTuples, TableRow, TableCell } from './table.component'
 import './common.css'
@@ -26,5 +27,6 @@ export {
   DetectionList,
   DetectionBoxes,
   Keyframe,
+  Keyframes,
   Video,
 }

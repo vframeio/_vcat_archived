@@ -3,20 +3,27 @@ import { Link } from 'react-router-dom'
 import { imageUrl, timestamp, keyframeUri, widths } from '../util'
 import { DetectionBoxes } from '.'
 
+import * as searchActions from '../search/search.actions'
+
 export default function Keyframe({
+  verified,
   sha256,
   frame,
+  isSaved,
   fps = 25,
   size = 'th',
   className,
   showHash,
   showFrame,
   showTimestamp,
+  showSearchButton,
+  showSaveButton,
   to,
   children,
   detectionList = [],
   aspectRatio = 1.777,
   onClick,
+  reviewActions,
 }) {
   if (!sha256) return null
   const width = widths[size]
@@ -41,15 +48,43 @@ export default function Keyframe({
           />
         ))}
       </PossiblyExternalLink>
-      <label>
-        {showHash && <small><span className='sha256'>{sha256.substr(0, 6)}</span></small>}
-        {showFrame &&
-          <small>
-            <span>{'Frame #'}{frame}</span>
-          </small>
-        }
-        {showTimestamp && <small>{timestamp(frame, fps)}</small>}
-      </label>
+      {(showHash || showFrame || showTimestamp) &&
+        <label>
+          {showHash && <small><span className='sha256'>{sha256.substr(0, 6)}</span></small>}
+          {showFrame &&
+            <small>
+              <span>{'Frame #'}{frame}</span>
+            </small>
+          }
+          {showTimestamp && <small>{timestamp(frame, fps)}</small>}
+        </label>
+      }
+      {(reviewActions && (showSearchButton || showSaveButton)) &&
+        <label className='searchButtons'>
+          {showSearchButton &&
+            <Link
+              to={searchActions.publicUrl.searchByFrame(verified, sha256, frame)}
+              className='btn'
+            >
+              Search
+            </Link>
+          }
+          {showSaveButton && (isSaved
+            ? <button
+                onClick={() => reviewActions.unsave({ hash: sha256, frame, verified })}
+                className={'btn saved'}
+              >
+                {'Saved'}
+              </button>
+            : <button
+                onClick={() => reviewActions.save({ hash: sha256, frame, verified })}
+                className={'btn save'}
+              >
+                {'Save'}
+              </button>
+          )}
+        </label>
+      }
       {children}
     </div>
   )
