@@ -17,7 +17,7 @@ export default function reviewReducer(state = initialState, action) {
         saved: { ...saved },
       }
 
-    case types.review.reset:
+    case types.review.clear:
       cache.setSaved({})
       return {
         ...state,

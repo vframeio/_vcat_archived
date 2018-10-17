@@ -1,7 +1,7 @@
-import ReviewMenu from './review.menu'
 import Saved from './review.saved'
 
+import './review.css'
+
 export {
-  ReviewMenu,
   Saved,
 }

@@ -13,12 +13,10 @@ class Video extends Component {
     const { app, data, size } = this.props
     const { playing } = this.state
     const { sugarcube } = data.metadata
-    console.log(data.metadata)
     const url = sugarcube.fp.replace('/var/www/files/', 'https://cube.syrianarchive.org/')
     const { sha256, verified } = app.mediainfo
     const { video } = app.mediainfo.metadata.mediainfo
     const keyframe = app.keyframe.metadata.keyframe.basic[0]
-    console.log(keyframe)
     return (
       <div className='video'>
         {playing

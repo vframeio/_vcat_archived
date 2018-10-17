@@ -3,42 +3,42 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import * as actions from './review.actions'
-import { SearchResults } from '../search'
+import { Keyframes } from '../common'
+import InvestigatorMenu from './investigatorMenu.component'
+import AnnotatorMenu from './annotatorMenu.component'
 
 class ReviewSaved extends Component {
+  state = {
+    showAnnotator: false,
+  }
+
   render() {
     const { saved } = this.props
-    const savedResults = Object.keys(saved).forEach(key => {
+    const { showAnnotator } = this.state
+    const results = Object.keys(saved).sort().map(key => {
       const { verified, hash, frames } = saved[key]
-      return Object.keys(frames).map(frame => ({
+      return Object.keys(frames).sort().map(frame => ({
         verified,
         hash,
         frame,
       }))
-    }).reduce((a, b) => {
-      return (b && b.length) ? a.concat(b) : a
-    }, [])
+    }).reduce((a, b) => ((b && b.length) ? a.concat(b) : a), [])
     return (
-      <div className="searchImport">
-        <div>
-          <label>
-            <span>Title</span>
-            <input type="text" name="title" placeholder="Enter a title" />
-          </label>
-          <label>
-            <span />
-            <input type="checkbox" name="graphic" />Graphic content
-          </label>
-          <label>
-            <span />
-            <button className='btn create_new_group'>Create New Group</button>
-            <button className='btn check'>Check Duplicates</button>
-            <button className='btn reset'>Clear Selection</button>
-          </label>
+      <div className="reviewSaved">
+        <h2>Saved Images</h2>
+        <div className='reviewButtons'>
+          <button className='btn' onClick={() => this.setState({ showAnnotator: !showAnnotator })}>Import into VCAT</button>
+          <button className='btn' onClick={() => this.props.actions.exportCSV()}>Export CSV</button>
+          <button className='btn' onClick={() => this.props.actions.refresh()}>Refresh</button>
+          <button className='btn reset' onClick={() => confirm("This will clear your saved images.") && this.props.actions.clear()}>Reset</button>
         </div>
-        <SearchResults
-          query
-          results={savedResults}
+        {showAnnotator && <AnnotatorMenu />}
+        <Keyframes
+          frames={results}
+          showHash
+          showTimestamp
+          showSearchButton
+          showSaveButton
         />
       </div>
     )

@@ -81,6 +81,7 @@ h4:first-child {
   background: #fff;
   border: .05rem solid;
   border-radius: 2px;
+  margin-right: 5px;
   color: #11f;
   cursor: pointer;
   display: inline-block;
@@ -117,6 +118,9 @@ h4:first-child {
 .btn.saved:hover {
   background: #0808ee;
   color: white !important;
+}
+.row .btn {
+  margin: 0 5px 0 0;
 }
 
 

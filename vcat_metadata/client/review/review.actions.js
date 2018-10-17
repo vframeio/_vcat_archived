@@ -13,7 +13,7 @@ export const save = opt => dispatch => {
     verified: opt.verified,
   }
   if (opt.frame) {
-    hash.frames[parseInt(opt.frame)] = true
+    hash.frames[parseInt(opt.frame, 10)] = true
   }
   hash.verified = opt.verified
   saved[opt.hash] = hash
@@ -26,8 +26,8 @@ export const unsave = (opt) => dispatch => {
   let saved = getSavedFromStore()
   let hash = saved[opt.hash]
   if (hash) {
-    if (opt.frame && hash.frames[parseInt(opt.frame)]) {
-      hash.frames[parseInt(opt.frame)] = false
+    if (opt.frame && hash.frames[parseInt(opt.frame, 10)]) {
+      hash.frames[parseInt(opt.frame, 10)] = false
     }
   }
   dispatch({ type: types.review.unsave, saved })
@@ -56,4 +56,17 @@ export const refresh = () => dispatch => {
 // clear the stored frames
 export const clear = () => dispatch => {
   dispatch({ type: types.review.clear })
+}
+
+export const exportCSV = () => dispatch => {
+  console.log('export CSV')
+  let saved = getSavedFromStore()
+  const results = Object.keys(saved).sort().map(key => {
+    const { verified, hash, frames } = saved[key]
+    const rows = Object.keys(frames).sort().map(frame => ([
+      verified,
+      hash,
+      frame,
+    ]))
+  }).reduce((a, b) => ((b && b.length) ? a.concat(b) : a), [])
 }

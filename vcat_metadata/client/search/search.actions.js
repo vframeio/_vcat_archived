@@ -20,6 +20,7 @@ export const publicUrl = {
   browse: hash => '/search/browse/' + hash,
   searchByVerifiedFrame: (verified, hash, frame) => '/search/keyframe/' + verify(verified) + '/' + hash + '/' + pad(frame, 6),
   searchByFrame: (hash, frame) => '/search/keyframe/' + hash + '/' + pad(frame, 6),
+  review: () => '/search/review/'
 }
 
 // standard loading events

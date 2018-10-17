@@ -26,12 +26,6 @@
 .searchButtons {
   margin-top: 5px;
 }
-.searchButtons .btn:first-child {
-  margin-left: 0;
-}
-.searchButtons .btn {
-  margin-left: 5px;
-}
 .body > div.searchForm {
   padding-bottom: 20px;
 }
@@ -48,9 +42,7 @@
   opacity: 0;
   cursor: pointer;
 }
-.row .btn {
-  margin: 0 5px;
-}
+.reviewSaved,
 .searchQuery {
   margin: 0px 10px;
   padding: 13px;
