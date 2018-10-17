@@ -66,6 +66,62 @@ h4:first-child {
 .body > div {
   padding-bottom: 40px;
 }
+
+/* buttons */
+
+.btn:focus, .btn:hover {
+  background: #f1f1fc;
+  color: #4b48d6 !important;
+  text-decoration: none;
+}
+.btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #fff;
+  border: .05rem solid;
+  border-radius: 2px;
+  color: #11f;
+  cursor: pointer;
+  display: inline-block;
+  font-size: .8rem;
+  height: 1.8rem;
+  line-height: 1rem;
+  outline: none;
+  padding: .35rem .4rem;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.btn.reset,
+.btn.panic {
+  color: #b00;
+}
+.btn.view_saved,
+.btn.saved {
+  background: #11f;
+  border-color: #11f;
+  color: white;
+}
+.btn.view_saved:focus,
+.btn.view_saved:hover,
+.btn.saved:focus,
+.btn.saved:hover {
+  background: #0808ee;
+  color: white !important;
+}
+
+
+/* tables on metadata pages */
+
 table {
   border: 0;
   margin: 0;

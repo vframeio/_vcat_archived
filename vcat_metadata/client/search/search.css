@@ -29,6 +29,9 @@
 .searchButtons .btn:first-child {
   margin-left: 0;
 }
+.searchButtons .btn {
+  margin-left: 5px;
+}
 .body > div.searchForm {
   padding-bottom: 20px;
 }

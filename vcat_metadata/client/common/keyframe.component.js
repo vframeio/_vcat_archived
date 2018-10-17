@@ -29,7 +29,7 @@ export default function Keyframe({
   const width = widths[size]
   const height = Math.round(width / aspectRatio)
   return (
-    <div className={className || 'keyframe'}>
+    <div className={(className || 'keyframe') + (isSaved ? ' isSaved' : '')}>
       <PossiblyExternalLink to={to || keyframeUri(sha256, frame)} onClick={onClick}>
         <img
           alt={'Frame #' + frame}
