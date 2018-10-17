@@ -38,13 +38,8 @@ export const pad = (n, m) => {
 }
 
 // Verified is 0/1 when retrieved from SQL, but 'verified' or 'unverified' when retrieved elsewhere
-export const verify = verified => (
-  (verified === 1 || verified === '1')
-    ? 'verified'
-    : !verified
-      ? 'unverified'
-      : verified
-)
+export const isVerified = verified => verified === 1 || verified === '1' || verified === 'verified'
+export const verify = verified => isVerified(verified) ? 'verified' : 'unverified'
 
 export const courtesyS = (n, s) => n + ' ' + (n === 1 ? s : s + 's')
 
@@ -78,13 +73,14 @@ export const hashPath = sha256 => {
   ].join('/')
 }
 
-export const imageUrl = (sha256, frame, size = 'th') => [
+export const imageUrl = (verified, sha256, frame, size = 'th') => [
   'https://' + process.env.S3_HOST + '/v1/media/keyframes',
+  isVerified(verified) ? 'verified' : null,
   hashPath(sha256),
   pad(frame, 6),
   size,
   'index.jpg'
-].join('/')
+].filter(s => !!s).join('/')
 
 export const metadataUri = (sha256, tag) => '/metadata/' + sha256 + '/' + tag + '/'
 export const keyframeUri = (sha256, frame) => '/metadata/' + sha256 + '/keyframe/' + pad(frame, 6) + '/'

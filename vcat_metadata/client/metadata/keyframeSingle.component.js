@@ -63,6 +63,7 @@ class KeyframeSingle extends Component {
         <Keyframe
           sha256={sha256}
           frame={frame}
+          verified={verified}
           size='md'
           to={imageUrl(sha256, frame, 'lg')}
           aspectRatio={aspectRatio}

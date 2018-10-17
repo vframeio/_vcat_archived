@@ -8,6 +8,7 @@ export default class Classifier extends Component {
     const {
       tag,
       sha256,
+      verified,
       keyframes = {},
       labels,
       summary,
@@ -74,6 +75,7 @@ export default class Classifier extends Component {
               key={frame}
               sha256={sha256}
               frame={frame}
+              verified={verified}
               size='th'
               showFrame
               showTimestamp

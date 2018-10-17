@@ -33,7 +33,7 @@ export default function Keyframe({
       <PossiblyExternalLink to={to || keyframeUri(sha256, frame)} onClick={onClick}>
         <img
           alt={'Frame #' + frame}
-          src={imageUrl(sha256, frame, size)}
+          src={imageUrl(verified, sha256, frame, size)}
           width={width}
           height={height}
           onClick={onClick}
@@ -63,7 +63,7 @@ export default function Keyframe({
         <label className='searchButtons'>
           {showSearchButton &&
             <Link
-              to={searchActions.publicUrl.searchByFrame(verified, sha256, frame)}
+              to={searchActions.publicUrl.searchByVerifiedFrame(verified, sha256, frame)}
               className='btn'
             >
               Search
