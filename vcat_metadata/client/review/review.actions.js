@@ -102,3 +102,31 @@ export const exportCSV = () => dispatch => {
 //     return alert("Untagged " + bad.length + " duplicate" + (bad.length === 1 ? "" : "s") + ".")
 //   })
 // }
+
+// // submit the new group
+// function createNewGroup() {
+//   const title = document.querySelector('[name=title]').value.trim().replace(/[^-_a-zA-Z0-9 ]/g, "")
+//   const saved = window.store.get('saved', [])
+//   const graphic = document.querySelector('[name=graphic]').checked
+//   if (!title.length) return alert("Please enter a title for this group")
+//   if (!saved.length) return alert("Please pick some images to save")
+//   if (!did_check) {
+//     alert('Automatically checking for duplicates. Please doublecheck your selection.')
+//     return check()
+//   }
+//   if (creating) return null
+//   creating = true
+//   return http_post("/api/images/import/new/", {
+//     title,
+//     graphic,
+//     saved
+//   }).then(res => {
+//     console.log(res)
+//     window.store.set('saved', [])
+//     window.location.href = '/groups/show/' + res.image_group.id
+//   }).catch(res => {
+//     alert('Error creating group.  The server response is logged to the console.')
+//     console.log(res)
+//     creating = false
+//   })
+// }
