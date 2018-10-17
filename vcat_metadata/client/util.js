@@ -52,12 +52,12 @@ export const padSeconds = n => n < 10 ? '0' + n : n
 
 export const timestamp = (n = 0, fps = 25) => {
   n /= fps
-  let s = padSeconds((n % 60).toFixed(1))
+  let s = padSeconds(Math.round(n) % 60)
   n = Math.floor(n / 60)
   if (n > 60) {
-    return Math.floor(n / 60) + ':' + padSeconds(n % 60) + '\'' + s + '\"'
+    return Math.floor(n / 60) + ':' + padSeconds(n % 60) + ':' + s
   }
-  return (n % 60) + '\'' + s + '"'
+  return (n % 60) + '\:' + s
 }
 
 export const percent = n => (n * 100).toFixed(1) + '%'
