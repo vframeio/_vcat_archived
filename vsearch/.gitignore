@@ -1,4 +1,5 @@
 static/*
+!static/img
 !static/js
 !static/css
 !static/favicon.ico
