@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -21,13 +21,18 @@ class PanicButton extends Component {
 
   keydown(e) {
     if (e.keyCode === 27) {
-      this.props.actions.panic()
+      this.panic()
     }
+  }
+
+  panic() {
+    this.props.actions.panic()
+    this.props.history.push('/search/')
   }
 
   render() {
     return (
-      <button className='btn panic' onClick={this.props.actions.panic}>
+      <button className='btn panic' onClick={() => this.panic()}>
         <span>⚠</span> Panic
       </button>
     )
@@ -41,4 +46,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ panic: actions.panic }, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(PanicButton)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PanicButton))

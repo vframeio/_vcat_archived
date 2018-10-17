@@ -1,14 +1,15 @@
 import * as types from '../types'
 import session from '../session'
 
-const initialState = {
+const initialState = () => ({
   query: { reset: true },
   browse: { reset: true },
   options: {
     thumbnailSize: session('thumbnailSize') || 'th',
     perPage: parseInt(session('perPage'), 10) || 50,
   }
-}
+})
+
 const loadingState = {
   query: {
     query: { loading: true },
@@ -19,7 +20,7 @@ const loadingState = {
   }
 }
 
-export default function searchReducer(state = initialState, action) {
+export default function searchReducer(state = initialState(), action) {
   console.log(action.type, action)
   switch (action.type) {
     case types.search.loading:
@@ -63,9 +64,8 @@ export default function searchReducer(state = initialState, action) {
       }
 
     case types.search.panic:
-      window.history.pushState(null, 'VSearch', '/search/')
       return {
-        ...initialState,
+        ...initialState(),
       }
 
     case types.search.update_options:

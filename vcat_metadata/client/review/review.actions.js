@@ -1,3 +1,7 @@
+import { format } from 'date-fns'
+import stringify from 'csv-stringify'
+import saveAs from 'file-saver'
+
 import * as types from '../types'
 import { store } from '../store'
 
@@ -63,10 +67,16 @@ export const exportCSV = () => dispatch => {
   let saved = getSavedFromStore()
   const results = Object.keys(saved).sort().map(key => {
     const { verified, hash, frames } = saved[key]
-    const rows = Object.keys(frames).sort().map(frame => ([
+    return [
       verified,
       hash,
-      frame,
-    ]))
-  }).reduce((a, b) => ((b && b.length) ? a.concat(b) : a), [])
+      Object.keys(frames).join(', '),
+    ]
+  })
+  stringify(results, (err, csv) => {
+    const blob = new Blob([csv], {
+      type: 'text/csv'
+    })
+    saveAs(blob, 'vsearch_investigation_' + format(new Date(), 'YYYYMMDD_HHmm') + '.csv')
+  })
 }

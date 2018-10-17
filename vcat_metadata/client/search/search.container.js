@@ -50,7 +50,7 @@ class SearchContainer extends Component {
 
   render() {
     const { query, results, loadingMore } = this.props.query
-    console.log(query, results, loadingMore)
+    console.log('search container', query, results, loadingMore)
     let showLoadMore = true
     if (!query || query.reset || query.loading || !results || !results.length) {
       showLoadMore = false

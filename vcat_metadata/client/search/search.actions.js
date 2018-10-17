@@ -45,6 +45,7 @@ const error = (tag, err) => ({
 // search UI functions
 
 export const panic = () => dispatch => {
+  window.history.pushState(null, 'VSearch', '/search/')
   dispatch({ type: types.search.panic })
 }
 export const updateOptions = opt => dispatch => {
@@ -131,7 +132,8 @@ export const random = () => dispatch => {
     .then(data => data.json())
     .then(data => {
       dispatch(loaded(tag, data))
-      window.history.pushState(null, 'VSearch: Results', '/search/keyframe/' + data.query.hash + '/' + data.query.frame + '/')
+      // history.push(publicUrl.searchByVerifiedFrame(data.query.verified, data.query.hash, data.query.frame))
+      window.history.pushState(null, 'VSearch: Results', publicUrl.searchByVerifiedFrame(data.query.verified, data.query.hash, data.query.frame))
     })
     .catch(err => dispatch(error(tag, err)))
 }

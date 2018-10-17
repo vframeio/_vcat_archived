@@ -112,6 +112,12 @@ h4:first-child {
   border-color: #11f;
   color: white;
 }
+.btn[disabled] {
+  color: #bbb !important;
+  border-color: #bbb !important;
+  background: white !important;
+  cursor: default;
+}
 .btn.view_saved:focus,
 .btn.view_saved:hover,
 .btn.saved:focus,
