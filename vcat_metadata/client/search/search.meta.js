@@ -10,8 +10,10 @@ class SearchMeta extends Component {
   render() {
     const { query, metadata, sugarcube } = this.props
     console.log(metadata)
-    if (!query || !metadata || !metadata.mediainfo || metadata.metadata === 'loading') return <div className='gray'></div>
-    const sugarcubeId = metadata.mediainfo && metadata.mediainfo.sugarcube_id
+    if (!query || !metadata || !metadata.mediainfo || metadata.metadata === 'loading') {
+      return <div className='gray'></div>
+    }
+    const sugarcubeId = metadata.mediainfo.sugarcube_id
     const { video } = metadata.mediainfo.metadata.mediainfo
 
     return (
