@@ -6,9 +6,10 @@ import { Keyframe, Gate } from '../common'
 
 class KeyframeList extends Component {
   render() {
-    const { sha256 } = this.props.data
-    const { keyframe: keyframes } = this.props.data.metadata
-    const keyframeLists = ['dense', 'basic', 'expanded'].map(key => (
+    const { data, list } = this.props
+    const { sha256, metadata } = data
+    const { keyframe: keyframes } = metadata
+    let keyframeLists = (list ? [list] : ['dense', 'basic', 'expanded']).map(key => (
       <div key={key}>
         <h3>{key}</h3>
         <ul className='meta'>

@@ -1,25 +1,31 @@
 import * as types from '../types'
 import session from '../session'
 
-console.log(session)
-
 const initialState = {
   query: { reset: true },
+  browse: { reset: true },
   options: {
     thumbnailSize: session('thumbnailSize') || 'th',
     perPage: parseInt(session('perPage'), 10) || 50,
   }
 }
+const loadingState = {
+  query: {
+    query: { loading: true },
+    results: []
+  },
+  loading: {
+    loading: true
+  }
+}
 
 export default function searchReducer(state = initialState, action) {
+  console.log(action.type, action)
   switch (action.type) {
     case types.search.loading:
       return {
         ...state,
-        [action.tag]: {
-          query: { loading: true },
-          results: []
-        },
+        [action.tag]: loadingState[action.tag] || loadingState.loading,
       }
 
     case types.search.loaded:

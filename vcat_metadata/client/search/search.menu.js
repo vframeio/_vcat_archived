@@ -55,9 +55,10 @@ class SearchMenu extends Component {
             <option value='lg'>Large</option>
           </select>
           <label className='perPage'>
-            <input type='text'
-              onChange={e => this.props.actions.updateOptions({ perPage: parseInt(e.target.value, 10) })}
+            <input
+              type='text'
               value={this.props.options.perPage}
+              onChange={e => this.props.actions.updateOptions({ perPage: parseInt(e.target.value, 10) })}
             />
             {' per page'}
           </label>

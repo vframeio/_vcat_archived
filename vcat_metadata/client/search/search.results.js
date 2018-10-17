@@ -4,20 +4,12 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as querystring from 'querystring'
 
+import { timestamp } from '../util'
 import { Keyframe } from '../common'
 import * as searchActions from './search.actions'
+import * as metadataActions from '../metadata/metadata.actions'
 
-function SearchQuery({ query }) {
-  if (!query) return null
-  if (query.loading) {
-    return <div className="searchQuery">Loading results...</div>
-  }
-  return (
-    <div className="searchQuery">
-      <img src={query.url} />
-    </div>
-  )
-}
+import SearchQuery from './search.query'
 
 function SearchResults({ query, results, options }) {
   if (!query || query.reset || query.loading || !results) {
@@ -60,9 +52,10 @@ class SearchResultsContainer extends Component {
   componentDidMount() {
     const qs = querystring.parse(this.props.location.search.substr(1))
     if (qs && qs.url) {
-      this.props.actions.search(qs.url)
+      this.props.searchActions.search(qs.url)
+    } else {
+      this.searchByHash()
     }
-    this.searchByHash()
   }
 
   componentDidUpdate(prevProps) {
@@ -79,15 +72,19 @@ class SearchResultsContainer extends Component {
   searchByHash() {
     const { hash, frame } = this.props.match.params
     if (hash && frame) {
-      this.props.actions.searchByFrame(hash, frame)
+      this.props.searchActions.searchByFrame(hash, frame)
+    }
+    if (hash) {
+      this.props.metadataActions.fetchMetadata(hash)
     }
   }
 
   render() {
     const { query, results } = this.props.query
+    console.log(query, results)
     return (
       <div>
-        <SearchQuery query={query} />
+        <SearchQuery />
         <SearchResults
           {...this.props}
           query={query}
@@ -101,10 +98,12 @@ class SearchResultsContainer extends Component {
 const mapStateToProps = state => ({
   query: state.search.query,
   options: state.search.options,
+  metadata: state.metadata,
 })
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ ...searchActions }, dispatch)
+  searchActions: bindActionCreators({ ...searchActions }, dispatch),
+  metadataActions: bindActionCreators({ ...metadataActions }, dispatch),
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchResultsContainer))

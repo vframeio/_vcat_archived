@@ -118,12 +118,32 @@ table {
 .tableArray td {
   border-bottom: 1px solid #ddd;
 }
-.sha256 {
+.sha256,
+.gray {
   font-size: 12px;
   color: #888;
   display: block;
   padding-left: 3px;
+}
+.sha256 {
   margin: 20px 0 0px;
+}
+.gray span {
+  padding-right: 5px;
+}
+.gray {
+  margin-bottom: 10px;
+}
+.gray a {
+  color: #666;
+}
+.verified {
+  color: #080;
+  font-weight: bold;
+}
+.unverified {
+  color: #f00;
+  font-weight: 300;
 }
 .loading, .error {
   font-weight: normal;

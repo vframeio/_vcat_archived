@@ -64,17 +64,23 @@ def import_():
     return jsonify({ 'good': [], 'bad': [] })
 
 # query a mediarecord
-@app.route('/search/api/mediarecord/<sha>', methods=['GET'])
-def mediarecord(sha):
-  return jsonify(db.mediarecord(sha) or { 'err': 'Hash not found' })
+@app.route('/search/api/mediarecord/<hash>', methods=['GET'])
+def mediarecord(hash):
+  return jsonify(db.mediarecord(hash) or { 'err': 'Hash not found' })
 
 # list a directory
-@app.route('/search/api/list/<sha>', methods=['GET'])
-def list(sha):
-  frames = db.browse(sha)
+@app.route('/search/api/list/<hash>', methods=['GET'])
+def list(hash):
+  frames = db.browse(hash)
+  if len(frames) == 0:
+    return jsonify({
+      'hash': hash,
+      'frames': [],
+    })
   return jsonify({
-    'path': sha,
-    'results': frames,
+    'hash': hash,
+    'verified': frames[0]['verified'],
+    'frames': frames,
   })
 
 # search using an uploaded file
