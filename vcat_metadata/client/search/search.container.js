@@ -50,6 +50,7 @@ class SearchContainer extends Component {
 
   render() {
     const { query, results, loadingMore } = this.props.query
+    const options = this.props.options
     console.log('search container', query, results, loadingMore)
     let showLoadMore = true
     if (!query || query.reset || query.loading || !results || !results.length) {
@@ -63,7 +64,7 @@ class SearchContainer extends Component {
           ? !loadingMore
             ? <button
                 onClick={() => this.searchByOffset()}
-                className={(results && results.length > 50) ? 'btn loadMore wide' : 'btn loadMore'}
+                className={(results && results.length > Math.min(options.perPage, 30)) ? 'btn loadMore wide' : 'btn loadMore'}
               >
                 Load more
               </button>

@@ -69,9 +69,9 @@ export const exportCSV = () => dispatch => {
   const results = Object.keys(saved).sort().map(key => {
     const { verified, hash, frames } = saved[key]
     return [
-      verify(verified),
       hash,
       Object.keys(frames).join(', '),
+      verify(verified),
     ]
   })
   stringify(results, (err, csv) => {

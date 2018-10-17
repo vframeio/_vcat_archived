@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { imageUrl, timestamp, keyframeUri, widths } from '../util'
+import { imageUrl, timestamp, keyframeUri, widths, verify } from '../util'
 import { DetectionBoxes } from '.'
 
 import * as searchActions from '../search/search.actions'
@@ -50,7 +50,7 @@ export default function Keyframe({
       </PossiblyExternalLink>
       {(showHash || showFrame || showTimestamp) &&
         <label>
-          {showHash && <small><span className='sha256'>{sha256.substr(0, 6)}</span></small>}
+          {showHash && <small><span title={sha256} className={'sha256 ' + verify(verified)}>{sha256.substr(0, 6)}</span></small>}
           {showFrame &&
             <small>
               <span>{'Frame #'}{frame}</span>

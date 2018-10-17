@@ -31,9 +31,11 @@
 }
 .upload {
   position: relative;
+  cursor: pointer;
 }
 .upload .btn {
   pointer-events: none;
+  cursor: pointer;
 }
 .upload input {
   position: absolute;
@@ -70,6 +72,7 @@
   width: 400px;
   margin: 20px;
   height: 40px;
+  transition: all;
 }
 .loadMore.wide {
   width: calc(100% - 40px);
@@ -77,5 +80,5 @@
   height: 100px;
 }
 .loadingMore {
-  margin: 20px;
+  margin: 20px 20px 200px 20px;
 }

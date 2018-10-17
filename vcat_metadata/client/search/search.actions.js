@@ -1,7 +1,7 @@
 // import fetchJsonp from 'fetch-jsonp'
 import * as types from '../types'
 // import { hashPath } from '../util'
-import { store } from '../store'
+import { store, history } from '../store'
 import { post, pad, verify } from '../util'
 import querystring from 'query-string'
 
@@ -45,7 +45,7 @@ const error = (tag, err) => ({
 // search UI functions
 
 export const panic = () => dispatch => {
-  window.history.pushState(null, 'VSearch', '/search/')
+  history.push('/search/')
   dispatch({ type: types.search.panic })
 }
 export const updateOptions = opt => dispatch => {
@@ -65,7 +65,7 @@ export const upload = file => dispatch => {
     .then(data => {
       dispatch(loaded(tag, data))
       if (data.query.url && !window.location.search.match(data.query.url)) {
-        window.history.pushState(null, 'VSearch: Results', '/search/?url=' + data.query.url)
+        history.push('/search/?url=' + data.query.url)
       }
     })
     .catch(err => dispatch(error(tag, err)))
@@ -132,8 +132,8 @@ export const random = () => dispatch => {
     .then(data => data.json())
     .then(data => {
       dispatch(loaded(tag, data))
-      // history.push(publicUrl.searchByVerifiedFrame(data.query.verified, data.query.hash, data.query.frame))
-      window.history.pushState(null, 'VSearch: Results', publicUrl.searchByVerifiedFrame(data.query.verified, data.query.hash, data.query.frame))
+      history.push(publicUrl.searchByVerifiedFrame(data.query.verified, data.query.hash, data.query.frame))
+      // window.history.pushState(null, 'VSearch: Results', publicUrl.searchByVerifiedFrame(data.query.verified, data.query.hash, data.query.frame))
     })
     .catch(err => dispatch(error(tag, err)))
 }
