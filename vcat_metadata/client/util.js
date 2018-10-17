@@ -75,7 +75,7 @@ export const hashPath = sha256 => {
 
 export const imageUrl = (verified, sha256, frame, size = 'th') => [
   'https://' + process.env.S3_HOST + '/v1/media/keyframes',
-  isVerified(verified) ? 'verified' : null,
+  isVerified(verified) ? null : 'unverified',
   hashPath(sha256),
   pad(frame, 6),
   size,
