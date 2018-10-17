@@ -117,6 +117,15 @@ def upload():
     'results': results,
   })
 
+@app.route('/search/api/search/<verified>/<hash>/<frame>', methods=['GET'])
+def verified_search(verified, hash, frame):
+  offset, limit = get_offset_and_limit()
+  results, query = db.search_by_verified_frame(verified, hash, frame, offset=offset, limit=limit)
+  return jsonify({
+    'query': query,
+    'results': results,
+  })
+
 @app.route('/search/api/search/<hash>/<frame>', methods=['GET'])
 def search(hash, frame):
   offset, limit = get_offset_and_limit()

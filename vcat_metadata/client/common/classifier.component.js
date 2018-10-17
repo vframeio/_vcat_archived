@@ -4,10 +4,6 @@ import { courtesyS } from '../util'
 import { TableTuples, DetectionList, Keyframe } from '.'
 
 export default class Classifier extends Component {
-  state = {
-    showAll: false,
-  }
-
   render() {
     const {
       tag,
@@ -16,10 +12,8 @@ export default class Classifier extends Component {
       labels,
       summary,
       aspectRatio = 1.777,
+      showAll,
     } = this.props
-    const {
-      showAll
-    } = this.state
     let totalDetections = 0
     const keys = Object
       .keys(keyframes)

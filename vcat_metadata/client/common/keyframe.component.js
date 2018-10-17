@@ -9,6 +9,7 @@ export default function Keyframe({
   fps = 25,
   size = 'th',
   className,
+  showHash,
   showFrame,
   showTimestamp,
   to,
@@ -41,7 +42,13 @@ export default function Keyframe({
         ))}
       </PossiblyExternalLink>
       <label>
-        {showFrame && <small>{'Frame #'}{frame}</small>}
+        {showFrame &&
+          <small>
+            {showHash && <span className='sha256'>{sha256.substr(0, 6)}</span>}
+            {showHash && <span>{' #' + frame}</span>}
+            {!showHash && <span>{'Frame #'}{frame}</span>}
+          </small>
+        }
         {showTimestamp && <small>{timestamp(frame, fps)}</small>}
       </label>
       {children}

@@ -104,6 +104,15 @@ class FaissSearch:
     vec = self.load_feature_vector(verified, hash, frame)
     return self.search(vec, offset=offset, limit=limit), self.format_match((verified, hash, frame,))
 
+  # Search using a frame assuming we know if it's verified
+  def search_by_verified_frame(self, verified, hash, frame, offset=0, limit=15):
+    if verified == 'verified':
+      verified = 1
+    else:
+      verified = 0
+    vec = self.load_feature_vector(verified, hash, frame)
+    return self.search(vec, offset=offset, limit=limit), self.format_match((verified, hash, frame,))
+
   # Search using a random frame from the database
   def search_random(self, limit=15):
     id = randint(1, self.count)

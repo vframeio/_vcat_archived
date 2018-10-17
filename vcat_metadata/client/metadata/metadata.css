@@ -40,6 +40,18 @@
 .keyframe.th img {
   min-height: 90px;
 }
+.keyframe .sha256 {
+  display: inline-block;
+  min-width: auto;
+  max-width: 50px;
+  margin-right: 5px;
+  overflow: hidden;
+}
+.keyframe label small {
+  display: flex;
+  align-items: flex-start;
+}
+
 
 .keyframeSummary .tableTuples td {
   text-align: left;
@@ -72,4 +84,8 @@ ul.meta li:first-child:before {
 ul.meta li:before {
   content: '·';
   padding: 0 5px;
+}
+
+.sugarcube {
+  margin-top: 10px;
 }

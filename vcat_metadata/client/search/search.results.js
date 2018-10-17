@@ -25,6 +25,9 @@ function SearchResults({ query, results, options }) {
       frame={frame}
       size={options.thumbnailSize}
       to={searchActions.publicUrl.browse(hash)}
+      showHash
+      showFrame
+      showTimestamp
     >
       <label className='searchButtons'>
         <Link
@@ -70,8 +73,10 @@ class SearchResultsContainer extends Component {
   }
 
   searchByHash() {
-    const { hash, frame } = this.props.match.params
-    if (hash && frame) {
+    const { verified, hash, frame } = this.props.match.params
+    if (verified && hash && frame) {
+      this.props.searchActions.searchByVerifiedFrame(verified, hash, frame)
+    } else if (hash && frame) {
       this.props.searchActions.searchByFrame(hash, frame)
     }
     if (hash) {

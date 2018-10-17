@@ -66,10 +66,6 @@ h4:first-child {
 .body > div {
   padding-bottom: 40px;
 }
-video {
-  max-width: 640px;
-  margin: 10px 0;
-}
 table {
   border: 0;
   margin: 0;
@@ -118,14 +114,13 @@ table {
 .tableArray td {
   border-bottom: 1px solid #ddd;
 }
-.sha256,
 .gray {
   font-size: 12px;
   color: #888;
   display: block;
   padding-left: 3px;
 }
-.sha256 {
+.sha256.heading {
   margin: 20px 0 0px;
 }
 .gray span {
@@ -137,6 +132,7 @@ table {
 .gray a {
   color: #666;
 }
+
 .verified {
   color: #080;
   font-weight: bold;
@@ -145,12 +141,14 @@ table {
   color: #f00;
   font-weight: 300;
 }
+
 .loading, .error {
   font-weight: normal;
   margin: 10px 0;
   padding: 3px;
   font-size: 24px;
 }
+
 .title {
   text-transform: capitalize;
 }
@@ -158,3 +156,31 @@ table {
   position: absolute;
 }
 .rect { border: 1px solid rgba(0,0,255); background-color: rgba(0,0,255,0.1); }
+
+video {
+  max-width: 640px;
+  margin: 10px 0;
+}
+.video {
+  margin: 0 0 10px 0;
+}
+.video .bg {
+  cursor: pointer;
+  position: relative;
+  background-size: cover;
+}
+.video .play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 20%;
+  height: 20%;
+  background-image: url(/search/static/img/play.png);
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.desktop .video .play:hover {
+  -webkit-filter: invert(60%) sepia(100%) saturate(500%) hue-rotate(160deg);
+}

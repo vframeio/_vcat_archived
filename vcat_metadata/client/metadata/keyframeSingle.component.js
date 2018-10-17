@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import { imageUrl, metadataUri, keyframeUri } from '../util'
 import { DetectionList, TableTuples, Keyframe, Gate } from '../common'
+import * as searchActions from '../search/search.actions'
 
 import * as labels from '../labels'
 
@@ -11,7 +12,7 @@ class KeyframeSingle extends Component {
   render() {
     const { app, data, match } = this.props
     const frame = parseInt(match.params.frame, 10)
-    const { sha256 } = data
+    const { sha256, verified } = data
     const { width, height, aspect_ratio: aspectRatio } = app.mediainfo.metadata.mediainfo.video
     const keyframeLookup = app.keyframe.metadata.keyframe
     const detections = {
@@ -69,6 +70,12 @@ class KeyframeSingle extends Component {
             { labels: labels.coco, detections: detections.coco }
           ]}
         />
+        <Link
+          to={searchActions.publicUrl.searchByVerifiedFrame(verified, sha256, frame)}
+          className='btn'
+        >
+          Search
+        </Link>
         <TableTuples
           tag='Metadata'
           list={[

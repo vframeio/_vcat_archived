@@ -23,6 +23,12 @@
 .keyframe label.searchButtons {
   justify-content: flex-start;
 }
+.searchButtons {
+  margin-top: 5px;
+}
+.searchButtons .btn:first-child {
+  margin-left: 0;
+}
 .body > div.searchForm {
   padding-bottom: 20px;
 }

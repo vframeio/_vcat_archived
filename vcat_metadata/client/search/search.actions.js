@@ -8,6 +8,7 @@ import querystring from 'query-string'
 const url = {
   upload: () => '/search/api/upload',
   search: () => '/search/api/fetch',
+  searchByVerifiedFrame: (verified, hash, frame) => '/search/api/search/' + verified + '/' + hash + '/' + pad(frame, 6),
   searchByFrame: (hash, frame) => '/search/api/search/' + hash + '/' + pad(frame, 6),
   browse: hash => '/search/api/list/' + hash,
   random: () => '/search/api/random',
@@ -15,7 +16,17 @@ const url = {
 }
 export const publicUrl = {
   browse: hash => '/search/browse/' + hash,
+  searchByVerifiedFrame: (verified, hash, frame) => '/search/keyframe/' + verify(verified) + '/' + hash + '/' + pad(frame, 6),
   searchByFrame: (hash, frame) => '/search/keyframe/' + hash + '/' + pad(frame, 6),
+}
+function verify(verified) {
+  if (verified === 1 || verified === '1') {
+    return 'verified'
+  }
+  if (!verified) {
+    return 'unverified'
+  }
+  return verified
 }
 
 const loading = (tag) => ({
@@ -77,6 +88,19 @@ export const upload = file => dispatch => {
         window.history.pushState(null, 'VSearch: Results', '/search/?url=' + data.query.url)
       }
     })
+    .catch(err => dispatch(error(tag, err)))
+}
+export const searchByVerifiedFrame = (verified, hash, frame) => dispatch => {
+  const { options } = store.getState().search
+  const tag = 'query'
+  dispatch(loading(tag))
+  const qs = querystring.stringify({ limit: options.perPage })
+  fetch(url.searchByVerifiedFrame(verified, hash, frame) + '?' + qs, {
+    method: 'GET',
+    mode: 'cors',
+  })
+    .then(data => data.json())
+    .then(data => dispatch(loaded(tag, data)))
     .catch(err => dispatch(error(tag, err)))
 }
 export const searchByFrame = (hash, frame) => dispatch => {

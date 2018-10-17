@@ -3,8 +3,8 @@ import { Link, withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { Keyframe } from '../common'
-import { KeyframeList } from '../metadata'
+import { Keyframe, Video } from '../common'
+import { Coco } from '../metadata'
 import * as searchActions from './search.actions'
 import * as metadataActions from '../metadata/metadata.actions'
 import SearchMeta from './search.meta'
@@ -66,7 +66,8 @@ class Browse extends Component {
     return (
       <div className="searchQuery column">
         <SearchMeta query={browse} sugarcube />
-        <div className='row'>
+        <Video size={'md'} />
+        <div className='row buttons'>
           <Link
             to={'/metadata/' + browse.hash}
             className='btn'
@@ -75,7 +76,7 @@ class Browse extends Component {
           </Link>
         </div>
         {frames}
-        <KeyframeList list='dense' />
+        <Coco showAll />
       </div>
     )
   }

@@ -26,7 +26,7 @@ class Heading extends Component {
 
   render() {
     return (
-      <span className='sha256'>
+      <span className='gray sha256 heading'>
         {'sha256: '}{this.props.hash}
       </span>
     )
