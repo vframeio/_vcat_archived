@@ -42,7 +42,7 @@ export const image_url = (img, type, size) => {
     return "/static/vframe-logo-blue.png"
   }
   size = size || 'md'
-  if (img.sa_hash) {
+  if (img.from_sa) {
     const endpoint = img.verified ? keyframe_endpoint : keyframe_endpoint_unverified
     if (img.frame) {
       return [

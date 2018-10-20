@@ -55,8 +55,8 @@ class ImageGroupRow extends Component {
       )
       buttons = (
         <div className="column col-4 buttons">
-          <span>{'Delete group?'}</span>
-          <button className="btn btn-error" onClick={this.handleDestroy}>x</button>
+          <span>{'Delete group'}</span>
+          <button className="btn btn-sm btn-error" onClick={this.handleDestroy}>x</button>
         </div>
       )
     } else {

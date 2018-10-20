@@ -18,15 +18,7 @@ class StaffDashboard extends Component {
     return (
       <div className='dashboard'>
         <div className="columns">
-          <div className="col4 dash-a">
-            <div><img className="" alt='logo' src="/static/logo-large.png" /></div>
-          </div>
-          <div className="col1">
-          &nbsp;
-          </div>
           <div className="col7">
-            <h1>Welcome to VCat</h1>
-            <h2>{site.client_name}</h2>
             <UserStats />
           </div>
         </div>

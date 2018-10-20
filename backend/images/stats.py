@@ -12,6 +12,21 @@ from rest_framework import status
 class ImageStats(APIView):
   def get(self, request, format=None):
     cursor = connection.cursor()
+
+    user_complete_count = 0
+    user_incomplete_count = 0
+
+    cursor.execute("SELECT id FROM images_imagegroup WHERE assigned_to_id = %s", [request.user.id])
+    group_ids = [str(i[0]) for i in cursor.fetchall()]
+
+    if len(group_ids):
+      group_ids_str = ",".join(group_ids)
+      cursor.execute("SELECT count(*) AS count FROM images_image WHERE complete=1 AND image_group_id IN ({})".format(group_ids_str))
+      user_complete_count = cursor.fetchone()[0]
+
+      cursor.execute("SELECT count(*) AS count FROM images_image WHERE complete=0 AND image_group_id IN ({})".format(group_ids_str))
+      user_incomplete_count = cursor.fetchone()[0]
+
     cursor.execute("SELECT count(*) AS count FROM images_image WHERE complete=1 AND image_group_id IS NOT NULL")
     complete_count = cursor.fetchone()[0]
 
@@ -36,6 +51,9 @@ class ImageStats(APIView):
         'total': complete_count + incomplete_count,
         'complete': complete_count,
         'incomplete': incomplete_count,
+        'user_total': user_complete_count + user_incomplete_count,
+        'user_complete': user_complete_count,
+        'user_incomplete': user_incomplete_count,
       },
       'annotations': {
         'user': user_annotation_count,

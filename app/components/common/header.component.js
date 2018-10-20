@@ -28,22 +28,20 @@ function LoggedOutHeader(props){
 function LoggedInHeader(props){
   return (
     <header className="navbar">
-      <section className="navbar-section">
+      <section className="navbar-section first-navbar-section">
         <Link to="/"><img className="menuToggle" alt='logo' src="/static/vframe-logo.png" /></Link>
+        <Link to="/" className="btn btn-link vcat-btn"><b>VCAT</b></Link>
         <Link to="/categories/" className="btn btn-link">Categories</Link>
-        <Link to="/groups/user/" className="btn btn-link">Assignments</Link>
-        <Link to="/images/new/" className="btn btn-link">Add Image</Link>
-        {props.auth && props.auth.groups && props.auth.groups.staff
-        ? <a href="/search/" className="btn btn-link">Search</a>
-        : null
-        }
+        <Link to="/images/new/" className="btn btn-link">Upload</Link>
+        <a href="/search/" className="btn btn-link">Search</a>
       </section>
 
       <section className="navbar-section last-navbar-section">
-        <span className="menu-help"><Link to="/static/explore/treemap.html" className="btn btn-link">Explore Data</Link></span>
+        <span className="menu-help"><Link to="/static/explore/treemap.html" className="btn btn-link">Stats</Link></span>
         <span className="menu-help"><Link to="/help/" className="btn btn-link">Help</Link></span>
-        <span className="login-out logged-in"><span className="capitalize">{props.auth.user.username}</span></span>
-        <span className="logout login-out"><Link to="/accounts/logout/">Logout</Link></span>
+        <span className="login-out logged-in capitalize">{props.auth.user.username}</span>
+        <Link to="/groups/user/" className="btn btn-link">My Assignments</Link>
+        <span className="btn btn-link"><Link to="/accounts/logout/">Logout</Link></span>
       </section>
     </header>
   )
