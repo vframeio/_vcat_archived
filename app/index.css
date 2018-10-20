@@ -81,8 +81,29 @@ a:focus {
   padding: 20px;
 }
 
-
 a:focus{
   -webkit-box-shadow:none;
   box-shadow:none;
+}
+
+.btn {
+  color: #11f;
+}
+.btn:focus, .btn:hover {
+  border-color: #11f;
+  background: #f1f1ff;
+}
+.btn.btn-primary {
+  background: #11f;
+  border-color: #11f;
+}
+.btn.btn-primary:focus,
+.btn.btn-primary:hover {
+  background: #6161ff;
+  border-color: #66f;
+}
+.btn.btn-link:focus,
+.btn.btn-link:hover {
+  background: transparent;
+  border-color: transparent;
 }

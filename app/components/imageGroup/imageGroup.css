@@ -6,3 +6,21 @@
   justify-content: flex-end;
   flex-direction: row;
 }
+.imageGroupRow h5 {
+  font-weight: bold;
+  font-size: 15px;
+}
+.imageGroupRow h5 a {
+  font-size: 15px;
+  margin-right: 5px;
+}
+.imageGroupRow .buttons,
+.imageGroupRow h5 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.imageGroupRow .buttons span {
+  display: inline-block;
+  margin-right: 5px;
+}

@@ -48,12 +48,15 @@ class ImageGroupRow extends Component {
         </Link>
       )
     })
-    let buttons;
+    let userSelect, buttons;
     if (this.props.adminView) {
+      userSelect = (
+        <UserSelect value={group.assigned_to} list={this.props.user.list} onChange={this.handleAssign} />
+      )
       buttons = (
         <div className="column col-4 buttons">
-          <UserSelect value={group.assigned_to} list={this.props.user.list} onChange={this.handleAssign} />
-          <button className="btn" onClick={this.handleDestroy}>Destroy</button>
+          <span>{'Delete group?'}</span>
+          <button className="btn btn-error" onClick={this.handleDestroy}>x</button>
         </div>
       )
     } else {
@@ -65,7 +68,13 @@ class ImageGroupRow extends Component {
     return (
       <div className="columns imageGroupRow">
         <div className="column col-8">
-          <h5><Link to={"/groups/show/" + group.id}>{heading}</Link></h5>
+          <h5>
+            {userSelect}
+            <span>
+              {'Group name: '}
+              <Link to={"/groups/show/" + group.id}>{heading}</Link>
+            </span>
+          </h5>
         </div>
         {buttons}
         <div className="column col-12 gallery">
