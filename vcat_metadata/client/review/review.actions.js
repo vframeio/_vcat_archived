@@ -124,7 +124,6 @@ export const dedupe = () => dispatch => {
 // submit the new group
 export const create = ({ title, graphic }) => dispatch => {
   const urls = getSavedUrls()
-  title = title.trim().replace(/[^-_a-zA-Z0-9 ]/g, '')
   if (!title) return dispatch(error('create', 'No title'))
   if (!urls) return dispatch(error('create', 'No images to save'))
   dispatch(loading('create'))

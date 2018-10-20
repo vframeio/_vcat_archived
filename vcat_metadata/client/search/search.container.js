@@ -9,6 +9,7 @@ import * as metadataActions from '../metadata/metadata.actions'
 
 import SearchQuery from './search.query'
 import SearchResults from './search.results'
+import SearchSafety from './search.safety'
 
 class SearchContainer extends Component {
   componentDidMount() {
@@ -56,6 +57,8 @@ class SearchContainer extends Component {
     if (!query || query.reset || query.loading || !results || !results.length) {
       showLoadMore = false
     }
+    let isWide = (results && results.length > Math.min(options.perPage, 30))
+    let isMoreLoaded = (results && results.length > options.perPage)
     return (
       <div>
         <SearchQuery />
@@ -64,13 +67,15 @@ class SearchContainer extends Component {
           ? !loadingMore
             ? <button
                 onClick={() => this.searchByOffset()}
-                className={(results && results.length > Math.min(options.perPage, 30)) ? 'btn loadMore wide' : 'btn loadMore'}
+                className={isWide ? 'btn loadMore wide' : 'btn loadMore'}
               >
                 Load more
               </button>
             : <div className='loadingMore'>{'Loading more results...'}</div>
-          : <div></div>
+          : <div>
+            </div>
         }
+        {!isMoreLoaded && <SearchSafety />}
       </div>
     )
   }

@@ -14,7 +14,7 @@ function Keyframes(props) {
     review,
     ...frameProps
   } = props
-  console.log(props)
+  // console.log(props)
   return (
     <div className='keyframes'>
       {frames.map(({ hash, frame, verified }) => (
