@@ -68,6 +68,9 @@
   width: 30px;
   font-family: Helvetica, sans-serif;
 }
+
+/* load more button that gets bigger */
+
 .loadMore {
   width: 400px;
   margin: 20px;
@@ -82,10 +85,23 @@
 .loadingMore {
   margin: 20px 20px 200px 20px;
 }
+
+/* health and safety warning */
+
 .safety div {
   display: inline-block;
   margin: 20px 20px;
   padding: 10px;
+  background: #eee;
+  color: #111;
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   font-size: 13px;
+  line-height: 1.4;
+}
+.safety ul {
+  margin: 0;
+  padding: 0 21px;
+}
+.safety li {
+  padding: 1px 0 0 0;
 }

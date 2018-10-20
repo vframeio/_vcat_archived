@@ -8,8 +8,7 @@ export default function SearchWarning() {
         <ul>
           <li> Look away if you see something nasty. </li>
           <li> Hit <tt>esc</tt> to activate panic mode (hides all images) </li>
-          <li> Keep thumbnails small so your eye can dart away. </li>
-          <li> Limit viewing to 15 minute stretches. </li>
+          <li> Keep thumbnails small so your eye can dart. </li>
           <li> Take breaks and refresh yourself with positive imagery. </li>
         </ul>
       </div>
