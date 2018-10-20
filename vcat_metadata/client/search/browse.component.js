@@ -41,9 +41,10 @@ class Browse extends Component {
       return <div>No frames</div>
     }
     return (
-      <div className="searchQuery column">
-        <SearchMeta query={browse} sugarcube />
+      <div className="browseComponent column">
+        <h3>Video Preview</h3>
         <Video size={'md'} />
+        <SearchMeta query={browse} sugarcube />
         <div className='row buttons'>
           <Link
             to={'/metadata/' + browse.hash}
@@ -52,6 +53,7 @@ class Browse extends Component {
             View Full Metadata
           </Link>
         </div>
+        <h3>Keyframes</h3>
         <Keyframes
           frames={browse.frames}
           showHash

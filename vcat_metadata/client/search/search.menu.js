@@ -40,12 +40,13 @@ class SearchMenu extends Component {
           <button className='btn random' onClick={this.random.bind(this)}><span>♘</span> Random</button>
           <PanicButton />
           <Link to={actions.publicUrl.review()}>
-            <button className='btn view_saved'><span>⇪</span> View Saved</button>
+            <button className='btn view_saved'><span>⇪</span> Saved</button>
           </Link>
         </div>
 
         <div className='row'>
           <select
+            className='form-select'
             onChange={e => this.props.actions.updateOptions({ thumbnailSize: e.target.value })}
             value={this.props.options.thumbnailSize}
           >
@@ -56,9 +57,11 @@ class SearchMenu extends Component {
           </select>
           <label className='perPage'>
             <input
-              type='text'
+              type='number'
               value={this.props.options.perPage}
-              onChange={e => this.props.actions.updateOptions({ perPage: parseInt(e.target.value, 10) })}
+              min={1}
+              max={100}
+              onChange={e => this.props.actions.updateOptions({ perPage: e.target.value })}
             />
             {' per page'}
           </label>

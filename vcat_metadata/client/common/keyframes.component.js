@@ -12,20 +12,26 @@ function Keyframes(props) {
     frames,
     options,
     review,
+    search,
     ...frameProps
   } = props
   // console.log(props)
+  let minDistance = 0
+  if (frames && frames.length) {
+    minDistance = frames[0].distance || 0
+  }
   return (
     <div className='keyframes'>
-      {frames.map(({ hash, frame, verified }) => (
+      {frames.map(({ hash, frame, verified, distance }) => (
         <Keyframe
           key={hash + '_' + frame}
           sha256={hash}
           frame={frame}
+          score={100 - Math.round(distance - minDistance) + '%'}
           verified={verified}
-          isSaved={!!saved[hash] && !!saved[hash].frames && !!saved[hash].frames[parseInt(frame)]}
+          isSaved={!!saved[hash] && !!saved[hash].frames && !!saved[hash].frames[parseInt(frame, 10)]}
           size={options.thumbnailSize}
-          to={searchActions.publicUrl.browse(hash)}
+          onClick={() => review.toggleSaved({ verified, hash, frame })}
           reviewActions={review}
           {...frameProps}
         />
@@ -41,6 +47,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   review: bindActionCreators({ ...reviewActions }, dispatch),
+  search: bindActionCreators({ ...searchActions }, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Keyframes)

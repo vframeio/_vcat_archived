@@ -56,6 +56,25 @@ export const unsave = (opt) => dispatch => {
   dispatch({ type: types.review.unsave, saved })
 }
 
+export const toggleSaved = (opt) => dispatch => {
+  let { hash, frame } = opt
+  let saved = getSavedFromStore()
+  let el = saved[hash]
+  let isSaved = false
+  console.log(saved, el)
+  if (el) {
+    if (frame && el.frames && el.frames[parseInt(frame, 10)]) {
+      isSaved = el.frames[parseInt(frame, 10)]
+    }
+  }
+  console.log(isSaved)
+  if (isSaved) {
+    unsave(opt)(dispatch)
+  } else {
+    save(opt)(dispatch)
+  }
+}
+
 // refresh the stored frames
 export const refresh = () => dispatch => {
   let saved = getSavedFromStore()

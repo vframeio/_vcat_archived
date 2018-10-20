@@ -249,3 +249,49 @@ video {
 .desktop .video .play:hover {
   -webkit-filter: invert(60%) sepia(100%) saturate(500%) hue-rotate(160deg);
 }
+
+
+.loader {
+  color: transparent !important;
+  min-height: .8rem;
+  pointer-events: none;
+  position: relative;
+}
+
+.loader::after {
+  animation: loader 500ms infinite linear;
+  border: .1rem solid #5755d9;
+  border-radius: 50%;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  content: "";
+  display: block;
+  height: .8rem;
+  left: 50%;
+  margin-left: -.4rem;
+  margin-top: -.4rem;
+  position: absolute;
+  top: 50%;
+  width: .8rem;
+  z-index: 1;
+}
+
+.loader.loader-lg {
+  min-height: 2rem;
+}
+
+.loader.loader-lg::after {
+  height: 1.6rem;
+  margin-left: -.8rem;
+  margin-top: -.8rem;
+  width: 1.6rem;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

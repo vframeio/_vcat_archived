@@ -9,6 +9,11 @@
   display: flex;
   flex-direction: column;
 }
+
+.searchContainer h3 {
+  padding: 0;
+  margin-left: 23px;
+}
 .searchForm {
   display: flex;
   justify-content: space-between;
@@ -20,12 +25,48 @@
 .searchForm .row {
   align-items: center;
 }
-.keyframe label.searchButtons {
-  justify-content: flex-start;
+.searchBox {
+  margin: 0 10px 0 0;
 }
-.searchButtons {
-  margin-top: 5px;
+
+.searchMeta {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  line-height: 18px;
+  width: 200px;
+  padding: 0;
 }
+.searchMeta span {
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.keyframe .thumbnail {
+  position: relative;
+  cursor: pointer;
+}
+.keyframe .searchButtons {
+  position: absolute;
+  bottom: 0; left: 0;
+  padding: 0 5px 15px 5px;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  transition: all 0.2s;
+}
+.desktop .keyframe .thumbnail:hover .searchButtons,
+.mobile .keyframe .searchButtons {
+  opacity: 1;
+}
+.keyframe .searchButtons .btn {
+  margin-right: 0;
+}
+.keyframe a {
+  text-decoration: none;
+}
+
 .body > div.searchForm {
   padding-bottom: 20px;
 }
@@ -44,7 +85,9 @@
   opacity: 0;
   cursor: pointer;
 }
+
 .reviewSaved,
+.browseComponent,
 .searchQuery {
   margin: 0px 10px;
   padding: 13px;
@@ -53,8 +96,25 @@
   padding: 0 0 10px 0px;
 }
 .searchQuery img {
-  max-width: 320px;
-  max-height: 180px;
+  cursor: crosshair;
+  user-select: none;
+  max-width: 640px;
+  max-height: 480px;
+}
+.searchContainer .searchQuery h3 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+.searchBox {
+  position: relative;
+}
+.searchBox .box {
+  position: absolute;
+  cursor: crosshair;
+  pointer-events: none;
+  border: 1px solid #11f;
+  background-color: rgba(16,16,255,0.1);
 }
 .searchResults {
   margin: 20px;
@@ -104,4 +164,15 @@
 }
 .safety li {
   padding: 1px 0 0 0;
+}
+
+.browseComponent h3 {
+  margin-bottom: 10px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }

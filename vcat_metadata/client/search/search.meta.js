@@ -9,21 +9,20 @@ import * as searchActions from './search.actions'
 class SearchMeta extends Component {
   render() {
     const { query, metadata, sugarcube } = this.props
-    console.log(metadata)
     if (!query || !metadata || !metadata.mediainfo || metadata.metadata === 'loading') {
-      return <div className='gray'></div>
+      return <div className='searchMeta'></div>
     }
     const sugarcubeId = metadata.mediainfo.sugarcube_id
     const { video } = metadata.mediainfo.metadata.mediainfo
 
     return (
-      <div className='gray'>
+      <div className='searchMeta'>
         <span className={query.verified ? 'verified' : 'unverified'}>
           {query.verified ? 'verified' : 'unverified'}
         </span>
         <span>
           {'sha256: '}
-          <Link to={searchActions.publicUrl.browse(query.hash)}>{query.hash}</Link>
+          <Link className="sha256" to={searchActions.publicUrl.browse(query.hash)}>{query.hash}</Link>
         </span>
         {query.frame &&
           <span>

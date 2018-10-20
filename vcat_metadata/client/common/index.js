@@ -4,6 +4,7 @@ import DetectionBoxes from './detectionBoxes.component'
 import DetectionList from './detectionList.component'
 import Header from './header.component'
 import Footer from './footer.component'
+import Loader from './loader.component'
 import Sidebar from './sidebar.component'
 import Gate from './gate.component'
 import Keyframe from './keyframe.component'
@@ -16,6 +17,7 @@ export {
   Header,
   Footer,
   Sidebar,
+  Loader,
   Gate,
   TableObject,
   TableArray,

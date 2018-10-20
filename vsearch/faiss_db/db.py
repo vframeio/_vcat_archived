@@ -102,7 +102,7 @@ class FaissSearch:
   def search_by_frame(self, hash, frame, offset=0, limit=15):
     verified, hash, frame = self.find_by_frame(hash, frame)
     vec = self.load_feature_vector(verified, hash, frame)
-    return self.search(vec, offset=offset, limit=limit), self.format_match((verified, hash, frame,))
+    return self.search(vec, offset=offset, limit=limit), self.format_match((verified, hash, frame,), size='md')
 
   # Search using a frame assuming we know if it's verified
   def search_by_verified_frame(self, verified, hash, frame, offset=0, limit=15):
@@ -111,14 +111,14 @@ class FaissSearch:
     else:
       verified = 0
     vec = self.load_feature_vector(verified, hash, frame)
-    return self.search(vec, offset=offset, limit=limit), self.format_match((verified, hash, frame,))
+    return self.search(vec, offset=offset, limit=limit), self.format_match((verified, hash, frame,), size='md')
 
   # Search using a random frame from the database
   def search_random(self, limit=15):
     id = randint(1, self.count)
     verified, hash, frame = self.find_by_id(id)
     vec = self.load_feature_vector(verified, hash, frame)
-    return self.search(vec, limit=limit), self.format_match((verified, hash, frame,))
+    return self.search(vec, limit=limit), self.format_match((verified, hash, frame,), size='md')
 
   # List frames in a video
   def browse(self, hash):

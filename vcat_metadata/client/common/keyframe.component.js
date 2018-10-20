@@ -9,6 +9,7 @@ export default function Keyframe({
   verified,
   sha256,
   frame,
+  score,
   isSaved,
   fps = 25,
   size = 'th',
@@ -16,6 +17,7 @@ export default function Keyframe({
   showHash,
   showFrame,
   showTimestamp,
+  showScore,
   showSearchButton,
   showSaveButton,
   to,
@@ -30,59 +32,74 @@ export default function Keyframe({
   const height = Math.round(width / aspectRatio)
   return (
     <div className={(className || 'keyframe') + (isSaved ? ' isSaved' : '')}>
-      <PossiblyExternalLink to={to || keyframeUri(sha256, frame)} onClick={onClick}>
-        <img
-          alt={'Frame #' + frame}
-          src={imageUrl(verified, sha256, frame, size)}
-          width={width}
-          height={height}
-          onClick={onClick}
-        />
-        {detectionList.map(({ labels, detections }, i) => (
-          <DetectionBoxes
-            key={i}
-            labels={labels}
-            detections={detections}
+      <div className="thumbnail">
+        <PossiblyExternalLink to={to || keyframeUri(sha256, frame)} onClick={onClick}>
+          <img
+            alt={'Frame #' + frame}
+            src={imageUrl(verified, sha256, frame, size)}
             width={width}
             height={height}
+            onClick={onClick}
           />
-        ))}
-      </PossiblyExternalLink>
-      {(showHash || showFrame || showTimestamp) &&
+          {detectionList.map(({ labels, detections }, i) => (
+            <DetectionBoxes
+              key={i}
+              labels={labels}
+              detections={detections}
+              width={width}
+              height={height}
+            />
+          ))}
+        </PossiblyExternalLink>
+        {(reviewActions && (showSearchButton || showSaveButton)) &&
+          <label className='searchButtons'>
+            {showSearchButton &&
+              <Link
+                to={searchActions.publicUrl.searchByVerifiedFrame(verified, sha256, frame)}
+                className='btn'
+              >
+                Search
+              </Link>
+            }
+            {showSaveButton && (isSaved
+              ? <button
+                  onClick={() => reviewActions.unsave({ hash: sha256, frame, verified })}
+                  className={'btn saved'}
+                >
+                  {'Saved'}
+                </button>
+              : <button
+                  onClick={() => reviewActions.save({ hash: sha256, frame, verified })}
+                  className={'btn save'}
+                >
+                  {'Save'}
+                </button>
+            )}
+          </label>
+        }
+      </div>
+      {(showHash || showFrame || showTimestamp || showScore) &&
         <label>
-          {showHash && <small><span title={sha256} className={'sha256 ' + verify(verified)}>{sha256.substr(0, 6)}</span></small>}
+          {showHash && 
+            <small>
+              <Link to={searchActions.publicUrl.browse(sha256)}>
+                <span
+                  title={sha256}
+                  className={'sha256 ' + verify(verified)}
+                >
+                  {'▶ '}
+                  {sha256.substr(0, 6)}
+                </span>
+              </Link>
+            </small>
+          }
           {showFrame &&
             <small>
               <span>{'Frame #'}{frame}</span>
             </small>
           }
           {showTimestamp && <small>{timestamp(frame, fps)}</small>}
-        </label>
-      }
-      {(reviewActions && (showSearchButton || showSaveButton)) &&
-        <label className='searchButtons'>
-          {showSearchButton &&
-            <Link
-              to={searchActions.publicUrl.searchByVerifiedFrame(verified, sha256, frame)}
-              className='btn'
-            >
-              Search
-            </Link>
-          }
-          {showSaveButton && (isSaved
-            ? <button
-                onClick={() => reviewActions.unsave({ hash: sha256, frame, verified })}
-                className={'btn saved'}
-              >
-                {'Saved'}
-              </button>
-            : <button
-                onClick={() => reviewActions.save({ hash: sha256, frame, verified })}
-                className={'btn save'}
-              >
-                {'Save'}
-              </button>
-          )}
+          {showScore && !!score && <small>{score}</small>}
         </label>
       }
       {children}

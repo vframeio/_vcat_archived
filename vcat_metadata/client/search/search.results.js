@@ -19,7 +19,7 @@ function SearchResults({ query, results, options }) {
       <Keyframes
         frames={results}
         showHash
-        showTimestamp
+        showScore
         showSearchButton
         showSaveButton
       />

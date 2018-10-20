@@ -20,7 +20,7 @@ class Video extends Component {
     return (
       <div className='video'>
         {playing
-          ? <video src={url} autoPlay controls />
+          ? <video src={url} autoPlay controls muted />
           : <div
               className='bg'
               style={{

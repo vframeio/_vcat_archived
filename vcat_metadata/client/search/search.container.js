@@ -52,7 +52,7 @@ class SearchContainer extends Component {
   render() {
     const { query, results, loadingMore } = this.props.query
     const options = this.props.options
-    console.log('search container', query, results, loadingMore)
+    // console.log('search container', query, results, loadingMore)
     let showLoadMore = true
     if (!query || query.reset || query.loading || !results || !results.length) {
       showLoadMore = false
@@ -60,8 +60,10 @@ class SearchContainer extends Component {
     let isWide = (results && results.length > Math.min(options.perPage, 30))
     let isMoreLoaded = (results && results.length > options.perPage)
     return (
-      <div>
+      <div className='searchContainer'>
         <SearchQuery />
+
+        <h3>Search Results</h3>
         <SearchResults />
         {showLoadMore
           ? !loadingMore

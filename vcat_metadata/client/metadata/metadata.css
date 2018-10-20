@@ -36,7 +36,7 @@
 }
 .keyframe label {
   color: #888;
-  font-size: 12px;
+  font-size: 14px;
 }
 .keyframe.th, .keyframe.th img { width: 160px; }
 .keyframe.sm, .keyframe.sm img { width: 320px; }
@@ -48,7 +48,7 @@
 .keyframe .sha256 {
   display: inline-block;
   min-width: auto;
-  max-width: 50px;
+  max-width: 60px;
   margin-right: 5px;
   overflow: hidden;
 }

@@ -11,8 +11,8 @@ class SearchQuery extends Component {
   state = {
     dragging: false,
     bounds: null,
-    mouse_x: 0,
-    mouse_y: 0,
+    mouseX: 0,
+    mouseY: 0,
     box: {
       x: 0,
       y: 0,
@@ -41,15 +41,18 @@ class SearchQuery extends Component {
   handleMouseDown(e) {
     e.preventDefault()
     const bounds = this.imgRef.getBoundingClientRect()
-    const mouse_x = e.pageX
-    const mouse_y = e.pageY
-    const x = mouse_x - bounds.left
-    const y = mouse_y - bounds.top
-    const w = 0
-    const h = 0
+    const mouseX = e.pageX
+    const mouseY = e.pageY
+    const x = mouseX - bounds.left
+    const y = mouseY - bounds.top
+    const w = 1
+    const h = 1
+    console.log(x, y, w, h)
     this.setState({
       dragging: true,
       bounds,
+      mouseX,
+      mouseY,
       box: {
         x, y, w, h,
       }
@@ -57,12 +60,13 @@ class SearchQuery extends Component {
   }
 
   handleMouseMove(e) {
-    const { dragging, bounds, box } = this.state
+    const { dragging, bounds, mouseX, mouseY, box } = this.state
     if (!dragging) return
     e.preventDefault()
     let { x, y } = box
-    let w = clamp(e.pageX - x, 0, bounds.width - x)
-    let h = clamp(e.pageY - y, 0, bounds.height - y)
+    let w = clamp(e.pageX - mouseX, 0, bounds.width - x)
+    let h = clamp(e.pageY - mouseY, 0, bounds.height - y)
+    console.log(x, y, w, h)
     this.setState({
       box: {
         x, y, w, h,
@@ -77,57 +81,62 @@ class SearchQuery extends Component {
       dragging: false,
     })
     e.preventDefault()
-    const img = this.imgRef
-    const canvas = query_div.querySelector('canvas') || document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
-    const ratio = img.naturalWidth / bounds.width
-    canvas.width = dx * ratio
-    canvas.height = dy * ratio
-    if (dx < 10 || dy < 10) {
-      if (canvas.parentNode) canvas.parentNode.removeChild(canvas)
-      const box_el = document.querySelector('.box')
-      if (box_el) box_el.parentNode.removeChild(box_el)
-      return
-    }
-    // query_div.appendChild(canvas)
-    ctx.drawImage(
-      img,
-      x * ratio,
-      y * ratio,
-      dx * ratio,
-      dy * ratio,
-      0, 0, canvas.width, canvas.height
-    )
-    const blob = window.dataUriToBlob(canvas.toDataURL('image/jpeg', 0.9))
-    this.actions.upload(blob)
+  //   const img = this.imgRef
+  //   const canvas = query_div.querySelector('canvas') || document.createElement('canvas')
+  //   const ctx = canvas.getContext('2d')
+  //   const ratio = img.naturalWidth / bounds.width
+  //   canvas.width = dx * ratio
+  //   canvas.height = dy * ratio
+  //   if (dx < 10 || dy < 10) {
+  //     if (canvas.parentNode) canvas.parentNode.removeChild(canvas)
+  //     const box_el = document.querySelector('.box')
+  //     if (box_el) box_el.parentNode.removeChild(box_el)
+  //     return
+  //   }
+  //   // query_div.appendChild(canvas)
+  //   ctx.drawImage(
+  //     img,
+  //     x * ratio,
+  //     y * ratio,
+  //     dx * ratio,
+  //     dy * ratio,
+  //     0, 0, canvas.width, canvas.height
+  //   )
+  //   const blob = window.dataUriToBlob(canvas.toDataURL('image/jpeg', 0.9))
+  //   this.actions.upload(blob)
   }
 
   render() {
     const { query } = this.props.query
-    const { dragging, box, bounds } = this.state
+    const { box, bounds } = this.state
     const { x, y, w, h } = box
     if (!query) return null
     if (query.loading) {
       return <div className="searchQuery">Loading results...</div>
     }
     return (
-      <div className="searchQuery">
-        <SearchMeta query={query} />
-        <div className="query">
+      <div className="searchQuery row">
+        <div className="searchBox">
           <img
             src={query.url}
-            ref={ref => this.img = ref}
+            ref={ref => this.imgRef = ref}
             onMouseDown={this.handleMouseDown}
           />
-          <div
-            className="box"
-            style={{
-              left: px(rect[0], width),
-              top: px(rect[1], height),
-              width: px(rect[2] - rect[0], width),
-              height: px(rect[3] - rect[1], height),
-            }}
-          />
+          {!!w &&
+            <div
+              className="box"
+              style={{
+                left: x,
+                top: y,
+                width: w,
+                height: h,
+              }}
+            />
+          }
+        </div>
+        <div>
+          <h3>Your Query</h3>
+          <SearchMeta query={query} />
         </div>
       </div>
     )
