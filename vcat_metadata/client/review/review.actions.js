@@ -3,10 +3,28 @@ import stringify from 'csv-stringify'
 import saveAs from 'file-saver'
 
 import * as types from '../types'
-import { store } from '../store'
-import { verify } from '../util'
+import { post, verify } from '../util'
 
-const getSavedFromStore = () => store.getState().review.saved
+import { getSavedFromStore, getSavedUrls } from './review.cache'
+
+const url = {
+  createNewGroup: () => '/api/images/import/new/',
+}
+
+const loading = (tag) => ({
+  type: types.metadata.loading,
+  tag
+})
+const loaded = (tag, data = {}) => ({
+  type: types.metadata.loaded,
+  tag,
+  data
+})
+const error = (tag, err) => ({
+  type: types.metadata.error,
+  tag,
+  err
+})
 
 // add a hash/frame to the reviewer
 export const save = opt => dispatch => {
@@ -80,53 +98,46 @@ export const exportCSV = () => dispatch => {
       type: 'text/csv'
     })
     saveAs(blob, 'vsearch_investigation_' + format(new Date(), 'YYYYMMDD_HHmm') + '.csv')
+    dispatch(loaded('csv', { count: results.length }))
   })
 }
 
-// // check duplicates
-// export const checkDuplicates = () => {
-//   post('/api/images/import/search/', {
-//     saved: window.store.get('saved') || [],
-//   }).then(res => {
-//     console.log(res)
-//     const { good, bad } = res
-//     // did_check = true
-//     window.store.set('saved', good)
-//     if (!bad.length) {
-//       return alert("No duplicates found.")
-//     }
-//     bad.forEach(path => {
-//       const el = document.querySelector('img[src="' + path + '"]')
-//       if (el) el.parentNode.classList.remove('saved')
-//     })
-//     return alert("Untagged " + bad.length + " duplicate" + (bad.length === 1 ? "" : "s") + ".")
-//   })
-// }
+// check duplicates in current database using phash
+export const dedupe = () => dispatch => {
+  dispatch(loading('dedupe'))
+  return new Promise((resolve, reject) => {
+    const urls = getSavedUrls()
+    post('/api/images/import/search/', {
+      urls,
+    }).then(res => {
+      const { good, bad } = res
+      window.store.set('saved', good)
+      dispatch(loaded('dedupe'))
+      resolve(good, bad)
+    }).catch(err => {
+      dispatch(loaded('dedupe'))
+      reject(err)
+    })
+  })
+}
 
-// // submit the new group
-// function createNewGroup() {
-//   const title = document.querySelector('[name=title]').value.trim().replace(/[^-_a-zA-Z0-9 ]/g, "")
-//   const saved = window.store.get('saved', [])
-//   const graphic = document.querySelector('[name=graphic]').checked
-//   if (!title.length) return alert("Please enter a title for this group")
-//   if (!saved.length) return alert("Please pick some images to save")
-//   if (!did_check) {
-//     alert('Automatically checking for duplicates. Please doublecheck your selection.')
-//     return check()
-//   }
-//   if (creating) return null
-//   creating = true
-//   return http_post("/api/images/import/new/", {
-//     title,
-//     graphic,
-//     saved
-//   }).then(res => {
-//     console.log(res)
-//     window.store.set('saved', [])
-//     window.location.href = '/groups/show/' + res.image_group.id
-//   }).catch(res => {
-//     alert('Error creating group.  The server response is logged to the console.')
-//     console.log(res)
-//     creating = false
-//   })
-// }
+// submit the new group
+export const create = ({ title, graphic }) => dispatch => {
+  const urls = getSavedUrls()
+  title = title.trim().replace(/[^-_a-zA-Z0-9 ]/g, '')
+  if (!title) return dispatch(error('create', 'No title'))
+  if (!urls) return dispatch(error('create', 'No images to save'))
+  dispatch(loading('create'))
+  return post(url.createNewGroup, {
+    title,
+    graphic,
+    urls,
+  }).then(res => {
+    dispatch(loaded('create'))
+    // clear()
+    window.location.href = '/groups/show/' + res.image_group.id
+  }).catch(res => {
+    dispatch(error('create'))
+    console.log(res)
+  })
+}

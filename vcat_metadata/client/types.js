@@ -15,5 +15,5 @@ export const search = tagAsType('search', [
 ])
 
 export const review = tagAsType('review', [
-  'save', 'unsave', 'refresh', 'clear', 'dedupe',
+  'loading', 'loaded', 'error', 'save', 'unsave', 'refresh', 'clear', 'dedupe', 'create'
 ])

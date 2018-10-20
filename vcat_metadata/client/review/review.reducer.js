@@ -2,7 +2,9 @@ import * as types from '../types'
 import * as cache from './review.cache'
 
 const initialState = {
-  saved: cache.getSaved()
+  saved: cache.getSaved(),
+  dedupe: {},
+  create: {},
 }
 
 export default function reviewReducer(state = initialState, action) {
@@ -22,6 +24,24 @@ export default function reviewReducer(state = initialState, action) {
       return {
         ...state,
         saved: {},
+      }
+
+    case types.review.loading:
+      return {
+        ...state,
+        [action.tag]: { loading: true },
+      }
+
+    case types.review.loaded:
+      return {
+        ...state,
+        [action.tag]: action.data || {},
+      }
+
+    case types.review.error:
+      return {
+        ...state,
+        [action.tag]: { error: action.err },
       }
 
     default:

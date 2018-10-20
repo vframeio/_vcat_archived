@@ -52,7 +52,7 @@ export const timestamp = (n = 0, fps = 25) => {
   if (n > 60) {
     return Math.floor(n / 60) + ':' + padSeconds(n % 60) + ':' + s
   }
-  return (n % 60) + '\:' + s
+  return (n % 60) + ':' + s
 }
 
 export const percent = n => (n * 100).toFixed(1) + '%'
@@ -111,4 +111,3 @@ export const post = (uri, data) => {
     headers,
   }).then(res => res.json())
 }
-

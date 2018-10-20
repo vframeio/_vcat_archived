@@ -37,13 +37,13 @@ class ImportView(ImportView):
     group_serializer = SavedImageGroupSerializer(data=group_data)
 
     if not group_serializer.is_valid():
-        return Response(serializer.errors,
-                        status=status.HTTP_400_BAD_REQUEST)
+      return Response(serializer.errors,
+                      status=status.HTTP_400_BAD_REQUEST)
     group_serializer.save()
 
     image_group = group_serializer.data
 
-    for url in data['saved']:
+    for url in data['urls']:
       print(url)
 
       # https://fax-vframe.ams3.digitaloceanspaces.com/v1/media/keyframes/unverified/27ad...979b/[frame]/lg/index.jpg
@@ -106,7 +106,7 @@ class SearchView(ImportView):
     data = json.loads(request.body.decode("utf-8"))
     good = []
     bad = []
-    for url in data['saved']:
+    for url in data['urls']:
       phash = self.phash_url(url)
       images = Image.objects.raw('SELECT images_image.*, BIT_COUNT(phash ^ %s) as hamming_distance FROM images_image HAVING hamming_distance < 6 ORDER BY hamming_distance ASC LIMIT 1', [phash])
       if len(list(images)):
