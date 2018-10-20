@@ -59,6 +59,8 @@ export const percent = n => (n * 100).toFixed(1) + '%'
 
 export const px = (n, w) => Math.round(n * w) + 'px'
 
+export const clamp = (n, a, b) => n < a ? a : n < b ? n : b
+
 /* URLs */
 
 export const hashPath = sha256 => {
