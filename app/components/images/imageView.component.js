@@ -7,7 +7,7 @@ import actions from '../../actions'
 
 import Thumbnail from '../common/thumbnail.component';
 
-const destroyConfirmationMessage = "Really delete this image?\n\n" + 
+const destroyConfirmationMessage = "Are you sure you want to delete this image?\n\n" + 
   "This action cannot be undone."
 
 class ImageView extends Component {

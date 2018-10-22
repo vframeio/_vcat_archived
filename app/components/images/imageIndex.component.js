@@ -140,7 +140,6 @@ class ImageIndex extends Component {
     return (
       <div className="container">
         <h2>Images</h2>
-
         <ul className="tab">
           <li className="tab-item">
             <Link to={"/images/new/"}><button className='btn'>Add image</button></Link>
