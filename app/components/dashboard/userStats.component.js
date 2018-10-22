@@ -40,8 +40,8 @@ class UserStats extends Component {
           <Stat value={stats.annotations.user} label={'annotations by you'} />
           <Stat value={stats.annotations.today} label={'annotations today'} />
           <Stat value={stats.image.total} label={'images in the system'} />
-          <Stat value={stats.image.complete} label={'total complete'} />
-          <Stat value={stats.image.incomplete} label={'total incomplete'} />
+          <Stat value={stats.image.complete} label={'images marked complete'} />
+          <Stat value={stats.image.incomplete} label={'images marked incomplete'} />
         </ul>
         <div className='userAchievement'>
           {'You are an '}{userAchievement}
