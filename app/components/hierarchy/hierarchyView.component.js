@@ -12,8 +12,8 @@ import Accordion from './accordion.component'
 
 import rootNode from './rootNode'
 
-const destroyConfirmationMessage = "Really destroy the node '{{name}}'?\n\n" + 
-  "This will destroy all images and annotations in this category. The action cannot be undone."
+const destroyConfirmationMessage = "Really delete the node '{{name}}'?\n\n" + 
+  "This will delete all images and annotations in this category. The action cannot be undone."
 
 class HierarchyView extends Component {
   constructor(props) {
@@ -102,7 +102,7 @@ class HierarchyView extends Component {
           </li>
           <li className='cat-edit-item'>
             <a className='' href={'/categories/' + node.id + '/destroy'} onClick={this.handleDestroy}>
-              <button className="btn btn-error btn-sm">Destroy</button>
+              <button className="btn btn-error btn-sm">Delete</button>
             </a>
           </li>
         </ul>

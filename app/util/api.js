@@ -48,7 +48,7 @@ export const image_url = (img, type, size) => {
       return [
         endpoint,
         hash_dir(img.sa_hash),
-        img.frame,
+        pad(img.frame, 6),
         size,
         'index.jpg'
       ].join('/')
@@ -62,3 +62,13 @@ export const image_url = (img, type, size) => {
   }
   return [image_endpoint, "media", type, img.id, img.fn, size + ".jpg"].join('/')
 }
+
+// Use to pad frame numbers with zeroes
+export const pad = (n, m) => {
+  let s = String(parseInt(n, 10) || 0)
+  while (s.length < m) {
+    s = '0' + s
+  }
+  return s
+}
+

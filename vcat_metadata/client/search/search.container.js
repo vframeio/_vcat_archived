@@ -62,8 +62,6 @@ class SearchContainer extends Component {
     return (
       <div className='searchContainer'>
         <SearchQuery />
-
-        <h3>Search Results</h3>
         <SearchResults />
         {showLoadMore
           ? !loadingMore

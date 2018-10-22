@@ -106,7 +106,7 @@ class ImageView extends Component {
 
 /*
 <li className='tab-item'>
-  <a className='' href={'/images/' + node.id + '/destroy'} onClick={this.handleDestroy}>Destroy</a>
+  <a className='' href={'/images/' + node.id + '/destroy'} onClick={this.handleDestroy}>Delete</a>
 </li>
 */
 

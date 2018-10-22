@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { format } from 'date-fns'
 
 import { timestamp } from '../util'
 import * as searchActions from './search.actions'
@@ -35,7 +36,7 @@ class SearchMeta extends Component {
           </span>
         }
         <span>
-          {'date: '}{video.encoded_date}
+          {'date: '}{format(new Date(video.encoded_date), "dd-MM-yyyy")}
         </span>
         {sugarcube &&
           <span>

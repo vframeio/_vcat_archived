@@ -133,11 +133,12 @@ class ImageForm extends Component {
     const node = this.state.node
 
     return (
-      <form className="form-horizontal container" onSubmit={this.handleSubmit}>
+      <form className="form-horizontal container imageForm" onSubmit={this.handleSubmit}>
         <h2>{this.props.title}</h2>
+        {this.props.subtitle && <div className='subtitle'>{this.props.subtitle}</div>}
 
         <div className="form-group">
-          <div className="col-2">Image</div>
+          <div className="col-2">Image(s)</div>
           {!!node.id &&
             <div className="col-6">
               <Thumbnail node={node} type='images' size='th' />

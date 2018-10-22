@@ -51,7 +51,7 @@ def destroy_path(tag, id):
     base_path = os.path.join(settings.MEDIA_ROOT, base_dir)
     try:
         if os.path.exists(base_path):
-            print("/!\\ DESTROY /!\\ {}".format(base_path))
+            print("/!\\ DELETE /!\\ {}".format(base_path))
             shutil.rmtree(base_path)
     except:
         pass

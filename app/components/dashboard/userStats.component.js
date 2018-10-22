@@ -54,8 +54,7 @@ class UserStats extends Component {
 function Stat(props) {
   return (
     <li>
-      <b>{props.value}</b>
-      <span>{courtesyS(props.value, props.label)}</span>
+      {props.value} {props.label}
     </li>
   )
 }
@@ -66,11 +65,6 @@ function getUserAchievement(total) {
     return ["Annoprentice", 100 - total]
   }
   return ['Annon00bie', 10 - total]
-}
-
-function courtesyS(n, s, pl) {
-  pl = pl || "s"
-  return n !== 1 ? s.replace('{}', pl) : s.replace('{}', '')
 }
 
 const mapStateToProps = (state) => ({

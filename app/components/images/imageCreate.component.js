@@ -31,6 +31,7 @@ class ImageCreate extends Component {
     return (
       <ImageForm
         title="New Image Group"
+        subtitle="Upload one or multiple images into a group."
         node={{
           from_sa: true,
           graphic: false,

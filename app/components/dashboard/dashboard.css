@@ -30,6 +30,7 @@ ul.user-stats {
  
 }
 
+/*
 ul.userStats {
 	display: flex;
 	flex-direction: row;
@@ -53,6 +54,7 @@ ul.userStats li b {
 	font-weight: normal;
 	font-size: 18px;
 }
+*/
 .dashboard h1 {
 	color: #333;
 	margin-top: 0;

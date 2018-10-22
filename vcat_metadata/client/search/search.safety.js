@@ -4,12 +4,12 @@ export default function SearchWarning() {
   return (
     <div className='safety'>
       <div>
-        Tips for limiting your exposure to sensitive images:
+        <h4>Safety Tips</h4>
         <ul>
-          <li> Look away if you see something nasty. </li>
-          <li> Hit <tt>esc</tt> to activate panic mode (hides all images) </li>
-          <li> Keep thumbnails small so your eye can dart. </li>
-          <li> Take breaks and refresh yourself with positive imagery. </li>
+          <li> Look away if you see something traumatic </li>
+          <li> Hit <tt>ESC</tt> to activate panic mode (hides all images) </li>
+          <li> Use thumbnails to reduce details </li>
+          <li> Take breaks and refresh yourself with positive imagery </li>
         </ul>
       </div>
     </div>
