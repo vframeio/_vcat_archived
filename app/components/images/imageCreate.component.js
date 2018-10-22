@@ -36,6 +36,7 @@ class ImageCreate extends Component {
           from_sa: true,
           graphic: false,
           verified: false,
+          uploaded: true,
         }}
         onSubmit={this.handleSubmit}
       />

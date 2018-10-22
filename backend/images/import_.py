@@ -78,6 +78,7 @@ class ImportView(ImportView):
       initial_data['phash'] = phash
       initial_data['original_fn'] = original_fn
       initial_data['from_sa'] = True
+      initial_data['uploaded'] = False
       initial_data['graphic'] = data['graphic']
       initial_data['image_group'] = image_group['id']
       serializer = SavedImageSerializer(data=initial_data)

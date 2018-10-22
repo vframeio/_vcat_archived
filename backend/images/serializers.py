@@ -35,7 +35,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'fn', 'ext',
             'original_fn',
             'from_sa', 'source_url', 'sa_hash', 'verified',
-            'graphic', 'regions', 'tags', 'description',
+            'graphic', 'uploaded', 'regions', 'tags', 'description',
             'region_count', 'phash', 'base_href', 'frame',
             'image_group', 'complete',
             'created_at', 'updated_at',
@@ -50,7 +50,7 @@ class HierarchyImageSerializer(serializers.ModelSerializer):
             'fn', 'ext',
             'original_fn',
             'from_sa', 'source_url', 'sa_hash', 'verified',
-            'graphic', 'regions', 'tags', 'description',
+            'graphic', 'uploaded', 'regions', 'tags', 'description',
             'region_count', 'phash', 'base_href', 'frame',
             'image_group', 'complete',
             'created_at', 'updated_at',
@@ -65,7 +65,7 @@ class ImageSerializerForGroups(serializers.ModelSerializer):
             'fn', 'ext',
             'original_fn',
             'from_sa', 'source_url', 'sa_hash', 'verified',
-            'graphic', 'regions', 'tags', 'description',
+            'graphic', 'uploaded', 'regions', 'tags', 'description',
             'base_href', 'frame',
             'region_count', 'phash',
             'image_group', 'complete',
@@ -80,7 +80,7 @@ class SavedImageSerializer(serializers.ModelSerializer):
             'fn', 'ext',
             'original_fn',
             'from_sa', 'source_url', 'sa_hash', 'verified',
-            'graphic', 'tags', 'description',
+            'graphic', 'uploaded', 'tags', 'description',
             'base_href', 'frame',
             'region_count', 'phash',
             'image_group', 'complete',
@@ -95,7 +95,7 @@ class UpdateImageSerializer(serializers.ModelSerializer):
             'original_fn',
             'base_href', 'frame',
             'from_sa', 'source_url', 'sa_hash', 'verified',
-            'graphic', 'tags', 'description',
+            'graphic', 'uploaded', 'tags', 'description',
             'region_count', 'phash', 'complete',
             'created_at', 'updated_at',
         )
@@ -108,7 +108,10 @@ class ImageSearchSerializer(serializers.Serializer):
     original_fn = serializers.CharField()
     source_url = serializers.CharField()
     sa_hash = serializers.CharField()
+    frame = serializers.CharField()
+    verified = serializers.BooleanField()
     graphic = serializers.BooleanField()
+    uploaded = serializers.BooleanField()
     tags = serializers.CharField()
     description = serializers.CharField()
     region_count = serializers.IntegerField()
@@ -123,7 +126,7 @@ class QuickImageSerializer(serializers.ModelSerializer):
             'id',
             'fn', 'ext',
             'sa_hash', 'verified', 'frame',
-            'from_sa', 'source_url',
+            'from_sa', 'uploaded', 'source_url',
             'graphic',
             'region_count',
         )

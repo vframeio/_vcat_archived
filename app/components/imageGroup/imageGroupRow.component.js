@@ -35,6 +35,7 @@ class ImageGroupRow extends Component {
   }
   render(){
     const group = this.props.group
+    console.log(group)
     const heading = group.from_sa ? group.sa_hash : group.source_url
     const images = group.images.map((el, i) => {
       return (

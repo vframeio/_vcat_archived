@@ -31,6 +31,7 @@ class Image(models.Model):
   width = models.IntegerField(default=0)
   height = models.IntegerField(default=0)
   graphic = models.BooleanField(default=False)
+  uploaded = models.BooleanField(default=False)
   tags = models.CharField(max_length=512, blank=True, default="")
   description = models.TextField(blank=True, default="")
   phash = models.BigIntegerField(blank=True)
