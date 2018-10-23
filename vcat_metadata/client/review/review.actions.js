@@ -8,7 +8,7 @@ import { post, verify } from '../util'
 import { getSavedFromStore, getSavedUrls } from './review.cache'
 
 const url = {
-  createNewGroup: () => '/api/images/import/new/',
+  createNewGroup: () => '/api/images/import/new/'
 }
 
 const loading = (tag) => ({
