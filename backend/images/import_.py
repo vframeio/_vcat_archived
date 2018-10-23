@@ -18,7 +18,7 @@ from rest_framework import status
 from backend.lib.import_view import ImportView
 from .models import Image, ImageGroup
 from backend.lib.util import make_thumbnails, mkdir
-from backend.images.serializers import SavedImageSerializer, SavedImageGroupSerializer
+from backend.images.serializers import SavedImageSerializer, SavedImageGroupSerializer, ImageSearchSerializer
 
 IMAGES_FOLDER = 'images'
 
@@ -111,7 +111,7 @@ class SearchView(ImportView):
       phash = self.phash_url(url)
       images = Image.objects.raw('SELECT images_image.*, BIT_COUNT(phash ^ %s) as hamming_distance FROM images_image HAVING hamming_distance < 6 ORDER BY hamming_distance ASC LIMIT 1', [phash])
       if len(list(images)):
-        bad.append({ 'url': url, 'image': images[0] })
+        bad.append({ 'url': url, 'image': serializer = ImageSearchSerializer(images[0]) })
       else:
         good.append(url)
     return JsonResponse({
