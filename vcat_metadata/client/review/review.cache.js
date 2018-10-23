@@ -4,7 +4,7 @@ import { imageUrl } from '../util'
 
 export const getSavedUrls = () => {
   const saved = getSavedFromStore()
-  Object.keys(saved).sort().map(key => {
+  return Object.keys(saved).sort().map(key => {
     const { verified, hash, frames } = saved[key]
     return Object.keys(frames).map(frame => imageUrl(verified, hash, frame))
   }).reduce((a, b) => ((b && b.length) ? a.concat(b) : a), [])
