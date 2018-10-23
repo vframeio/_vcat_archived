@@ -9,14 +9,14 @@ import * as searchActions from '../search/search.actions'
 function Keyframes(props) {
   // console.log(props)
   let {
-    options,
     frames,
+    groupByHash,
   } = props
   let minDistance = 0
   if (frames && frames.length) {
     minDistance = frames[0].distance || 0
   }
-  if (!options.groupByHash) {
+  if (!groupByHash) {
     return (
       <KeyframeList
         minDistance={minDistance}
