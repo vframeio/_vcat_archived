@@ -22,6 +22,12 @@ module.exports = {
     new UglifyJsPlugin(),
     new webpack.optimize.AggressiveMergingPlugin()
   ],
+  resolve: {
+    alias: {
+      'vcat-header': path.resolve(__dirname, '../app/components/common/header.component.js'),
+      'vcat-auth-reducer': path.resolve(__dirname, '../app/reducers/auth.reducer.js'),
+    }
+  },
   devtool: 'inline-source-map',
   module: {
     rules: [
@@ -31,7 +37,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, 'client'),
+        // include: path.resolve(__dirname, 'client'),
         exclude: /(node_modules|bower_components|build)/,
         loader: 'babel-loader',
         options: {

@@ -144,8 +144,7 @@ header > section:last-of-type {
 .btn.panic {
   color: #b00;
 }
-.btn.view_saved,
-.btn.saved {
+.btn.btn-primary {
   background: #11f;
   border-color: #11f;
   color: white;
@@ -156,10 +155,8 @@ header > section:last-of-type {
   background: white !important;
   cursor: default;
 }
-.btn.view_saved:focus,
-.btn.view_saved:hover,
-.btn.saved:focus,
-.btn.saved:hover {
+.btn.btn-primary:focus,
+.btn.btn-primary:hover {
   background: #0808ee;
   color: white !important;
 }

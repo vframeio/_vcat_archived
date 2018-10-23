@@ -27,10 +27,29 @@ class ReviewSaved extends Component {
       <div className="reviewSaved">
         <h2>Saved Images</h2>
         <div className='reviewButtons'>
-          <button className='btn' disabled={noResults} onClick={() => this.setState({ showAnnotator: !showAnnotator })}>Import into VCAT</button>
-          <button className='btn' disabled={noResults} onClick={() => this.props.actions.exportCSV()}>Export CSV</button>
-          <button className='btn' disabled={noResults} onClick={() => this.props.actions.refresh()}>Refresh</button>
-          <button className='btn reset' disabled={noResults} onClick={() => confirm("This will clear your saved images.") && this.props.actions.clear()}>Reset</button>
+          <button
+            className={'btn'}
+            disabled={noResults}
+            onClick={() => this.setState({ showAnnotator: !showAnnotator })}>
+            Import into VCAT
+          </button>
+          <button
+            className={'btn'}
+            disabled={noResults}
+            onClick={() => this.props.actions.exportCSV()}>
+            Export CSV
+          </button>
+          <button
+            className={'btn'}
+            disabled={noResults}
+            onClick={() => this.props.actions.refresh()}>
+            Refresh
+          </button>
+          <button
+            className='btn reset'
+            disabled={noResults}onClick={() => confirm("This will clear your saved images.") && this.props.actions.clear()}>
+            Reset
+          </button>
         </div>
         {showAnnotator && <AnnotatorMenu />}
         <Keyframes

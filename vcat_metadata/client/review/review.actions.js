@@ -41,6 +41,7 @@ export const save = opt => dispatch => {
   hash.verified = opt.verified
   saved[opt.hash] = hash
   dispatch({ type: types.review.save, saved })
+  dispatch({ type: types.review.dedupe, payload: false })
 }
 
 // mark a frame as being not for export
@@ -126,15 +127,30 @@ export const dedupe = () => dispatch => {
   dispatch(loading('dedupe'))
   return new Promise((resolve, reject) => {
     const urls = getSavedUrls()
-    post('/api/images/import/search/', {
+    post('http://127.0.0.1:8000/api/images/import/search/', {
       urls,
     }).then(res => {
       const { good, bad } = res
-      window.store.set('saved', good)
-      dispatch(loaded('dedupe'))
+
+      console.log(bad)
+      bad.forEach(({ image }) => {
+        console.log(image)
+      })
+
+      // let saved = getSavedFromStore()
+      // let hash = saved[opt.hash]
+      // if (hash) {
+      //   if (opt.frame && hash.frames[parseInt(opt.frame, 10)]) {
+      //     hash.frames[parseInt(opt.frame, 10)] = false
+      //   }
+      // }
+
+      // dispatch({ type: types.review.save, saved })
+
+      dispatch({ type: types.review.dedupe, payload: true })
       resolve(good, bad)
     }).catch(err => {
-      dispatch(loaded('dedupe'))
+      dispatch({ type: types.review.dedupe, payload: false })
       reject(err)
     })
   })

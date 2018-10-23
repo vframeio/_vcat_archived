@@ -64,13 +64,13 @@ export default function Keyframe({
             {showSaveButton && (isSaved
               ? <button
                   onClick={() => reviewActions.unsave({ hash: sha256, frame, verified })}
-                  className={'btn saved'}
+                  className={'btn btn-primary saved'}
                 >
                   {'Saved'}
                 </button>
               : <button
                   onClick={() => reviewActions.save({ hash: sha256, frame, verified })}
-                  className={'btn save'}
+                  className={'btn btn-primary save'}
                 >
                   {'Save'}
                 </button>

@@ -1,15 +1,15 @@
 import { applyMiddleware, compose, combineReducers, createStore } from 'redux'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
-import { createBrowserHistory, createHashHistory } from 'history'
+import { createBrowserHistory } from 'history'
 import thunk from 'redux-thunk'
+import { login } from './util'
 
 import metadataReducer from './metadata/metadata.reducer'
 import searchReducer from './search/search.reducer'
 import reviewReducer from './review/review.reducer'
-import authReducer from 'vcat-auth-reducer'
 
 const rootReducer = combineReducers({
-  auth: authReducer,
+  auth: (state = login()) => state,
   metadata: metadataReducer,
   search: searchReducer,
   review: reviewReducer,

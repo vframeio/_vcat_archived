@@ -89,21 +89,27 @@ export const keyframeUri = (sha256, frame) => '/metadata/' + sha256 + '/keyframe
 
 /* AJAX */
 
+let cachedAuth = null
+let token = ''
+let username = ''
+
 export const post = (uri, data) => {
+  login()
   let headers
   if (data instanceof FormData) {
     headers = {
       Accept: 'application/json, application/xml, text/play, text/html, *.*',
-      // Authorization: 'Token ' + token,
+      Authorization: 'Token ' + token,
     }
   } else {
     headers = {
       Accept: 'application/json, application/xml, text/play, text/html, *.*',
       'Content-Type': 'application/json; charset=utf-8',
-      // Authorization: 'Token ' + token,
+      Authorization: 'Token ' + token,
     }
     data = JSON.stringify(data)
   }
+  console.log(headers)
 
   // headers['X-CSRFToken'] = csrftoken
   return fetch(uri, {
@@ -112,4 +118,29 @@ export const post = (uri, data) => {
     credentials: 'include',
     headers,
   }).then(res => res.json())
+}
+
+// api queries
+export const login = () => {
+  if (cachedAuth) return cachedAuth
+  const isLocal = (window.location.hostname === '0.0.0.0' || window.location.hostname === '127.0.0.1')
+  try {
+    const auth = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).auth)
+    // console.log('auth', auth)
+    token = auth.token
+    username = auth.user.username
+    if (token) {
+      console.log('logged in', username)
+    }
+    cachedAuth = auth
+    if (!token && !isLocal) {
+      window.location.href = '/'
+    }
+    return auth    
+  } catch (e) {
+    if (!isLocal) {
+      window.location.href = '/'
+    }
+    return {}
+  }
 }

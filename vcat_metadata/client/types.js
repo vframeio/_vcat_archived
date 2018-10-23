@@ -17,3 +17,5 @@ export const search = tagAsType('search', [
 export const review = tagAsType('review', [
   'loading', 'loaded', 'error', 'save', 'unsave', 'refresh', 'clear', 'dedupe', 'create'
 ])
+
+export const init = '@@INIT'

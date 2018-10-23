@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import './header.css';
 
 function Header(props) {
-  if (props.isAuthenticated || window.location.hostname === '5.k') {
+  if (props.isAuthenticated || window.location.hostname === '0.0.0.0') {
     return LoggedInHeader(props)
   }
   return LoggedOutHeader(props)

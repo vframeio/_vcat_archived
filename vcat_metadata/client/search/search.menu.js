@@ -40,7 +40,7 @@ class SearchMenu extends Component {
           <button className='btn random' onClick={this.random.bind(this)}><span>♘</span> Random</button>
           <PanicButton />
           <Link to={actions.publicUrl.review()}>
-            <button className='btn view_saved'><span>⇪</span> Saved</button>
+            <button className='btn btn-primary'><span>⇪</span> Saved</button>
           </Link>
         </div>
 

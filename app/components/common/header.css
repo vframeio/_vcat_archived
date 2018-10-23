@@ -21,10 +21,13 @@
 .navbar section.first-navbar-section * {
   font-weight: bold;
 }
+.navbar section.first-navbar-section > * {
+  padding: 5px 8px 5px 8px;
+}
 .navbar section > * {
   padding: 5px 5px;
 }
-.navbar .vcat-btn {
+.navbar section.first-navbar-section > .vcat-btn {
   font-size: 16px;
   padding-left: 0;
 }

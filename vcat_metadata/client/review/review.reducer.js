@@ -3,6 +3,7 @@ import * as cache from './review.cache'
 
 const initialState = {
   saved: cache.getSaved(),
+  deduped: false,
   dedupe: {},
   create: {},
 }
@@ -24,6 +25,12 @@ export default function reviewReducer(state = initialState, action) {
       return {
         ...state,
         saved: {},
+      }
+
+    case types.review.dedupe:
+      return {
+        ...state,
+        deduped: action.payload,
       }
 
     case types.review.loading:
