@@ -37,7 +37,7 @@ function LoggedInHeader(props){
       </section>
 
       <section className="navbar-section last-navbar-section">
-        <Link to="/static/explore/hierarchy.html">Stats</Link>
+        <Link to="/static/explore/hierarchy.html" className="">Stats</Link>
         <Link to="/help/">Help</Link>
         <span className="login-btn logged-in capitalize">
           {props.auth.user.username}
