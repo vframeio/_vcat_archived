@@ -109,9 +109,9 @@ class SearchView(ImportView):
     bad = []
     for url in data['urls']:
       phash = self.phash_url(url)
-      images = Image.objects.raw('SELECT images_image.*, BIT_COUNT(phash ^ %s) as hamming_distance FROM images_image HAVING hamming_distance < 6 ORDER BY hamming_distance ASC LIMIT 1', [phash])
-      if len(list(images)):
-        image = ImageSearchSerializer(images.first())
+      images = list(Image.objects.raw('SELECT images_image.*, BIT_COUNT(phash ^ %s) as hamming_distance FROM images_image HAVING hamming_distance < 6 ORDER BY hamming_distance ASC LIMIT 1', [phash]))
+      if len(images):
+        image = ImageSearchSerializer(images[0])
         bad.append({ 'url': url, 'image': image })
       else:
         good.append(url)
