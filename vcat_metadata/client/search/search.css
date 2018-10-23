@@ -37,7 +37,9 @@
   align-items: center;
 }
 .searchBox {
+  min-width: 640px;
   margin: 0 10px 0 0;
+  background-color: #eee;
 }
 
 .searchMeta {
@@ -151,6 +153,12 @@
 }
 .keyframeGroup {
   max-width: 640px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: flex-start;
 }
 
 /* load more button that gets bigger */

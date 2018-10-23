@@ -60,22 +60,23 @@ class SearchMenu extends Component {
           </select>
           <label className='row'>
             <input
+              type='checkbox'
+              checked={options.groupByHash}
+              onChange={e => this.props.actions.updateOptions({ groupByHash: e.target.checked })}
+            />
+            {' Group by hash'}
+          </label>
+          <label className='row'>
+            <input
               type='number'
               value={options.perPage}
               className='perPage'
               min={1}
               max={100}
               onChange={e => this.props.actions.updateOptions({ perPage: e.target.value })}
+              onBlur={() => window.location.reload()}
             />
             {' per page'}
-          </label>
-          <label className='row'>
-            <input
-              type='checkbox'
-              checked={options.groupByHash}
-              onChange={e => this.props.actions.updateOptions({ groupByHash: e.target.checked })}
-            />
-            {' Group by hash'}
           </label>
         </div>
       </div>

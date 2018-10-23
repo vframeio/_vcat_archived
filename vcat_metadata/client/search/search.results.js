@@ -12,19 +12,22 @@ function SearchResults({ query, results, options }) {
     return <div></div>
   }
   if (!query.loading && !results.length) {
-    return <div className='keyframes'><h3>No results</h3></div>
+    return <div className='searchResults'><h3>No results</h3></div>
   }
   return (
     <div className="searchResults">
       <div className='searchResultsHeading row'>
         <div className='column'>
           <h3>Search Results</h3>
-          <small className="subtitle">Searched 10,523,176 frames from 576,234 videos</small>
+          <small className="subtitle">
+            {'Searched 10,523,176 frames from 576,234 videos (took '}{query.timing.toFixed(2)}{' ms)'}
+          </small>
         </div>
       </div>
       <Keyframes
         frames={results}
         showHash
+        showTimestamp={options.groupByHash}
         showSearchButton
         showSaveButton
         groupByHash={options.groupByHash}

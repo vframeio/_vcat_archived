@@ -109,7 +109,7 @@ export const post = (uri, data) => {
     }
     data = JSON.stringify(data)
   }
-  console.log(headers)
+  // console.log(headers)
 
   // headers['X-CSRFToken'] = csrftoken
   return fetch(uri, {

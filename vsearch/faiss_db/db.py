@@ -49,6 +49,7 @@ class FaissSearch:
   # Perform a search using a feature vector
   def search(self, query, offset=0, limit=15, size='sm'):
     if query is None:
+      print("got empty query!")
       return []
 
     db = sqlite3.connect(self.db_fn)
@@ -61,6 +62,7 @@ class FaissSearch:
     distances, indexes = self.index.search(query, offset + limit)
 
     if len(indexes) == 0:
+      print("weird, no results!")
       return []
 
     distances = distances[0]
@@ -71,6 +73,7 @@ class FaissSearch:
       indexes = indexes[offset:offset+limit]
 
     if len(indexes) == 0:
+      print("no results!")
       return []
 
     lookup = {}

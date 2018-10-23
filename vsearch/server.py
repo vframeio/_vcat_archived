@@ -3,6 +3,7 @@
 import os
 import sys
 import json
+import time
 import argparse
 import cv2 as cv
 import numpy as np
@@ -89,15 +90,12 @@ def list(hash):
 # search using an uploaded file
 @app.route('/search/api/upload', methods=['POST'])
 def upload():
-  try:
-    limit = int(request.args.get('limit'))
-  except:
-    limit = DEFAULT_LIMIT
+  start, limit, offset = get_offset_and_limit()
   file = request.files['query_img']
   fn = file.filename
   if fn.endswith('blob'):
     fn = 'filename.jpg'
-  # how to refactor this to get it to
+
   basename, ext = os.path.splitext(fn)
   print("got {}, type {}".format(basename, ext))
   if ext.lower() not in valid_exts:
@@ -112,18 +110,32 @@ def upload():
   img = Image.open(file.stream).convert('RGB')
   img.save(uploaded_img_path)
 
-  # query = db.load_feature_vector_from_file(uploaded_img_path)
-  query = fe.extract(img)
-  results = db.search(query, limit=limit)
+  time.sleep(0.01)
+  vec = db.load_feature_vector_from_file(uploaded_img_path)
+  # vec = fe.extract(img)
+  # print("loading file: {}".format(uploaded_img_path))
+  # vec = db.load_feature_vector_from_file(os.path.abspath(uploaded_img_path))
+  print(vec.shape)
+
+  results = db.search(vec, offset=0, limit=limit)
+  query = {
+    'url': uploaded_img_path,
+    'timing': time.time() - start,
+    'sha256': '',
+    'frame': '',
+    'verified': '',
+  }
+  print(results)
   return jsonify({
-    'query': { 'url': uploaded_img_path },
+    'query': query,
     'results': results,
   })
 
 @app.route('/search/api/search/<verified>/<hash>/<frame>', methods=['GET'])
 def verified_search(verified, hash, frame):
-  offset, limit = get_offset_and_limit()
+  start, offset, limit = get_offset_and_limit()
   results, query = db.search_by_verified_frame(verified, hash, frame, offset=offset, limit=limit)
+  query['timing'] = time.time() - start
   return jsonify({
     'query': query,
     'results': results,
@@ -131,8 +143,9 @@ def verified_search(verified, hash, frame):
 
 @app.route('/search/api/search/<hash>/<frame>', methods=['GET'])
 def search(hash, frame):
-  offset, limit = get_offset_and_limit()
+  start, offset, limit = get_offset_and_limit()
   results, query = db.search_by_frame(hash, frame, offset=offset, limit=limit)
+  query['timing'] = time.time() - start
   return jsonify({
     'query': query,
     'results': results,
@@ -141,8 +154,9 @@ def search(hash, frame):
 # search using a random file from the database
 @app.route('/search/api/random', methods=['GET'])
 def random():
-  offset, limit = get_offset_and_limit()
+  start, offset, limit = get_offset_and_limit()
   results, query = db.search_random(limit=limit)
+  query['timing'] = time.time() - start
   return jsonify({
     'query': query,
     'results': results,
@@ -151,23 +165,31 @@ def random():
 # search using an external url
 @app.route('/search/api/fetch/', methods=['GET'])
 def fetch():
-  offset, limit = get_offset_and_limit()
+  start, offset, limit = get_offset_and_limit()
   url = request.args.get('url')
   if url.startswith('static'):
     print("loading file: {}".format(url))
-    query = db.load_feature_vector_from_file(os.path.abspath(url))
-    print(query.shape)
+    vec = db.load_feature_vector_from_file(os.path.abspath(url))
   else:
     print("fetching url: {}".format(url))
-    query = db.load_feature_vector_from_url(url)
-  results = db.search(query, offset=offset, limit=limit)
+    vec = db.load_feature_vector_from_url(url)
+  # print(vec.shape)
+  results = db.search(vec, offset=offset, limit=limit)
+  query = {
+    'url': url,
+    'timing': time.time() - start,
+    'sha256': '',
+    'frame': '',
+    'verified': '',
+  }
   return jsonify({
-    'query': { 'url': url },
+    'query': query,
     'results': results,
   })
 
 # tidy up search arguments
 def get_offset_and_limit():
+  start = time.time()
   try:
     limit = int(request.args.get('limit'))
   except:
@@ -176,7 +198,7 @@ def get_offset_and_limit():
     offset = int(request.args.get('offset')) or 0
   except:
     offset = 0
-  return offset, limit
+  return start, offset, limit
 
 if __name__=="__main__":
     app.run("0.0.0.0", debug=False)

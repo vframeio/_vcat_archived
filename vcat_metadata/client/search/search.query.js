@@ -86,6 +86,7 @@ class SearchQuery extends Component {
   }
 
   handleMouseUp(e) {
+    const { actions } = this.props
     const { dragging, bounds, box } = this.state
     if (!dragging) return
     e.preventDefault()
@@ -104,12 +105,13 @@ class SearchQuery extends Component {
     this.setState({ dragging: false })
     // query_div.appendChild(canvas)
     const newImage = new Image()
-    let loaded = true
+    let loaded = false
     newImage.onload = () => {
       if (loaded) return
+      loaded = true
       newImage.onload = null
       ctx.drawImage(
-        img,
+        newImage,
         x * ratio,
         y * ratio,
         w * ratio,
@@ -117,8 +119,10 @@ class SearchQuery extends Component {
         0, 0, canvas.width, canvas.height
       )
       const blob = toBlob(canvas.toDataURL('image/jpeg', 0.9))
-      this.props.actions.upload(blob)
+      actions.upload(blob)
     }
+    console.log(img.src)
+    newImage.crossOrigin = 'anonymous'
     newImage.src = img.src
     if (newImage.complete) {
       newImage.onload()

@@ -46,7 +46,13 @@ class SearchContainer extends Component {
 
   searchByOffset() {
     const offset = this.props.query.results.length
-    this.searchByHash(offset)
+    const qs = querystring.parse(this.props.location.search.substr(1))
+    if (qs && qs.url) {
+      this.props.searchActions.search(qs.url, offset)
+    }
+    else {
+      this.searchByHash(offset)
+    }
   }
 
   render() {
