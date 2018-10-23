@@ -16,6 +16,10 @@
   margin-bottom: 5px;
   margin-left: 3px;
 }
+.searchContainer h4 {
+  margin-left: 0;
+  width: 100%;
+}
 .searchContainer .subtitle {
   display: block;
   margin-left: 3px;
@@ -124,15 +128,29 @@
 }
 .searchResults {
   margin: 0 20px 20px 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
-.perPage {
+.searchResultsHeading {
+  width: 100%;
+}
+.searchOptions .row {
+  font-size: 12px;
   margin-left: 10px;
-  font-size: 12px;
 }
-.perPage input {
+.searchOptions input {
   font-size: 12px;
-  width: 30px;
+  margin-right: 5px;
   font-family: Helvetica, sans-serif;
+}
+.searchOptions input[type=text],
+.searchOptions input[type=number] {
+  width: 30px;
+  text-align: right;
+}
+.keyframeGroup {
+  max-width: 640px;
 }
 
 /* load more button that gets bigger */

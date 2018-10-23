@@ -47,7 +47,7 @@ class SearchMenu extends Component {
           </Link>
         </div>
 
-        <div className='row'>
+        <div className='row searchOptions'>
           <select
             className='form-select'
             onChange={e => this.props.actions.updateOptions({ thumbnailSize: e.target.value })}
@@ -58,17 +58,25 @@ class SearchMenu extends Component {
             <option value='md'>Medium</option>
             <option value='lg'>Large</option>
           </select>
-          <label className='perPage'>
+          <label className='row'>
             <input
               type='number'
               value={options.perPage}
+              className='perPage'
               min={1}
               max={100}
               onChange={e => this.props.actions.updateOptions({ perPage: e.target.value })}
             />
             {' per page'}
           </label>
-
+          <label className='row'>
+            <input
+              type='checkbox'
+              checked={options.groupByHash}
+              onChange={e => this.props.actions.updateOptions({ groupByHash: e.target.checked })}
+            />
+            {' Group by hash'}
+          </label>
         </div>
       </div>
     )

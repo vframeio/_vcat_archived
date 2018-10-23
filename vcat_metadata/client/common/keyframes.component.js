@@ -7,21 +7,56 @@ import * as reviewActions from '../review/review.actions'
 import * as searchActions from '../search/search.actions'
 
 function Keyframes(props) {
+  // console.log(props)
+  let {
+    options,
+    frames,
+  } = props
+  let minDistance = 0
+  if (frames && frames.length) {
+    minDistance = frames[0].distance || 0
+  }
+  if (!options.groupByHash) {
+    return (
+      <KeyframeList
+        minDistance={minDistance}
+        {...props}
+      />
+    )
+  }
+  const frameGroups = frames.reduce((a, b) => {
+    if (a[b.hash]) {
+      a[b.hash].push(b)
+    } else {
+      a[b.hash] = [b]
+    }
+    return a
+  }, {})
+  return Object.keys(frameGroups).map(hash => (
+    <KeyframeList
+      {...props}
+      key={hash}
+      minDistance={minDistance}
+      frames={frameGroups[hash]}
+      label={hash}
+    />
+  ))
+}
+
+function KeyframeList(props) {
   let {
     saved = {},
     frames,
     options,
     review,
     search,
+    minDistance,
+    label,
     ...frameProps
   } = props
-  // console.log(props)
-  let minDistance = 0
-  if (frames && frames.length) {
-    minDistance = frames[0].distance || 0
-  }
   return (
-    <div className='keyframes'>
+    <div className={label ? 'keyframes keyframeGroup' : 'keyframes'}>
+      {label && <h4>{label}</h4>}
       {frames.map(({ hash, frame, verified, distance }) => (
         <Keyframe
           key={hash + '_' + frame}

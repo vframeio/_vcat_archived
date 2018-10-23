@@ -16,13 +16,18 @@ function SearchResults({ query, results, options }) {
   }
   return (
     <div className="searchResults">
-      <h3>Search Results</h3>
-      <small className="subtitle">Searched 10,523,176 frames from 576,234 videos</small>
+      <div className='searchResultsHeading row'>
+        <div className='column'>
+          <h3>Search Results</h3>
+          <small className="subtitle">Searched 10,523,176 frames from 576,234 videos</small>
+        </div>
+      </div>
       <Keyframes
         frames={results}
         showHash
         showSearchButton
         showSaveButton
+        groupByHash={options.groupByHash}
       />
     </div>
   )
@@ -31,6 +36,7 @@ function SearchResults({ query, results, options }) {
 const mapStateToProps = state => ({
   query: state.search.query.query,
   results: state.search.query.results,
+  options: state.search.options,
 })
 
 const mapDispatchToProps = dispatch => ({

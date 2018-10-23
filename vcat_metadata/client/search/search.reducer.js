@@ -7,6 +7,7 @@ const initialState = () => ({
   options: {
     thumbnailSize: session('thumbnailSize') || 'th',
     perPage: parseInt(session('perPage'), 10) || 50,
+    groupByHash: session('groupByHash'),
   }
 })
 
