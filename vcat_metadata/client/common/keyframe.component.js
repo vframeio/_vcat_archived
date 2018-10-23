@@ -70,7 +70,7 @@ export default function Keyframe({
                 </button>
               : <button
                   onClick={() => reviewActions.save({ hash: sha256, frame, verified })}
-                  className={'btn btn-primary save'}
+                  className={'btn btn save'}
                 >
                   {'Save'}
                 </button>

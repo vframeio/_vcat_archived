@@ -5,7 +5,7 @@ import saveAs from 'file-saver'
 import * as types from '../types'
 import { post, verify } from '../util'
 
-import { getSavedFromStore, getSavedUrls } from './review.cache'
+import { getSavedFromStore, getCountFromStore, getSavedUrls } from './review.cache'
 
 const url = {
   createNewGroup: () => '/api/images/import/new/'
@@ -143,10 +143,10 @@ export const dedupe = () => dispatch => {
         }
       })
       dispatch({ type: types.review.save, saved })
-      dispatch({ type: types.review.dedupe, deduped: true, count })
+      dispatch({ type: types.review.dedupe, payload: true })
       resolve(good, bad)
     }).catch(err => {
-      dispatch({ type: types.review.dedupe, deduped: false, count: 0 })
+      dispatch({ type: types.review.dedupe, payload: false })
       reject(err)
     })
   })

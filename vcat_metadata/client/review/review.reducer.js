@@ -35,7 +35,6 @@ export default function reviewReducer(state = initialState, action) {
       return {
         ...state,
         deduped: action.deduped,
-        count: action.count,
       }
 
     case types.review.loading:

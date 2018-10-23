@@ -19,6 +19,7 @@ export const getSavedCount = saved => {
 }
 
 export const getSavedFromStore = () => store.getState().review.saved
+export const getCountFromStore = () => store.getState().review.count || 0
 
 export const getSaved = () => {
   try {

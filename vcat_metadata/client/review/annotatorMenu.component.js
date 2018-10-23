@@ -65,7 +65,7 @@ class AnnotatorMenu extends Component {
               Create Group
             </button>
             {(review.dedupe.loading || review.create.loading) && <Loader />}
-            {review.dedupe.count && review.dedupe.count + ' images removed'}
+            {!!review.dedupe.count && (review.dedupe.count + ' images removed')}
           </label>
         </div>
       </div>
