@@ -6,15 +6,15 @@ export const getSavedUrls = () => {
   const saved = getSavedFromStore()
   return Object.keys(saved).sort().map(key => {
     const { verified, hash, frames } = saved[key]
-    return Object.keys(frames).map(frame => imageUrl(verified, hash, frame))
+    return Object.keys(frames).map(frame => (frames[frame] && imageUrl(verified, hash, frame))).filter(url => !!url)
   }).reduce((a, b) => ((b && b.length) ? a.concat(b) : a), [])
 }
 
-export const getSavedCount = () => {
-  const saved = getSavedFromStore()
+export const getSavedCount = saved => {
+  saved = saved || getSavedFromStore()
   Object.keys(saved).sort().map(key => {
     const { frames } = saved[key]
-    return Object.keys(frames).filter(frame => frames[frame]).length
+    return Object.keys(frames).filter(frame => frames[frame]).filter(f => !!f).length
   }).reduce((a, b) => (a + b), 0)
 }
 

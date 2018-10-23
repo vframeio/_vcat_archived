@@ -132,21 +132,16 @@ export const dedupe = () => dispatch => {
     }).then(res => {
       const { good, bad } = res
 
-      console.log(bad)
+      let saved = getSavedFromStore()
       bad.forEach(({ image }) => {
         console.log(image)
+        const { sa_hash, frame } = image
+        const frame_id = parseInt(frame, 10)
+        if (saved[sa_hash] && saved[sa_hash].frames[frame_id]) {
+          saved[sa_hash].frames[frame_id] = false
+        }
       })
-
-      // let saved = getSavedFromStore()
-      // let hash = saved[opt.hash]
-      // if (hash) {
-      //   if (opt.frame && hash.frames[parseInt(opt.frame, 10)]) {
-      //     hash.frames[parseInt(opt.frame, 10)] = false
-      //   }
-      // }
-
-      // dispatch({ type: types.review.save, saved })
-
+      dispatch({ type: types.review.save, saved })
       dispatch({ type: types.review.dedupe, payload: true })
       resolve(good, bad)
     }).catch(err => {

@@ -24,6 +24,7 @@ class SearchMenu extends Component {
   }
 
   render() {
+    const { savedCount, options } = this.props
     return (
       <div className="searchForm row">
         <div className='row'>
@@ -40,7 +41,9 @@ class SearchMenu extends Component {
           <button className='btn random' onClick={this.random.bind(this)}><span>♘</span> Random</button>
           <PanicButton />
           <Link to={actions.publicUrl.review()}>
-            <button className='btn btn-primary'><span>⇪</span> Saved</button>
+            <button className='btn btn-primary'><span>⇪</span>{
+              savedCount + ' Saved Image' + (savedCount ? 's' : '')
+            }</button>
           </Link>
         </div>
 
@@ -48,7 +51,7 @@ class SearchMenu extends Component {
           <select
             className='form-select'
             onChange={e => this.props.actions.updateOptions({ thumbnailSize: e.target.value })}
-            value={this.props.options.thumbnailSize}
+            value={options.thumbnailSize}
           >
             <option value='th'>Thumbnail</option>
             <option value='sm'>Small</option>
@@ -58,7 +61,7 @@ class SearchMenu extends Component {
           <label className='perPage'>
             <input
               type='number'
-              value={this.props.options.perPage}
+              value={options.perPage}
               min={1}
               max={100}
               onChange={e => this.props.actions.updateOptions({ perPage: e.target.value })}
@@ -74,6 +77,7 @@ class SearchMenu extends Component {
 
 const mapStateToProps = state => ({
   options: state.search.options,
+  savedCount: state.review.count,
 })
 
 const mapDispatchToProps = dispatch => ({
