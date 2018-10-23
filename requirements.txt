@@ -12,7 +12,6 @@ mysqlclient==1.3.12
 uwsgi==2.0.15
 ijson==2.3
 imagehash==4.0
-django-extensions==2.0.7
 boto3==1.7.48
 psycopg2-binary==2.7.5
 simplejson
