@@ -35,7 +35,7 @@ class Browse extends Component {
     console.log('browse', browse)
 
     if (!browse || browse.reset || browse.loading) {
-      return <div className="browseComponent row"><h3>Loading keyframes... <Loader /></h3></div>
+      return <div className="browseComponent column"><h3>Loading keyframes... <Loader /></h3></div>
     }
     return (
       <div className="browseComponent column">

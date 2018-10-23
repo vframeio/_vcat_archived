@@ -12,7 +12,7 @@ function SearchResults({ query, results, options }) {
     return <div></div>
   }
   if (!query.loading && !results.length) {
-    return <div>No results</div>
+    return <div className='keyframes'><h3>No results</h3></div>
   }
   return (
     <div className="searchResults">
@@ -21,7 +21,6 @@ function SearchResults({ query, results, options }) {
       <Keyframes
         frames={results}
         showHash
-        showScore
         showSearchButton
         showSaveButton
       />

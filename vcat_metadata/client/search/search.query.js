@@ -103,16 +103,26 @@ class SearchQuery extends Component {
     }
     this.setState({ dragging: false })
     // query_div.appendChild(canvas)
-    ctx.drawImage(
-      img,
-      x * ratio,
-      y * ratio,
-      w * ratio,
-      h * ratio,
-      0, 0, canvas.width, canvas.height
-    )
-    const blob = toBlob(canvas.toDataURL('image/jpeg', 0.9))
-    this.props.actions.upload(blob)
+    const newImage = new Image()
+    let loaded = true
+    newImage.onload = () => {
+      if (loaded) return
+      newImage.onload = null
+      ctx.drawImage(
+        img,
+        x * ratio,
+        y * ratio,
+        w * ratio,
+        h * ratio,
+        0, 0, canvas.width, canvas.height
+      )
+      const blob = toBlob(canvas.toDataURL('image/jpeg', 0.9))
+      this.props.actions.upload(blob)
+    }
+    newImage.src = img.src
+    if (newImage.complete) {
+      newImage.onload()
+    }
   }
 
   render() {
@@ -121,7 +131,7 @@ class SearchQuery extends Component {
     const { x, y, w, h } = box
     if (!query) return null
     if (query.loading) {
-      return <div className="searchQuery"><Loader /> Loading results...</div>
+      return <div className="searchQuery column"><h2>Loading results...</h2><Loader /></div>
     }
     let { url } = query
     if (url.indexOf('static') === 0) {
