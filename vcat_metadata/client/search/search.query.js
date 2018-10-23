@@ -41,7 +41,8 @@ class SearchQuery extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (!this.props.query.query || !prevProps.query.query || this.props.query.query.url !== prevProps.query.query.url) {
+    console.log(this.props.query.query, !prevProps.query.query)
+    if (this.state.bounds && (!this.props.query.query || !prevProps.query.query || this.props.query.query.url !== prevProps.query.query.url)) {
       this.setState({ ...defaultState })
     }
   }
