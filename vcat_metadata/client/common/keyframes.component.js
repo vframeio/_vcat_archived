@@ -32,15 +32,19 @@ function Keyframes(props) {
     }
     return a
   }, {})
-  return Object.keys(frameGroups).map(hash => (
-    <KeyframeList
-      {...props}
-      key={hash}
-      minDistance={minDistance}
-      frames={frameGroups[hash]}
-      label={hash}
-    />
-  ))
+  return Object.keys(frameGroups)
+    .map(hash => [frameGroups[hash].length, hash])
+    .sort((a, b) => b[0] - a[0])
+    .map(([count, hash]) => (
+      <KeyframeList
+        {...props}
+        count={count}
+        key={hash}
+        minDistance={minDistance}
+        frames={frameGroups[hash]}
+        label={hash}
+      />
+    ))
 }
 
 function KeyframeList(props) {
@@ -52,11 +56,12 @@ function KeyframeList(props) {
     search,
     minDistance,
     label,
+    count,
     ...frameProps
   } = props
   return (
     <div className={label ? 'keyframes keyframeGroup' : 'keyframes'}>
-      {label && <h4>{label}</h4>}
+      {label && <h4>{label} ({count})</h4>}
       {frames.map(({ hash, frame, verified, distance }) => (
         <Keyframe
           key={hash + '_' + frame}
