@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -61,7 +62,7 @@ function KeyframeList(props) {
   } = props
   return (
     <div className={label ? 'keyframes keyframeGroup' : 'keyframes'}>
-      {label && <h4>{label} ({count})</h4>}
+      {label && <h4><Link to={searchActions.browse(label)}>{label}</Link> ({count})</h4>}
       {frames.map(({ hash, frame, verified, distance }) => (
         <Keyframe
           key={hash + '_' + frame}
