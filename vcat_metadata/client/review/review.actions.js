@@ -162,7 +162,7 @@ export const create = ({ title, graphic }) => dispatch => {
   if (!title) return dispatch(error('create', 'No title'))
   if (!urls) return dispatch(error('create', 'No images to save'))
   dispatch(loading('create'))
-  return post(url.createNewGroup, {
+  return post(url.createNewGroup(), {
     title,
     graphic,
     urls,
