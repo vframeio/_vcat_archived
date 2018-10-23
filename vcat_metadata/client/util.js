@@ -93,31 +93,32 @@ let cachedAuth = null
 let token = ''
 let username = ''
 
-export const post = (uri, data) => {
+export const post = (uri, data, credentials) => {
   login()
   let headers
   if (data instanceof FormData) {
     headers = {
       Accept: 'application/json, application/xml, text/play, text/html, *.*',
-      Authorization: 'Token ' + token,
     }
   } else {
     headers = {
       Accept: 'application/json, application/xml, text/play, text/html, *.*',
       'Content-Type': 'application/json; charset=utf-8',
-      Authorization: 'Token ' + token,
     }
     data = JSON.stringify(data)
   }
-  // console.log(headers)
-
-  // headers['X-CSRFToken'] = csrftoken
-  return fetch(uri, {
+  let opt = {
     method: 'POST',
     body: data,
-    credentials: 'include',
     headers,
-  }).then(res => res.json())
+    credentials: 'include',
+  }
+  if (credentials) {
+    headers.Authorization = 'Token ' + token
+  }
+  // console.log(headers)
+  // headers['X-CSRFToken'] = csrftoken
+  return fetch(uri, opt).then(res => res.json())
 }
 
 // api queries

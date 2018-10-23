@@ -249,9 +249,10 @@ class FaissSearch:
     print("reading file: {}".format(fn))
     img = cv.imread(fn)
     # img = Image.open(fn)
-    print(img.shape)
-    query = self.feature_extractor.extract(img)
-    return query
+    if img:
+      print(img.shape)
+      return self.feature_extractor.extract(img)
+    return None
 
   # Load a feature vector directly from the Pickle file.
   # Requires loading the entire pickle file...

@@ -110,12 +110,11 @@ def upload():
   img = Image.open(file.stream).convert('RGB')
   img.save(uploaded_img_path)
 
-  time.sleep(0.01)
   vec = db.load_feature_vector_from_file(uploaded_img_path)
   # vec = fe.extract(img)
   # print("loading file: {}".format(uploaded_img_path))
   # vec = db.load_feature_vector_from_file(os.path.abspath(uploaded_img_path))
-  print(vec.shape)
+  # print(vec.shape)
 
   results = db.search(vec, offset=0, limit=limit)
   query = {
