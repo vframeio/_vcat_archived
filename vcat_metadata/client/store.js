@@ -6,8 +6,10 @@ import thunk from 'redux-thunk'
 import metadataReducer from './metadata/metadata.reducer'
 import searchReducer from './search/search.reducer'
 import reviewReducer from './review/review.reducer'
+import authReducer from 'vcat-auth-reducer'
 
 const rootReducer = combineReducers({
+  auth: authReducer,
   metadata: metadataReducer,
   search: searchReducer,
   review: reviewReducer,

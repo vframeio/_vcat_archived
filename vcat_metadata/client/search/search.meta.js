@@ -27,7 +27,7 @@ class SearchMeta extends Component {
         </span>
         {query.frame &&
           <span>
-            {'frame: '}
+            {'Frame: '}
             <Link to={searchActions.publicUrl.searchByVerifiedFrame(query.verified, query.hash, query.frame)}>
               {timestamp(query.frame, video.frame_rate)}
               {' / '}
@@ -36,7 +36,7 @@ class SearchMeta extends Component {
           </span>
         }
         <span>
-          {'date: '}{format(new Date(video.encoded_date), "dd-MM-yyyy")}
+          {'Date: '}{format(new Date(video.encoded_date), "DD-MM-YYYY")}
         </span>
         {sugarcube &&
           <span>

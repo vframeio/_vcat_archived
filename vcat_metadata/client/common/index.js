@@ -1,8 +1,10 @@
+import Header from 'vcat-header'
+
 import ActiveLink from './activeLink.component'
 import Classifier from './classifier.component'
 import DetectionBoxes from './detectionBoxes.component'
 import DetectionList from './detectionList.component'
-import Header from './header.component'
+// import Header from './header.component'
 import Footer from './footer.component'
 import Loader from './loader.component'
 import Sidebar from './sidebar.component'

@@ -3,11 +3,10 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import actions from '../../actions';
 import './header.css';
 
 function Header(props) {
-  if (props.isAuthenticated) {
+  if (props.isAuthenticated || window.location.hostname === '5.k') {
     return LoggedInHeader(props)
   }
   return LoggedOutHeader(props)
@@ -17,10 +16,11 @@ function LoggedOutHeader(props){
   return (
     <header className="navbar">
       <section className="navbar-section">
-        <img onClick={props.actions.openMenu} className="menuToggle" alt='logo' src="/static/vframe-logo.png" />
+        <Link to="/"><img className="menuToggle" alt='logo' src="/static/vframe-logo.png" /></Link>
+        <Link to="/" className="vcat-btn"><b>VCAT</b></Link>
       </section>
       <section className="navbar-section last-navbar-section">
-        <Link to="/accounts/login" className="btn btn-link">login</Link>
+        <span className=""><Link to="/accounts/login" className="">Login</Link></span>
       </section>
     </header>
   )
@@ -30,18 +30,20 @@ function LoggedInHeader(props){
     <header className="navbar">
       <section className="navbar-section first-navbar-section">
         <Link to="/"><img className="menuToggle" alt='logo' src="/static/vframe-logo.png" /></Link>
-        <Link to="/" className="btn btn-link vcat-btn"><b>VCAT</b></Link>
-        <Link to="/categories/" className="btn btn-link">Categories</Link>
-        <Link to="/images/new/" className="btn btn-link">Upload</Link>
-        <a href="/search/" className="btn btn-link">Search</a>
+        <Link to="/" className="vcat-btn"><b>VCAT</b></Link>
+        <Link to="/categories/" className="">Categories</Link>
+        <Link to="/images/new/" className="">Upload</Link>
+        <a href="/search/" className="">Search</a>
       </section>
 
       <section className="navbar-section last-navbar-section">
-        <span className="menu-help"><Link to="/static/explore/hierarchy.html" className="btn btn-link">Stats</Link></span>
-        <span className="menu-help"><Link to="/help/" className="btn btn-link">Help</Link></span>
-        <span className="login-out logged-in capitalize">{props.auth.user.username}</span>
-        <Link to="/groups/user/" className="btn btn-link">My Assignments</Link>
-        <span className="btn btn-link"><Link to="/accounts/logout/">Logout</Link></span>
+        <Link to="/static/explore/hierarchy.html" className="">Stats</Link>
+        <Link to="/help/" className="">Help</Link>
+        <span className="login-btn logged-in capitalize">
+          {props.auth.user.username}
+          <Link to="/accounts/logout/">Logout</Link>
+        </span>
+        <Link to="/groups/user/" className="">My Assignments</Link>
       </section>
     </header>
   )
@@ -54,7 +56,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({ ...actions.nav }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

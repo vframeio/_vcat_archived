@@ -57,6 +57,9 @@ def metadata_index():
 @app.route('/metadata/<path:path>', methods=['GET'])
 def metadata_path(path):
   return app.send_static_file('metadata.html')
+@app.route('/static/vframe-logo.png')
+def vcat_static():
+  return app.send_static_file('css/vframe-logo.png')
 
 # this is a vcat endpoint, included here as a no-op.
 @app.route('/api/images/import/search/', methods=['POST'])

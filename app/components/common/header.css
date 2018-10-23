@@ -11,7 +11,6 @@
   color: white;
   font-family: 'Helvetica', sans-serif;
 }
-.navbar .btn.btn-link,
 .navbar a {
   color: rgba(255,255,255,0.89);
   text-decoration: none;
@@ -19,17 +18,19 @@
   font-size: 14px;
   font-weight: 500;
 }
-.navbar .first-navbar-section .btn.btn-link,
-.navbar .first-navbar-section a {
+.navbar section.first-navbar-section * {
   font-weight: bold;
 }
-.navbar .btn.vcat-btn {
+.navbar section > * {
+  padding: 5px 5px;
+}
+.navbar .vcat-btn {
   font-size: 16px;
   padding-left: 0;
 }
-.navbar .btn.btn-link:focus,
-.navbar .btn.btn-link:hover,
-.navbar .btn.btn-link:active,
+.navbar .btn-link:focus,
+.navbar .btn-link:hover,
+.navbar .btn-link:active,
 .navbar a:focus,
 .navbar a:hover,
 .navbar a:active {
@@ -45,7 +46,7 @@
   width: 26px;
   height: 26px;
   cursor: pointer;
-  margin: 0 10px 0 10px;
+  margin: 0 0 0 10px;
   line-height: 1;
 }
 .navbar a.navbar-brand {
@@ -55,19 +56,31 @@
 .navbar .last-navbar-section {
   padding-right: 8px;
 }
-
-.capitalize {
-  cursor: default;
-  user-select: none;
-  text-transform: capitalize;
-  color: rgba(255,255,255,0.89);
-}
 .navbar .logout {
   padding: 0 .25rem;
 }
 .navbar .logged-in {
   border-left: 1px solid #99f;
   margin-left: .25rem;
-  margin-bottom: .1rem;
   padding: .25rem .25rem .25rem .75rem;
+  user-select: none;
+  text-transform: capitalize;
+  color: rgba(255,255,255,0.89);
+  position: relative;
+  min-width: 65px;
+}
+.navbar .logged-in a {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #11f;
+  opacity: 0;
+  transition: 0.1s all;
+}
+.navbar .logged-in:hover a {
+  opacity: 1;
 }

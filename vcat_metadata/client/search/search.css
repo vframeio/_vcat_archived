@@ -41,16 +41,14 @@
   flex-direction: column;
   font-size: 14px;
   line-height: 18px;
-  width: 200px;
   padding: 0;
 }
-/*
 .searchMeta span {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: calc(100vw - 23px - 640px - 30px);
 }
-*/
 
 .keyframe .thumbnail {
   position: relative;
@@ -102,9 +100,6 @@
 .searchQuery {
   margin: 0px 10px;
   padding: 13px;
-}
-.searchQuery .sha256 {
-  padding: 0 0 10px 0px;
 }
 .searchQuery img {
   cursor: crosshair;

@@ -3,8 +3,7 @@ require('dotenv').config()
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
-
-let path = require('path')
+const path = require('path')
 
 module.exports = {
   entry: {
@@ -23,6 +22,12 @@ module.exports = {
     hot: true,
   },
   devtool: 'inline-source-map',
+  resolve: {
+    alias: {
+      'vcat-header': path.resolve(__dirname, '../app/components/common/header.component.js'),
+      'vcat-auth-reducer': path.resolve(__dirname, '../app/reducers/auth.reducer.js'),
+    }
+  },
   plugins: [
     // new CleanWebpackPlugin(['dist']),
     new webpack.DefinePlugin({
