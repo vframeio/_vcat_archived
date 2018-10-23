@@ -7,7 +7,7 @@
     "watch": "NODE_ENV=development webpack --config ./webpack.config.dev.js --colors --watch",
     "buildDev": "NODE_ENV=development webpack --config ./webpack.config.dev.js --colors",
     "build": "NODE_ENV=production webpack --config ./webpack.config.prod.js",
-    "deploy": "NODE_ENV=production webpack --config ./webpack.config.prod.js && git commit -am 'deploy' && git push origin master"
+    "deploy": "NODE_ENV=production webpack --config ./webpack.config.prod.js && git commit -am 'deploy' && git push origin master && ssh vframe@vframe ./restart.sh"
   },
   "author": "vframe <research@vframe.io>",
   "license": "MIT",
