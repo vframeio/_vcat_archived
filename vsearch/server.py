@@ -90,7 +90,7 @@ def list(hash):
 # search using an uploaded file
 @app.route('/search/api/upload', methods=['POST'])
 def upload():
-  start, limit, offset = get_offset_and_limit()
+  start, offset, limit = get_offset_and_limit()
   file = request.files['query_img']
   fn = file.filename
   if fn.endswith('blob'):
@@ -112,11 +112,9 @@ def upload():
 
   # vec = db.load_feature_vector_from_file(uploaded_img_path)
   vec = fe.extract(img)
-  # print("loading file: {}".format(uploaded_img_path))
-  # vec = db.load_feature_vector_from_file(os.path.abspath(uploaded_img_path))
   # print(vec.shape)
 
-  results = db.search(vec, offset=0, limit=limit)
+  results = db.search(vec, limit=limit)
   query = {
     'url': uploaded_img_path,
     'timing': time.time() - start,
@@ -124,7 +122,7 @@ def upload():
     'frame': '',
     'verified': '',
   }
-  print(results)
+  # print(results)
   return jsonify({
     'query': query,
     'results': results,

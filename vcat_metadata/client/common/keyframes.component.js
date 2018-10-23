@@ -60,6 +60,7 @@ function KeyframeList(props) {
     count,
     ...frameProps
   } = props
+  if (!frames) return null
   return (
     <div className={label ? 'keyframes keyframeGroup' : 'keyframes'}>
       {label && <h4><Link to={searchActions.browse(label)}>{label}</Link> ({count})</h4>}

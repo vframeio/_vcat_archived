@@ -18,13 +18,17 @@ class SearchMeta extends Component {
 
     return (
       <div className='searchMeta'>
-        <span className={query.verified ? 'verified' : 'unverified'}>
-          {query.verified ? 'verified' : 'unverified'}
-        </span>
-        <span>
-          {'sha256: '}
-          <Link className="sha256" to={searchActions.publicUrl.browse(query.hash)}>{query.hash}</Link>
-        </span>
+        {'verified' in query && 
+          <span className={query.verified ? 'verified' : 'unverified'}>
+            {query.verified ? 'verified' : 'unverified'}
+          </span>
+        }
+        {query.hash &&
+          <span>
+            {'sha256: '}
+            <Link className="sha256" to={searchActions.publicUrl.browse(query.hash)}>{query.hash}</Link>
+          </span>
+        }
         {query.frame &&
           <span>
             {'Frame: '}
@@ -33,10 +37,12 @@ class SearchMeta extends Component {
             {timestamp(video.duration / 1000, 1)}
           </span>
         }
-        <span>
-          {'Date: '}{format(new Date(video.encoded_date), "DD-MMM-YYYY")}
-        </span>
-        {sugarcube &&
+        {!!(video && video.encoded_date) &&
+          <span>
+            {'Date: '}{format(new Date(video.encoded_date), "DD-MMM-YYYY")}
+          </span>
+        }
+        {!!(sugarcube && sugarcubeId) && 
           <span>
             sugarcube: {sugarcubeId}
           </span>
