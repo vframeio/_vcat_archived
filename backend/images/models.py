@@ -44,4 +44,4 @@ class Image(models.Model):
     ordering = ('id',)
 
   def __str__(self):
-      return "/uploads/{}/{}{}".format(self.parent.id, self.fn, self.ext)
+      return "/uploads/{}/{}{}".format(self.id, self.fn, self.ext)
