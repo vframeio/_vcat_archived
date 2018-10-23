@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 
 export default function Loader() {
   return (
-    <div className='loader'>
+    <div className='loaderWrapper'>
+      <div className='loader'>
+      </div>
     </div>
   )
 }

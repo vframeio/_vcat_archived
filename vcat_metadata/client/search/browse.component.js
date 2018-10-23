@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { Keyframes, Video } from '../common'
+import { Loader, Keyframes, Video } from '../common'
 // import { Coco } from '../metadata'
 import * as searchActions from './search.actions'
 import * as metadataActions from '../metadata/metadata.actions'
@@ -35,7 +35,7 @@ class Browse extends Component {
     console.log('browse', browse)
 
     if (!browse || browse.reset || browse.loading) {
-      return <div></div>
+      return <div><Loader /> Loading keyframes...</div>
     }
     if (!browse.loading && !browse.frames.length) {
       return <div>No frames</div>

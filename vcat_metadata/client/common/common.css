@@ -292,6 +292,13 @@ video {
 
 /* spectre.css loader */
 
+.loaderWrapper {
+  display: inline-block;
+  position: relative;
+  width: .8rem;
+  height: .8rem;
+  padding: 10px;
+}
 .loader {
   color: transparent !important;
   min-height: .8rem;
