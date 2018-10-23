@@ -56,7 +56,7 @@ class AnnotatorMenu extends Component {
             </button>
             <button
               className='btn btn-primary create'
-              onClick={this.props.actions.create(this.state)}>
+              onClick={() => this.props.actions.create(this.state)}>
               Create Group
             </button>
           </label>
