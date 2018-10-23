@@ -127,7 +127,7 @@ export const dedupe = () => dispatch => {
   dispatch(loading('dedupe'))
   return new Promise((resolve, reject) => {
     const urls = getSavedUrls()
-    post(process.env.API_HOST + '/api/images/import/search/', {
+    post(process.env.VCAT_HOST + '/api/images/import/search/', {
       urls,
     }).then(res => {
       const { good, bad } = res

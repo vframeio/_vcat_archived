@@ -33,7 +33,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"',
       'process.env.S3_HOST': '"' + process.env.S3_HOST + '"',
-      'process.env.API_HOST': '"http://127.0.0.1:8000"',
+      'process.env.VCAT_HOST': '"http://127.0.0.1:8000"',
+      'process.env.API_HOST': '""',
 
     }),
     new HtmlWebpackPlugin({

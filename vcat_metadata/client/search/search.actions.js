@@ -8,13 +8,13 @@ import querystring from 'query-string'
 // urls
 
 const url = {
-  upload: () => '/search/api/upload',
-  search: () => '/search/api/fetch',
-  searchByVerifiedFrame: (verified, hash, frame) => '/search/api/search/' + verified + '/' + hash + '/' + pad(frame, 6),
-  searchByFrame: (hash, frame) => '/search/api/search/' + hash + '/' + pad(frame, 6),
-  browse: hash => '/search/api/list/' + hash,
-  random: () => '/search/api/random',
-  check: () => '/api/images/import/search',
+  upload: () => process.env.API_HOST + '/search/api/upload',
+  search: () => process.env.API_HOST + '/search/api/fetch',
+  searchByVerifiedFrame: (verified, hash, frame) => process.env.API_HOST + '/search/api/search/' + verified + '/' + hash + '/' + pad(frame, 6),
+  searchByFrame: (hash, frame) => process.env.API_HOST + '/search/api/search/' + hash + '/' + pad(frame, 6),
+  browse: hash => process.env.API_HOST + '/search/api/list/' + hash,
+  random: () => process.env.API_HOST + '/search/api/random',
+  check: () => process.env.API_HOST + '/api/images/import/search',
 }
 export const publicUrl = {
   browse: hash => '/search/browse/' + hash,

@@ -17,7 +17,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
       'process.env.S3_HOST': '"' + process.env.S3_HOST + '"',
-      'process.env.API_HOST': '""',
+      'process.env.VCAT_HOST': '""',
+      'process.env.API_HOST': '"https://syrianarchive.vframe.io"',
     }),
     new UglifyJsPlugin(),
     new webpack.optimize.AggressiveMergingPlugin()

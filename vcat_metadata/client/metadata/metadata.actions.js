@@ -4,7 +4,7 @@ import * as types from '../types'
 
 const url = {
   mediaRecord: hash => '/search/api/mediarecord/' + hash,
-  metadata: hash => process.env.API_HOST + '/api/metadata/' + hash + '/',
+  metadata: hash => process.env.VCAT_HOST + '/api/metadata/' + hash + '/',
 //   mediaInfo: hash => 'https://sa-vframe.ams3.digitaloceanspaces.com/v1/metadata/mediainfo/' + hashPath(hash) + '/index.json',
 }
 
