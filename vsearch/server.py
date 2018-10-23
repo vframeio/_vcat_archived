@@ -162,7 +162,7 @@ def random():
   })
 
 # search using an external url
-@app.route('/search/api/fetch/', methods=['GET'])
+@app.route('/search/api/fetch', methods=['GET'])
 def fetch():
   start, offset, limit = get_offset_and_limit()
   url = request.args.get('url')
