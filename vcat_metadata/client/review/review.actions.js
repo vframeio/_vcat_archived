@@ -131,14 +131,13 @@ export const dedupe = () => dispatch => {
       urls,
     }).then(res => {
       const { good, bad } = res
-
       let saved = getSavedFromStore()
       bad.forEach(({ image }) => {
         console.log(image)
-        const { sa_hash, frame } = image
-        const frame_id = parseInt(frame, 10)
-        if (saved[sa_hash] && saved[sa_hash].frames[frame_id]) {
-          saved[sa_hash].frames[frame_id] = false
+        const { sa_hash: hash, frame } = image
+        const frameIndex = parseInt(frame, 10)
+        if (saved[hash] && saved[hash].frames[frameIndex]) {
+          saved[hash].frames[frameIndex] = false
         }
       })
       dispatch({ type: types.review.save, saved })

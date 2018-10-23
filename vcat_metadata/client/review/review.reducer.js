@@ -1,9 +1,10 @@
 import * as types from '../types'
 import * as cache from './review.cache'
 
+const saveCache = cache.getSaved()
 const initialState = {
-  saved: cache.getSaved(),
-  count: cache.getSavedCount(),
+  saved: saveCache,
+  count: cache.getSavedCount(saveCache),
   deduped: false,
   dedupe: {},
   create: {},

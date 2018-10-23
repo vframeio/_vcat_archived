@@ -42,7 +42,7 @@ class SearchMenu extends Component {
           <PanicButton />
           <Link to={actions.publicUrl.review()}>
             <button className='btn btn-primary'><span>⇪</span>{
-              savedCount + ' Saved Image' + (savedCount ? 's' : '')
+              ' '  + savedCount + ' Saved Image' + (savedCount === 1 ? '' : 's')
             }</button>
           </Link>
         </div>

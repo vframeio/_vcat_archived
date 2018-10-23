@@ -12,7 +12,7 @@ export const getSavedUrls = () => {
 
 export const getSavedCount = saved => {
   saved = saved || getSavedFromStore()
-  Object.keys(saved).sort().map(key => {
+  return Object.keys(saved).sort().map(key => {
     const { frames } = saved[key]
     return Object.keys(frames).filter(frame => frames[frame]).filter(f => !!f).length
   }).reduce((a, b) => (a + b), 0)
