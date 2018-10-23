@@ -110,8 +110,8 @@ def upload():
   img = Image.open(file.stream).convert('RGB')
   img.save(uploaded_img_path)
 
-  vec = db.load_feature_vector_from_file(uploaded_img_path)
-  # vec = fe.extract(img)
+  # vec = db.load_feature_vector_from_file(uploaded_img_path)
+  vec = fe.extract(img)
   # print("loading file: {}".format(uploaded_img_path))
   # vec = db.load_feature_vector_from_file(os.path.abspath(uploaded_img_path))
   # print(vec.shape)
