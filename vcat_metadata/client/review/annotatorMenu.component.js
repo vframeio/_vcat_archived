@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
+import { Loader } from '../common'
 import * as actions from './review.actions'
 
 class AnnotatorMenu extends Component {
@@ -27,6 +28,7 @@ class AnnotatorMenu extends Component {
   }
 
   render() {
+    const { review } = this.props
     return (
       <div className="importMenu">
         <div>
@@ -36,6 +38,7 @@ class AnnotatorMenu extends Component {
               type="text"
               name="title"
               placeholder="Title this group"
+              autoComplete="off"
               onChange={this.handleInput}
               value={this.state.title}
             />
@@ -52,13 +55,17 @@ class AnnotatorMenu extends Component {
             <button
               className='btn check'
               onClick={this.props.actions.dedupe}>
-              Dedupe
+              {review.dedupe.loading
+                ? 'Deduping...'
+                : 'Dedupe'}
             </button>
             <button
               className='btn btn-primary create'
               onClick={() => this.props.actions.create(this.state)}>
               Create Group
             </button>
+            {(review.dedupe.loading || review.create.loading) && <Loader />}
+            {review.dedupe.count && review.dedupe.count + ' images removed'}
           </label>
         </div>
       </div>

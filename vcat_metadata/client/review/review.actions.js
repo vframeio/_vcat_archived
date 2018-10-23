@@ -132,19 +132,21 @@ export const dedupe = () => dispatch => {
     }).then(res => {
       const { good, bad } = res
       let saved = getSavedFromStore()
+      let count = 0
       bad.forEach(({ image }) => {
         console.log(image)
         const { sa_hash: hash, frame } = image
         const frameIndex = parseInt(frame, 10)
         if (saved[hash] && saved[hash].frames[frameIndex]) {
           saved[hash].frames[frameIndex] = false
+          count += 1
         }
       })
       dispatch({ type: types.review.save, saved })
-      dispatch({ type: types.review.dedupe, payload: true })
+      dispatch({ type: types.review.dedupe, deduped: true, count })
       resolve(good, bad)
     }).catch(err => {
-      dispatch({ type: types.review.dedupe, payload: false })
+      dispatch({ type: types.review.dedupe, deduped: false, count: 0 })
       reject(err)
     })
   })

@@ -6,7 +6,7 @@ const initialState = {
   saved: saveCache,
   count: cache.getSavedCount(saveCache),
   deduped: false,
-  dedupe: {},
+  dedupe: { count: 0 },
   create: {},
 }
 
@@ -34,7 +34,8 @@ export default function reviewReducer(state = initialState, action) {
     case types.review.dedupe:
       return {
         ...state,
-        deduped: action.payload,
+        deduped: action.deduped,
+        count: action.count,
       }
 
     case types.review.loading:
