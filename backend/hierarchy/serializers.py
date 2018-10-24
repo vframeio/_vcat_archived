@@ -16,6 +16,7 @@ class HierarchyFullSerializer(serializers.ModelSerializer):
         )
 
 class HierarchyRegionSerializer(serializers.ModelSerializer):
+    image = QuickImageSerializer(read_only=True)
     images = QuickImageSerializer(many=True, read_only=True)
     regions = ImageRegionSerializer(many=True, read_only=True)
     class Meta:

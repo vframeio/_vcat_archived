@@ -82,7 +82,10 @@ class ImageUpload(UploadView):
             initial_data['original_fn'] = record['original_fn']
             initial_data['from_sa'] = 'true' in initial_data['from_sa']
             initial_data['graphic'] = 'true' in initial_data['graphic']
-            initial_data['verified'] = 'true' in initial_data['verified']
+            if 'verified' in initial_data:
+                initial_data['verified'] = 'true' in initial_data['verified']
+            else:
+                initial_data['verified'] = False
             initial_data['image_group'] = image_group['id']
             # so strange that these are arrays- the serializer should handle these
             if 'source_url' in initial_data:
