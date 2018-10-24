@@ -9,7 +9,7 @@ var api = (function(){
       token = auth.token
       login(auth)
     } catch (e) {
-      window.location.href = '/'
+      // window.location.href = '/'
     }
   }
 
@@ -20,11 +20,11 @@ var api = (function(){
       token = auth.token
       username = auth.user.username
       if (!token && !isLocal) {
-        window.location.href = '/'
+//        window.location.href = '/'
       }
     } catch(e) {
       if (!isLocal) {
-        window.location.href = '/'
+//        window.location.href = '/'
       }
     }
     document.querySelector('.logged-in .capitalize').innerHTML = username || 'user'
