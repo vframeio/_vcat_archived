@@ -41,8 +41,14 @@ text {
     </section>
   </header>
 
-  <svg></svg>
-
+  <div class="container">
+    <div class="sidebar">
+      <a class='active' href="/stats/treemap.html">Tree map</a>
+      <a href="/stats/hierarchy.html">Hierarchy graph</a>
+    </div>
+    <div id="body">
+    </div>
+  </div>
 <!--
   <form>
     <label><input type="radio" name="mode" value="sumBySize" checked> Size</label>
@@ -56,7 +62,7 @@ text {
 <script>
 
 var svg = d3.select("svg"),
-    width = window.innerWidth,
+    width = window.innerWidth - 200,
     height = window.innerHeight - document.querySelector('header').offsetHeight
 const form = document.querySelector('form')
 if (form) height -= form.offsetHeight;

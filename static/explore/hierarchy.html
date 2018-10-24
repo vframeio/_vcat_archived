@@ -45,7 +45,13 @@ path.link {
     </section>
   </header>
 
-  <div id="body">
+  <div class="container">
+    <div class="sidebar">
+      <a class='active' href="/stats/treemap.html">Tree map</a>
+      <a href="/stats/hierarchy.html">Hierarchy graph</a>
+    </div>
+    <div id="body">
+    </div>
   </div>
 
 </body>
@@ -54,7 +60,7 @@ path.link {
 <script src="/static/explore/js/api.js?1"></script>
 <script>
 var m = [20, 140, 20, 60],
-    w = window.innerWidth - m[1] - m[3],
+    w = window.innerWidth - m[1] - m[3] - 200,
     h = window.innerHeight - m[0] - m[2] - 60,
     i = 0,
     root;

@@ -118,3 +118,34 @@ header > section:last-of-type {
 .navbar .logged-in:hover a {
   opacity: 1;
 }
+
+/* sidebar */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+  float: left;
+  width: 200px;
+  flex: 0 0 200px;
+  padding: 10px;
+  margin-right: 10px;
+}
+.sidebar a {
+  display: block;
+  padding: 10px 10px;
+  text-decoration: none;
+  color: #444;
+}
+.sidebar a.active {
+  font-weight: bold;
+  color: #222;
+}
+.container {
+  width: 100%;
+  height: calc(100vh - 45px);
+  display: flex;
+  flex-direction: row;
+}
