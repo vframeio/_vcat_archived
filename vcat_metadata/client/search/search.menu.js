@@ -29,7 +29,7 @@ class SearchMenu extends Component {
       <div className="searchForm row">
         <div className='row'>
           <div className='upload'>
-            <button className='btn'><span>⤴</span> Upload an Image</button>
+            <button className='btn'><span>⤴</span> Search by Upload</button>
             <input
               type="file"
               name="img"

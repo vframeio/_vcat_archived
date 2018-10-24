@@ -3,7 +3,7 @@
 <head>
 <title>VCat | Treemap</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="css/vcat.css" />
+<link rel="stylesheet" type="text/css" href="/static/explore/css/vcat.css" />
 <style>
 svg {
   font: 10px sans-serif;
@@ -21,20 +21,23 @@ text {
 </style>
 <body>
 
-  <header>
-    <section class="navbar-section">
-      <a href="/"><img class="menuToggle" alt='logo' src="css/vframe-logo.png" /></a>
-      <a href="/categories/">Categories</a>
-      <a href="/groups/user/">Assignments</a>
-      <a href="/images/new/">Add Image</a>
+  <header className="navbar">
+    <section className="navbar-section first-navbar-section">
+      <Link to="/"><img className="menuToggle" alt='logo' src="/static/vframe-logo.png" /></Link>
+      <Link to="/" className="vcat-btn"><b>VCAT</b></Link>
+      <Link to="/categories/">Categories</Link>
+      <Link to="/images/new/">Upload</Link>
       <a href="/search/">Search</a>
     </section>
 
-    <section class="navbar-section last-navbar-section">
-      <span class="menu-help"><a href="/static/explore/treemap.html">Explore Data</a></span>
-      <span class="menu-help"><a href="/help/">Help</a></span>
-      <span class="login-out logged-in"><span class="capitalize"></span></span>
-      <span class="logout login-out"><a href="/accounts/logout/">Logout</a></span>
+    <section className="navbar-section last-navbar-section">
+      <Link to="/static/explore/hierarchy.html" className="">Stats</Link>
+      <Link to="/help/">Help</Link>
+      <span className="login-btn logged-in capitalize">
+        {props.auth.user.username}
+        <Link to="/accounts/logout/">Logout</Link>
+      </span>
+      <Link to="/groups/user/">My Assignments</Link>
     </section>
   </header>
 
@@ -48,8 +51,8 @@ text {
 -->
 
 </body>
-<script src="js/api.js"></script>
-<script src="js/d3.v4.min.js"></script>
+<script src="/static/explore/js/api.js"></script>
+<script src="/static/explore/js/d3.v4.min.js"></script>
 <script>
 
 var svg = d3.select("svg"),

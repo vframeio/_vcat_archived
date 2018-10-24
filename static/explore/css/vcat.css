@@ -12,17 +12,14 @@ body {
 /* header */
 
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 60px;
   width: 100%;
-  background: #11F;
+  background: #11f;
   color: white;
   align-items: stretch;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  z-index: 3;
 }
 header > section {
   justify-content: flex-start;
@@ -34,31 +31,91 @@ header > section {
 header > section:last-of-type {
   justify-content: flex-end;
 }
-header a {
-  color: hsla(0,0%,100%,.89);
+.navbar {
+  height: 50px;
+  color:#aaa;
+  font-size: 14px;
+}
+.navbar b {
+  font-weight: 900;
+}
+.navbar {
+  background: #11F;
+  color: white;
+  font-family: 'Helvetica', sans-serif;
+}
+.navbar a {
+  color: rgba(255,255,255,0.89);
   text-decoration: none;
   line-height: 18px;
   font-size: 14px;
-  font-weight: 700;
-  padding: .35rem .4rem;
-  white-space: nowrap;
+  font-weight: 500;
 }
-header .logged-in {
-  font-size: 12px;
-  font-weight: normal;
-  padding: 0 0.5rem;
+.navbar section.first-navbar-section * {
+  font-weight: bold;
 }
-header .logout {
-  padding: 0 6px;
-  border-left: 1px solid #99f;
+.navbar section.first-navbar-section > * {
+  padding: 5px 8px 5px 8px;
 }
-header .logout a {
-  font-size: 12px;
+.navbar section > * {
+  padding: 5px 5px;
+}
+.navbar section.first-navbar-section > .vcat-btn {
+  font-size: 16px;
+  padding-left: 0;
+}
+.navbar .btn-link:focus,
+.navbar .btn-link:hover,
+.navbar .btn-link:active,
+.navbar a:focus,
+.navbar a:hover,
+.navbar a:active {
+  text-decoration: none;
+  color: white;
+}
+.menubar a:focus,
+.menubar a:hover,
+.menubar a:active {
+  color: white;
 }
 .menuToggle {
-  width: 30px;
-  height: 30px;
-  margin: 5px;
+  width: 26px;
+  height: 26px;
   cursor: pointer;
+  margin: 0 0 0 10px;
   line-height: 1;
+}
+.navbar a.navbar-brand {
+  font-size: .8rem;
+}
+.navbar .last-navbar-section {
+  padding-right: 8px;
+}
+.navbar .logout {
+  padding: 0 .25rem;
+}
+.navbar .logged-in {
+  border-left: 1px solid #99f;
+  margin-left: .25rem;
+  padding: .25rem .25rem .25rem .75rem;
+  user-select: none;
+  text-transform: capitalize;
+  color: rgba(255,255,255,0.89);
+  position: relative;
+  min-width: 65px;
+}
+.navbar .logged-in a {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #11f;
+  opacity: 0;
+  transition: 0.1s all;
+}
+.navbar .logged-in:hover a {
+  opacity: 1;
 }
