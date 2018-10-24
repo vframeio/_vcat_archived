@@ -15,7 +15,7 @@ class SearchMeta extends Component {
     }
     const sugarcubeId = metadata.mediainfo.sugarcube_id
     const { video } = metadata.mediainfo.metadata.mediainfo
-
+    const { x, y, w, h } = query.crop || {}
     return (
       <div className='searchMeta'>
         {'verified' in query && 
@@ -35,6 +35,11 @@ class SearchMeta extends Component {
             {timestamp(query.frame, video.frame_rate)}
             {' / '}
             {timestamp(video.duration / 1000, 1)}
+          </span>
+        }
+        {query.crop &&
+          <span>
+            {'Crop: '}{'(' + x + ', ' + y + '), ' + w + 'x' + h}
           </span>
         }
         {!!(video && video.encoded_date) &&

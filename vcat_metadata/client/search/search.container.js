@@ -22,7 +22,7 @@ class SearchContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.match.params !== this.props.match.params) {
+    if (prevProps.match.params !== this.props.match.params && JSON.stringify(this.props.match.params) !== JSON.stringify(prevProps.match.params)) {
       this.searchByHash()
     }
     // const qsOld = querystring.parse(prevProps.location.search.substr(1))

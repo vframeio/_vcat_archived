@@ -71,11 +71,20 @@ export const upload = (file, query) => dispatch => {
           ...query,
           timing,
         }
-      }
-      dispatch(loaded(tag, data))
-      if (data.query.url && !window.location.search.match(data.query.url)) {
+        let qs = {}
+        if (data.query.crop) {
+          let { x, y, w, h } = data.query.crop
+          qs.crop = [x, y, w, h].map(n => parseInt(n, 10)).join(',')
+        }
+        if (query.url && !query.hash) {
+          qs.url = query.url
+        }
+        // history.push(window.location.pathname + '#' + querystring.stringify(qs))
+        // window.location.hash = querystring.stringify(qs)
+      } else if (data.query.url && !window.location.search.match(data.query.url)) {
         history.push('/search/?url=' + data.query.url)
       }
+      dispatch(loaded(tag, data))
     })
     .catch(err => dispatch(error(tag, err)))
 }
