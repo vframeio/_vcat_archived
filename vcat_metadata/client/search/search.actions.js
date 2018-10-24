@@ -54,15 +54,24 @@ export const updateOptions = opt => dispatch => {
 
 // API functions
 
-export const upload = file => dispatch => {
+export const upload = (file, query) => dispatch => {
   const { options } = store.getState().search
   const tag = 'query'
   const fd = new FormData()
   fd.append('query_img', file)
   fd.append('limit', options.perPage)
-  dispatch(loading(tag))
+  if (!query) {
+    dispatch(loading(tag))
+  }
   post(url.upload(), fd)
     .then(data => {
+      if (query) {
+        const { timing } = data.query
+        data.query = {
+          ...query,
+          timing,
+        }
+      }
       dispatch(loaded(tag, data))
       if (data.query.url && !window.location.search.match(data.query.url)) {
         history.push('/search/?url=' + data.query.url)

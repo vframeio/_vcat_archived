@@ -41,7 +41,7 @@ class SearchQuery extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props.query.query, !prevProps.query.query)
+    // console.log(this.props.query.query, !prevProps.query.query)
     if (this.state.bounds && (!this.props.query.query || !prevProps.query.query || this.props.query.query.url !== prevProps.query.query.url)) {
       this.setState({ ...defaultState })
     }
@@ -113,16 +113,21 @@ class SearchQuery extends Component {
       newImage.onload = null
       ctx.drawImage(
         newImage,
-        x * ratio,
-        y * ratio,
-        w * ratio,
-        h * ratio,
+        Math.round(x * ratio),
+        Math.round(y * ratio),
+        Math.round(w * ratio),
+        Math.round(h * ratio),
         0, 0, canvas.width, canvas.height
       )
       const blob = toBlob(canvas.toDataURL('image/jpeg', 0.9))
-      actions.upload(blob)
+      actions.upload(blob, {
+        ...this.props.query.query,
+        crop: {
+          x, y, w, h,
+        }
+      })
     }
-    console.log(img.src)
+    // console.log(img.src)
     newImage.crossOrigin = 'anonymous'
     newImage.src = img.src
     if (newImage.complete) {
@@ -139,7 +144,7 @@ class SearchQuery extends Component {
       return <div className="searchQuery column"><h2>Loading results...</h2><Loader /></div>
     }
     let { url } = query
-    if (url.indexOf('static') === 0) {
+    if (url && url.indexOf('static') === 0) {
       url = '/search/' + url
     }
     return (
