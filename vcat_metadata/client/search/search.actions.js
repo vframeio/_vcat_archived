@@ -2,7 +2,7 @@
 import * as types from '../types'
 // import { hashPath } from '../util'
 import { store, history } from '../store'
-import { post, pad, verify } from '../util'
+import { post, pad, verify, preloadImage } from '../util'
 import querystring from 'query-string'
 
 // urls
@@ -93,6 +93,7 @@ export const searchByVerifiedFrame = (verified, hash, frame, offset = 0) => disp
   const tag = 'query'
   dispatch(loading(tag, offset))
   const qs = querystring.stringify({ limit: options.perPage, offset })
+  preloadImage({ verified, hash, frame })
   fetch(url.searchByVerifiedFrame(verified, hash, frame) + '?' + qs, {
     method: 'GET',
     mode: 'cors',
@@ -106,6 +107,7 @@ export const searchByFrame = (hash, frame, offset = 0) => dispatch => {
   const tag = 'query'
   dispatch(loading(tag, offset))
   const qs = querystring.stringify({ limit: options.perPage, offset })
+  preloadImage({ verified, hash, frame })
   fetch(url.searchByFrame(hash, frame) + '?' + qs, {
     method: 'GET',
     mode: 'cors',
@@ -119,6 +121,9 @@ export const search = (uri, offset = 0) => dispatch => {
   const tag = 'query'
   dispatch(loading(tag, offset))
   const qs = querystring.stringify({ url: uri, limit: options.perPage, offset })
+  if (uri.indexOf('static') === 0) {
+    preloadImage({ uri })
+  }
   fetch(url.search(uri) + '?' + qs, {
     method: 'GET',
     mode: 'cors',

@@ -87,6 +87,26 @@ export const imageUrl = (verified, sha256, frame, size = 'th') => [
 export const metadataUri = (sha256, tag) => '/metadata/' + sha256 + '/' + tag + '/'
 export const keyframeUri = (sha256, frame) => '/metadata/' + sha256 + '/keyframe/' + pad(frame, 6) + '/'
 
+export const preloadImage = opt => {
+  let { verified, hash, frame, url } = opt
+  if (hash && frame) {
+    url = imageUrl(verified, hash, frame, 'md')
+  }
+  const image = new Image()
+  let loaded = false
+  image.onload = () => {
+    if (loaded) return
+    loaded = true
+    image.onload = null
+  }
+  // console.log(img.src)
+  image.crossOrigin = 'anonymous'
+  image.src = url
+  if (image.complete) {
+    image.onload()
+  }
+}
+
 /* AJAX */
 
 let cachedAuth = null
