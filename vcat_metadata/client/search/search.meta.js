@@ -39,7 +39,7 @@ class SearchMeta extends Component {
         }
         {query.crop &&
           <span>
-            {'Crop: '}{'(' + parseInt(x, 10) + ', ' + parseInt(y, 10) + '), ' + parseInt(w, 10) + 'x' + parseInt(h, 10)}
+            {'Crop: '}{parseInt(w, 10) + 'x' + parseInt(h, 10) + ' @ (' + parseInt(x, 10) + ', ' + parseInt(y, 10) + ')'}
           </span>
         }
         {!!(video && video.encoded_date) &&

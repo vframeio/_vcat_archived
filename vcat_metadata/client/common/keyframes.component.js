@@ -63,7 +63,7 @@ function KeyframeList(props) {
   if (!frames) return null
   return (
     <div className={label ? 'keyframes keyframeGroup' : 'keyframes'}>
-      {label && <h4><Link to={searchActions.browse(label)}>{label}</Link> ({count})</h4>}
+      {label && <h4><Link to={searchActions.publicUrl.browse(label)}>{label}</Link> ({count})</h4>}
       {frames.map(({ hash, frame, verified, distance }) => (
         <Keyframe
           key={hash + '_' + frame}
