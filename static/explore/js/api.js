@@ -27,7 +27,7 @@ var api = (function(){
 //        window.location.href = '/'
       }
     }
-    document.querySelector('.logged-in .capitalize').innerHTML = username || 'user'
+    document.querySelector('.logged-in .username').innerHTML = username || 'user'
   }
 
   function getCookie(name) {

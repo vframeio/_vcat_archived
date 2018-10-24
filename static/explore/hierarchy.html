@@ -27,21 +27,21 @@ path.link {
 
   <header className="navbar">
     <section className="navbar-section first-navbar-section">
-      <Link to="/"><img className="menuToggle" alt='logo' src="/static/vframe-logo.png" /></Link>
-      <Link to="/" className="vcat-btn"><b>VCAT</b></Link>
-      <Link to="/categories/">Categories</Link>
-      <Link to="/images/new/">Upload</Link>
+      <a href="/"><img className="menuToggle" alt='logo' src="/static/vframe-logo.png" /></a>
+      <a href="/" className="vcat-btn"><b>VCAT</b></a>
+      <a href="/categories/">Categories</a>
+      <a href="/images/new/">Upload</a>
       <a href="/search/">Search</a>
     </section>
 
     <section className="navbar-section last-navbar-section">
-      <Link to="/static/explore/hierarchy.html" className="">Stats</Link>
-      <Link to="/help/">Help</Link>
+      <a href="/static/explore/hierarchy.html" className="">Stats</a>
+      <a href="/help/">Help</a>
       <span className="login-btn logged-in capitalize">
-        {props.auth.user.username}
-        <Link to="/accounts/logout/">Logout</Link>
+        <span className='username'></span>
+        <a href="/accounts/logout/">Logout</a>
       </span>
-      <Link to="/groups/user/">My Assignments</Link>
+      <a href="/groups/user/">My Assignments</a>
     </section>
   </header>
 
