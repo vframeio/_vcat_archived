@@ -12,6 +12,7 @@ import SearchMeta from './search.meta'
 
 const defaultState = {
   dragging: false,
+  draggingBox: false,
   bounds: null,
   mouseX: 0,
   mouseY: 0,
@@ -31,6 +32,7 @@ class SearchQuery extends Component {
   constructor() {
     super()
     this.handleMouseDown = this.handleMouseDown.bind(this)
+    this.handleMouseDownOnBox = this.handleMouseDownOnBox.bind(this)
     this.handleMouseMove = this.handleMouseMove.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
   }
@@ -72,27 +74,62 @@ class SearchQuery extends Component {
     })
   }
 
-  handleMouseMove(e) {
-    const { dragging, bounds, mouseX, mouseY, box } = this.state
-    if (!dragging) return
-    e.preventDefault()
-    let { x, y } = box
-    let w = clamp(e.pageX - mouseX, 0, bounds.width - x)
-    let h = clamp(e.pageY - mouseY, 0, bounds.height - y)
+  handleMouseDownOnBox(e) {
+    const bounds = this.imgRef.getBoundingClientRect()
+    const mouseX = e.pageX
+    const mouseY = e.pageY
     this.setState({
+      draggingBox: true,
+      bounds,
+      mouseX,
+      mouseY,
+      initialBox: {
+        ...this.state.box
+      },
       box: {
-        x, y, w, h,
+        ...this.state.box
       }
     })
   }
 
+  handleMouseMove(e) {
+    const {
+      dragging, draggingBox,
+      bounds, mouseX, mouseY, initialBox, box
+    } = this.state
+    if (dragging) {
+      e.preventDefault()
+      let { x, y } = box
+      let w = clamp(e.pageX - mouseX, 0, bounds.width - x)
+      let h = clamp(e.pageY - mouseY, 0, bounds.height - y)
+      this.setState({
+        box: {
+          x, y, w, h,
+        }
+      })
+    } else if (draggingBox) {
+      e.preventDefault()
+      let { x, y, w, h } = initialBox
+      let dx = (e.pageX - mouseX)
+      let dy = (e.pageY - mouseY)
+      this.setState({
+        box: {
+          x: clamp(x + dx, 0, bounds.width - w),
+          y: clamp(y + dy, 0, bounds.height - h),
+          w,
+          h,
+        }
+      })
+    }
+  }
+
   handleMouseUp(e) {
     const { actions } = this.props
-    const { dragging, bounds, box } = this.state
-    if (!dragging) return
+    const { dragging, draggingBox, bounds, box } = this.state
+    if (!dragging && !draggingBox) return
     e.preventDefault()
     const { x, y, w, h } = box
-    console.log(x, y, w, h)
+    // console.log(x, y, w, h)
     const img = this.imgRef
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
@@ -100,10 +137,10 @@ class SearchQuery extends Component {
     canvas.width = w * ratio
     canvas.height = h * ratio
     if (w < 10 || h < 10) {
-      this.setState({ dragging: false, box: { x: 0, y: 0, w: 0, h: 0 } })
+      this.setState({ dragging: false, draggingBox: false, box: { x: 0, y: 0, w: 0, h: 0 } })
       return
     }
-    this.setState({ dragging: false })
+    this.setState({ dragging: false, draggingBox: false })
     // query_div.appendChild(canvas)
     const newImage = new Image()
     let loaded = false
@@ -165,6 +202,7 @@ class SearchQuery extends Component {
                 width: w,
                 height: h,
               }}
+              onMouseDown={this.handleMouseDownOnBox}
             />
           }
         </div>

@@ -22,7 +22,7 @@ const loadingState = {
 }
 
 export default function searchReducer(state = initialState(), action) {
-  console.log(action.type, action)
+  // console.log(action.type, action)
   switch (action.type) {
     case types.search.loading:
       if (action.tag === 'query' && action.offset) {

@@ -36,11 +36,6 @@
 .searchForm .row {
   align-items: center;
 }
-.searchBox {
-  min-width: 640px;
-  margin: 0 10px 0 0;
-  background-color: #eee;
-}
 
 .searchMeta {
   display: flex;
@@ -119,15 +114,21 @@
 }
 
 .searchBox {
+  min-width: 640px;
+  margin: 0 10px 0 0;
+  background-color: #eee;
   position: relative;
+}
+.searchBox img {
+  display: block;
 }
 .searchBox .box {
   position: absolute;
   cursor: crosshair;
-  pointer-events: none;
   border: 1px solid #11f;
   background-color: rgba(16,16,255,0.1);
 }
+
 .searchResults {
   margin: 0 20px 20px 20px;
   display: flex;
