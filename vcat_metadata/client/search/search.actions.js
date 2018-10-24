@@ -107,7 +107,7 @@ export const searchByFrame = (hash, frame, offset = 0) => dispatch => {
   const tag = 'query'
   dispatch(loading(tag, offset))
   const qs = querystring.stringify({ limit: options.perPage, offset })
-  preloadImage({ verified, hash, frame })
+  preloadImage({ verified: false, hash, frame })
   fetch(url.searchByFrame(hash, frame) + '?' + qs, {
     method: 'GET',
     mode: 'cors',

@@ -59,12 +59,12 @@ function Stat(props) {
   )
 }
 function getUserAchievement(total) {
-  if (total > 100){
+  if (total >= 99){
     return ["Annomaniac!", 0]
-  } else if (total > 10){
-    return ["Annoprentice", 100 - total]
+  } else if (total > 9){
+    return ["Annoprentice", 99 - total]
   }
-  return ['Annon00bie', 10 - total]
+  return ['Annon00bie', 9 - total]
 }
 
 const mapStateToProps = (state) => ({

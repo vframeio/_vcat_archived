@@ -137,7 +137,7 @@ class HierarchyView extends Component {
         </div>
         <div className="column col-9">
           <header>
-            <Thumbnail node={node.image} type="images" size="square" />
+            <Link to={node.image ? '/images/show/' + node.image.id : '.'}><Thumbnail node={node.image} type="images" size="square" /></Link>
             <h2 onClick={this.refresh}>{node.name}</h2>
           </header>
 
