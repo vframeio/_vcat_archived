@@ -34,10 +34,11 @@ class ImageGroupRow extends Component {
     }
   }
   render(){
-    const group = this.props.group
-    console.log(group)
+    let { group, limit } = this.props
+    if (!limit) limit = Infinity
+    // console.log(group)
     const heading = group.from_sa ? group.sa_hash : group.source_url
-    const images = group.images.map((el, i) => {
+    const images = group.images.slice(0, limit).map((el, i) => {
       return (
         <Link to={"/groups/show/" + group.id + "/annotate/" + el.id} key={i}>
           <Thumbnail
@@ -49,6 +50,9 @@ class ImageGroupRow extends Component {
         </Link>
       )
     })
+    console.log(limit, group.images.length)
+    const limitedWarning = group.images.length > limit
+    const notShownCount = group.images.length - limit
     let userSelect, buttons;
     if (this.props.adminView) {
       userSelect = (
@@ -74,18 +78,25 @@ class ImageGroupRow extends Component {
             <span>
               {'Group name: '}
               <Link to={"/groups/show/" + group.id}>{heading}</Link>
+              {"(" + group.images.length + " image" + courtesyS(group.images.length) + ")"}
             </span>
           </h5>
         </div>
         {buttons}
         <div className="column col-12 gallery">
           {images}
+          <div>
+            {limitedWarning && (
+              '+ ' + (notShownCount) + ' more image' + courtesyS(notShownCount) 
+            )}
+          </div>
         </div>
       </div>
     )
   }
 }
 
+const courtesyS = n => n !== 1 ? 's' : ''
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,

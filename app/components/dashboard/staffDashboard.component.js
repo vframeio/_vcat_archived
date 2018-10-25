@@ -26,6 +26,7 @@ class StaffDashboard extends Component {
 
         <ImageGroupBrowser
           adminView
+          limit={10}
           title="All Image Groups"
           location={this.props.location}
         />

@@ -32,6 +32,7 @@ class UserDashboard extends Component {
 
         <ImageGroupBrowser
           userView
+          limit={10}
           title="Your Assignments"
           location={this.props.location}
         />
