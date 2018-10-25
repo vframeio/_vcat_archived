@@ -3,7 +3,7 @@ from .base import *
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('DJANGO_SECRET_KEY', default='123use456env789var')
 
-DEBUG = env.bool('DJANGO_DEBUG', default=True)
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 

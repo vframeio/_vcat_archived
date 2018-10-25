@@ -51,7 +51,7 @@ class ImageEdit extends Component {
           <div className="col-2"></div>
           <div className="col-10" style={{paddingLeft: '4px'}}>
             <br/><br/>
-            <button className="btn" onClick={this.handleDestroy}>Delete this Image</button>
+            <button className="btn btn-error" onClick={this.handleDestroy}>Delete this Image</button>
           </div>
         </div>
       </div>
