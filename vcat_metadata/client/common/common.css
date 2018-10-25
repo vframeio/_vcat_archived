@@ -262,6 +262,8 @@ table {
 }
 .rect { border: 1px solid rgba(0,0,255); background-color: rgba(0,0,255,0.1); }
 
+/* videos / video preloader */
+
 video {
   max-width: 640px;
   margin: 10px 0;

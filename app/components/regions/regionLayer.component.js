@@ -25,18 +25,20 @@ class RegionLayer extends Component {
     this.onMouseDown = this.onMouseDown.bind(this)
   }
   shouldComponentUpdate(nextProps, nextState){
-    return this.state.layerHover !== nextState.layerHover
-    || this.state.controlPointHover !== nextState.controlPointHover
-    || this.state.dragging
-    || this.state.dragging !== nextState.dragging
-    || this.props.selected !== nextProps.selected
-    || this.props.stage.scale !== nextProps.stage.scale
-    || this.props.rect.x !== nextProps.rect.x
-    || this.props.rect.y !== nextProps.rect.y
-    || this.props.rect.width !== nextProps.rect.width
-    || this.props.rect.height !== nextProps.rect.height
-    || this.props.rect.tag !== nextProps.rect.tag
-    || this.props.labels !== nextProps.labels
+    return (
+      this.state.layerHover !== nextState.layerHover
+      || this.state.controlPointHover !== nextState.controlPointHover
+      || this.state.dragging
+      || this.state.dragging !== nextState.dragging
+      || this.props.selected !== nextProps.selected
+      || this.props.stage.scale !== nextProps.stage.scale
+      || this.props.rect.x !== nextProps.rect.x
+      || this.props.rect.y !== nextProps.rect.y
+      || this.props.rect.width !== nextProps.rect.width
+      || this.props.rect.height !== nextProps.rect.height
+      || this.props.rect.tag !== nextProps.rect.tag
+      || this.props.labels !== nextProps.labels
+    )
   }
   dragBounds(pos){
     if (! this.state.dragging) return pos;
