@@ -31,6 +31,8 @@ class RegionLayer extends Component {
       || this.state.dragging
       || this.state.dragging !== nextState.dragging
       || this.props.selected !== nextProps.selected
+      || this.props.stage.width !== nextProps.stage.width
+      || this.props.stage.height !== nextProps.stage.height
       || this.props.stage.scale !== nextProps.stage.scale
       || this.props.rect.x !== nextProps.rect.x
       || this.props.rect.y !== nextProps.rect.y
