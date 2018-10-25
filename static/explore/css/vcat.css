@@ -81,7 +81,7 @@ header > section:last-of-type {
   width: 26px;
   height: 26px;
   cursor: pointer;
-  margin: 0 0 0 10px;
+  margin: 0 0 0 5px;
   line-height: 1;
 }
 .navbar a.navbar-brand {
