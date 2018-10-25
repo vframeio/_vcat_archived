@@ -50,7 +50,6 @@ class ImageGroupRow extends Component {
         </Link>
       )
     })
-    console.log(limit, group.images.length)
     const limitedWarning = group.images.length > limit
     const notShownCount = group.images.length - limit
     let userSelect, buttons;

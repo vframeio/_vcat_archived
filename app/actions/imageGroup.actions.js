@@ -3,7 +3,7 @@ import * as api from '../util/api'
 import * as types from './types'
 import queryString from 'query-string'
 
-import { store } from '../util/store'
+import { store, history } from '../util/store'
 
 import { loadItem as loadImageItem } from './image.actions'
  
@@ -34,6 +34,10 @@ export function setIndex(index) {
   const images = state.image.group.images
   index = (index + images.length) % images.length
   const data = images[index]
+  console.log(data)
+  if (data) {
+    history.push('/groups/show/' + data.image_group + '/annotate/' + data.id)
+  }
   return { type: types.IMAGE_GROUP.SET_INDEX, index, data }
 }
 export function nextIndex() {

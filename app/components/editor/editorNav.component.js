@@ -38,11 +38,13 @@ class EditorNav extends Component {
     })
   }
   handleComplete(e){
-    this.updateComplete(!this.props.image.complete)
+    this.updateComplete(!this.props.image.image.complete)
   }
   render() {
-    const { group, index, image } = this.props.image
-    if (!group || !group.images || !image) return null
+    let { group, index, image } = this.props.image
+    // if (!group || !group.images || !image) return <ul className="editorNav tab tab-block"></ul>
+    group = group || { images: [] }
+    image = image || {}
     return (
       <ul className="editorNav tab tab-block">
         <li className="tab-item">

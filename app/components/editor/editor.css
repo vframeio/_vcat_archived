@@ -34,7 +34,9 @@
   width: 100%;
   padding-top: 0.4rem;
 }
-
+.editorNav {
+  height: 45px;
+}
 .editorNav.tab .tab-item:last-child {
   display: flex;
   justify-content: flex-end;
