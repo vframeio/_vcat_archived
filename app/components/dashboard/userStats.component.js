@@ -45,7 +45,7 @@ class UserStats extends Component {
         </ul>
         <div className='userAchievement'>
           {'You are an '}{userAchievement}
-          {nextGoal && '. Make {} annotations to level up!'.replace("{}", nextGoal)}
+          {!!nextGoal && '. Make {} annotations to level up!'.replace("{}", nextGoal)}
         </div>
       </div>
     )
