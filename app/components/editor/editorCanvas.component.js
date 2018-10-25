@@ -156,7 +156,7 @@ class EditorCanvas extends Component {
         this.setState({ labels: !this.state.labels })
         break
       default:
-        console.log(e.keyCode)
+        // console.log(e.keyCode)
         break
     }
   }

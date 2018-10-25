@@ -34,7 +34,7 @@ export function setIndex(index) {
   const images = state.image.group.images
   index = (index + images.length) % images.length
   const data = images[index]
-  console.log(data)
+  // console.log(data)
   if (data) {
     history.push('/groups/show/' + data.image_group + '/annotate/' + data.id)
   }
