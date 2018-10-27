@@ -1,3 +1,5 @@
+![](docs/images/vcat_horizontal.png)
+
 # VCAT: Visual Collection, Annotation, and Training
 
 ![](docs/images/vcat_hierarchy.png)
@@ -114,7 +116,10 @@ curl -u username:password https://syrianarchive.vframe.io/api/hierarchy/1/full
 
 ----------------------------
 
+
+
 ## Screenshots of VCAT Application
+
 
 ### Annotate
 
