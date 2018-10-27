@@ -1,13 +1,23 @@
 # VCAT: Visual Collection, Annotation, and Training
 
-VCAT is a system for creating machine learning image datasets for computer vision. It uses a Django backend, React frontend, and CNN-based based visual search engine to faciliate making specific image dataset. 
+![](docs/images/vcat_hierarchy_ao25rt.png)
 
-VCAT is designed to be used with  <https://vframe.io> / <https://github.com/adamhrv/vframe> and is intended primarily for human rights researchers.
+VCAT is a system for creating machine learning image datasets for computer vision. It uses a Django backend, React frontend, and CNN-based based visual search engine to faciliate creating new datasets and forensic image research.
 
-**This project is under active development and repo will be updated often during Oct-Nov 2018**
+VCAT is designed to be used with  <https://vframe.io> / <https://github.com/vframeio/vcat> and is intended primarily for human rights researchers.
+
+**This project is under daily development and repo will be updated often during Oct-Nov 2018**
+
+
 
 
 -------------------------
+
+NB: Development is still under process and installlation steps may change during the next 6 months. 
+
+## Getting Started
+
+VCAT runs mostly in Python on an Ubuntu 16.4 server
 
 ## Prerequisites
 
@@ -103,3 +113,27 @@ For now you can curl using Basic Auth to hit endpoints like so -
 curl -u username:password https://syrianarchive.vframe.io/api/hierarchy/1/full
 ```
 
+
+----------------------------
+
+## Screenshots of VCAT Application
+
+## Annotations
+
+![](docs/images/vcat_anno_demo_01.jpg)*Autocomplete visual taxonomy for quick annotation*
+
+![](docs/images/vcat_anno_demo_02.jpg)*Toggle on/off labels for scenes with many items*
+
+![](docs/images/vcat_anno_demo_03.jpg)*Display labels and verify annotations*
+
+## Search
+
+Search for similiar images using content based image retrieval
+
+![](docs/images/vcat_search_results.jpg)*Search reults*
+
+## Datasets
+
+Use search results to create a new training dataset
+
+![](docs/images/vcat_anno_boxes.jpg)*Annotated training set for aircraft*
