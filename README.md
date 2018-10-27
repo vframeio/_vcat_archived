@@ -1,29 +1,27 @@
 # VCAT: Visual Collection, Annotation, and Training
 
-![](docs/images/vcat_hierarchy_ao25rt.png)
+![](docs/images/vcat_hierarchy.png)
 
-VCAT is a system for creating machine learning image datasets for computer vision. It uses a Django backend, React frontend, and CNN-based based visual search engine to faciliate creating new datasets and forensic image research.
+VCAT is a system for creating machine learning image datasets for computer vision. It uses a Django backend, React frontend, and CNN-based based visual search engine to facilitate creating new datasets and forensic image research.
 
-VCAT is designed to be used with  <https://vframe.io> / <https://github.com/vframeio/vcat> and is intended primarily for human rights researchers.
-
-**This project is under daily development and repo will be updated often during Oct-Nov 2018**
-
+VCAT's front end can also be used for visual investigations. Searching 10M keyframes takes only 0.15 seconds. VCAT designed to be used with the [VFRAME](https://github.com/vframeio/vframe) computer vision processing tools and is primarily intended for human rights researchers and technologists.
 
 
 
 -------------------------
 
-NB: Development is still under process and installlation steps may change during the next 6 months. 
 
 ## Getting Started
 
-VCAT runs mostly in Python on an Ubuntu 16.4 server
+_This project is under daily development and installations steps may change significantly between Oct 2018 - May 2019_
 
 ## Prerequisites
 
+* Ubuntu 16.04 with 16GB RAM
 * A conda/virtualenv virtual environment running Python 3.6+
 * node v8.5.0 / npm v6.0.0 (suggest installing with nvm)
 * MySQL2 (apt install libmysqlclient-dev)
+
 
 ## Installation
 
@@ -66,7 +64,7 @@ npm install
 
 ### vsearch
 
-The FAISS-based image search engine lives in `~/vcat/vsearch/` directory.  This is a flask server which runs seperately from the main Django app.  Instructions for installing everything are there, including another requirements.txt.  This may be moved into its own repo at some point. Instructions for setting up vsearch can be found in that folder's readme.
+The FAISS-based image search engine lives in `~/vcat/vsearch/` directory.  This is a flask server which runs separately from the main Django app.  Instructions for installing everything are there, including another requirements.txt.  This may be moved into its own repo at some point. Instructions for setting up vsearch can be found in that folder's readme.
 
 If using vsearch with vcat, please run its fixtures:
 
@@ -118,7 +116,7 @@ curl -u username:password https://syrianarchive.vframe.io/api/hierarchy/1/full
 
 ## Screenshots of VCAT Application
 
-## Annotations
+### Annotate
 
 ![](docs/images/vcat_anno_demo_01.jpg)*Autocomplete visual taxonomy for quick annotation*
 
@@ -126,14 +124,16 @@ curl -u username:password https://syrianarchive.vframe.io/api/hierarchy/1/full
 
 ![](docs/images/vcat_anno_demo_03.jpg)*Display labels and verify annotations*
 
-## Search
+### Search
 
-Search for similiar images using content based image retrieval
+Search for similar images using content based image retrieval
 
-![](docs/images/vcat_search_results.jpg)*Search reults*
+![](docs/images/vcat_search_results.jpg)
+*Search results*
 
-## Datasets
+### Create Dataset
 
 Use search results to create a new training dataset
 
-![](docs/images/vcat_anno_boxes.jpg)*Annotated training set for aircraft*
+![](docs/images/vcat_anno_boxes.jpg)
+*Selection of annotated training images for aircraft*
