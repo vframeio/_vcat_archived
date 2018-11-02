@@ -142,3 +142,12 @@ Use search results to create a new training dataset
 
 ![](docs/images/vcat_anno_boxes.jpg)
 *Selection of annotated training images for aircraft*
+
+
+### Current Research
+
+The VFRAME is currently exploring how 3D modeling can be used to generated synthetic datasets to augment existing training data for illegal munitions.
+
+![](docs/images/vframe_3d_ao_25rt.jpg)
+
+![](docs/images/vframe_3d_shoab.jpg)
